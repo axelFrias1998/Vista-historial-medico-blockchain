@@ -22,7 +22,14 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return View();
         }
-
+          public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Registrer()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
