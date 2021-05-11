@@ -28,6 +28,8 @@ a {
 -------------------------------------------------- */
 html {
   font-size: 14px;
+  font-family: "century gothic";
+ 
 }
 @media (min-width: 768px) {
   html {
@@ -58,14 +60,124 @@ html {
   min-height: 100%;
 }
 
+
 body {
   /* Margin bottom by footer height */
+  font-family: "Century gothic";
   margin-bottom: 60px;
+  background: url(https://fondosmil.com/fondo/6738.jpg);
+   
 }
 .footer {
+  text-align: center;
+  background-color: #fff;
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+
+.login-box {
+  width: 100%;
+  margin: auto;
+  max-width: 500px;
+  min-height: 300px;
+  position: relative;
+  border-radius: 25px;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .50), 0 17px 50px 0 rgba(0, 0, 0, .19)
+}
+
+.card {
+  width: 500px;
+  left: 100px
+}
+.card-body {
+ background-color: #9acef8;
+ width: 100%;
+ margin: auto;
+ max-width: 500px;
+ min-height: 300px;
+ position: relative;
+ border-radius: 25px;
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  height: 90vh;
+  
+  margin-bottom: -200px;
+}
+
+#hero .container {
+  position: relative;
+}
+
+#hero h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #2c4964;
+}
+
+#hero h2 {
+  color: #2c4964;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#hero .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 35px;
+  margin-top: 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1977cc;
+}
+
+#hero .btn-get-started:hover {
+  background: #3291e6;
+}
+
+@media (min-width: 1024px) {
+  #hero {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 992px) {
+  #hero {
+    margin-bottom: 0;
+    height: 100vh;
+  }
+  #hero .container {
+    padding-bottom: 63px;
+  }
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-height: 500px) {
+  #hero {
+    height: auto;
+  }
 }
