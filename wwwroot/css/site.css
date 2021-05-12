@@ -14,7 +14,7 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: #153F59;
   border-color: #1861ac;
 }
 
@@ -94,7 +94,7 @@ body {
   left: 100px
 }
 .card-body {
- background-color: #9acef8;
+ background-color: #c8dfe2;
  width: 100%;
  margin: auto;
  max-width: 500px;
