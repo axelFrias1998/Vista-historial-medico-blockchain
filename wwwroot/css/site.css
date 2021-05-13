@@ -5,8 +5,8 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-}
-
+  
+  }
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -65,12 +65,18 @@ body {
   /* Margin bottom by footer height */
   font-family: "Century gothic";
   margin-bottom: 60px;
-  background: url(https://fondosmil.com/fondo/6738.jpg);
+  background-color: #c8dfe2;
    
 }
+.header{
+  
+    background-color: #153F59;
+  
+}
 .footer {
+  
   text-align: center;
-  background-color: #fff;
+  background-color: #153f59;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -94,7 +100,7 @@ body {
   left: 100px
 }
 .card-body {
- background-color: #c8dfe2;
+ background-color: #94b8d7;
  width: 100%;
  margin: auto;
  max-width: 500px;
