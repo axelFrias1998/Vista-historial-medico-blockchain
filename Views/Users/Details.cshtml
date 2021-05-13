@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<br />
+<label>Tipo de servicio que ofrecen @ViewBag.Hola </label>
+@Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.CatalogoServicios, null, new { @class = "form-control" })
+@*<div>
+        <h4>AspNetUser</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.IsPublic)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.IsPublic)
+            </dd>
+        </dl>
+    </div>
+    <div*@
+<!-->
+</div>-->
