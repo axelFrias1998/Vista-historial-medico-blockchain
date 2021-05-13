@@ -52,6 +52,7 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
             ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
             ViewBag.Hola = "Soy Axel";
+            
             return View();
         }
 
