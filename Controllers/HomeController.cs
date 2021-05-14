@@ -66,7 +66,11 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
-         public IActionResult CreateH()
+        public IActionResult CreateH()
+        {
+            return View();
+        }
+         public IActionResult DetailsHos()
         {
             return View();
         }
