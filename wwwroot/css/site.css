@@ -16,10 +16,15 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #153F59;
-  border-color: #1861ac;
+  background-color: #153f59;
+  border-color: #153f59;
 }
 
+.btn-primary:hover {
+  color: #fff;
+  background-color: #447094;
+  border-color: #447094;
+}
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
@@ -152,11 +157,11 @@ body {
   border-radius: 50px;
   transition: 0.5s;
   color: #fff;
-  background: #1977cc;
+  background: #153f59;
 }
 
 #hero .btn-get-started:hover {
-  background: #3291e6;
+  background: #447094;
 }
 
 @media (min-width: 1024px) {
