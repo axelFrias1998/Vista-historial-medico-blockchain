@@ -33,7 +33,7 @@ namespace Vista_historial_medico_blockchain.Controllers
         //}
 
         // GET: Users/Details
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Index ()
         {
             HttpResponseMessage response = await client.GetAsync("https://historial-blockchain20210512190841.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
             response.EnsureSuccessStatusCode();
@@ -50,7 +50,7 @@ namespace Vista_historial_medico_blockchain.Controllers
             {
                 Console.WriteLine($"id: {service.Id}, Tipo: {service.Type}, Es público: {service.IsPublic}");
             }
-            ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
+            ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Name");
             ViewBag.Hola = "Soy Axel";
             
             return View();
