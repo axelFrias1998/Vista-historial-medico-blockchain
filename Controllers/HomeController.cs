@@ -74,6 +74,11 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return View();
         }
+         public IActionResult put()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
