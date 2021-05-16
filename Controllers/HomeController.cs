@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Vista_historial_medico_blockchain.Models;
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Json;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -15,6 +19,9 @@ namespace Vista_historial_medico_blockchain.Controllers
         static readonly HttpClient client = new HttpClient();
 
         private readonly ILogger<HomeController> _logger;
+        
+        HttpClient Client = new HttpClient();
+        string url = "https://historial-blockchain.azurewebsites.net/api/Accounts/CreateAccount"; 
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -47,10 +54,53 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return View();
         }
-        public IActionResult Registrer()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        /*public async Task <IActionResult> Registrer([Bind("Apellido,Email,Password,ConfirmPassword,Nombre,PhoneNumber,UserName")] UserInfo UserInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                await client.PostAsJsonAsync<UserInfo>(url, UserInfo);
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(UserInfo);
+        }*/
+
+        public async Task<ActionResult> Registrer(UserInfo userinfo)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                var postTask = client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
+ 
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadToken(userToken.Token);
+                    var tokenS = jsonToken as JwtSecurityToken;
+                    var jti = tokenS.Claims.First(claim => claim.Type == "jti").Value;
+
+                    if (userToken is null)
+                        return NotFound();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+            return View(userinfo);
+        }
+        
+         public IActionResult Registrer()
         {
             return View();
         }
+
         public IActionResult Privacy()
         {
             return View();
