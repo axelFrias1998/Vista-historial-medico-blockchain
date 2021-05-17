@@ -53,7 +53,38 @@ namespace Vista_historial_medico_blockchain.Controllers
           public IActionResult Login()
         {
             return View();
+        } 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public async Task<ActionResult> Login(UserLogin userlogin)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                var postTask = client.PostAsJsonAsync<UserLogin>("api/Accounts/Login", userlogin);
+                postTask.Wait();
+
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
+ 
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadToken(userToken.Token);
+                    var tokenS = jsonToken as JwtSecurityToken;
+                    var jti = tokenS.Claims.First(claim => claim.Type == "jti").Value;
+
+                    if (userToken is null)
+                        return NotFound();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+            return View(userlogin);
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         /*public async Task <IActionResult> Registrer([Bind("Apellido,Email,Password,ConfirmPassword,Nombre,PhoneNumber,UserName")] UserInfo UserInfo)
