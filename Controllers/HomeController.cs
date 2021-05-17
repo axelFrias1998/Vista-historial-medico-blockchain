@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -68,22 +69,30 @@ namespace Vista_historial_medico_blockchain.Controllers
                 if (result.IsSuccessStatusCode)
                 {
                     var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
- 
+                    SetCookie("Token", userToken.Token, userToken.Expiration);
                     /*var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadToken(userToken.Token);
                     var tokenS = jsonToken as JwtSecurityToken;
                     var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
-
+                    
+                    
+                    var roles = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
                     if (userToken is null)
-                        return NotFound();*/
-                        
-                    return RedirectToAction("Index");
+                        return NotFound();   
+                    if(roles == "Sysadmin")
+                        RedirectToAction("Panel", "PanelsController", ViewBag.Role = "roles");  */          
                 }
-            }
 
             ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
+            }
             return View(userlogin);
+        }
+
+        public void SetCookie(string key, string value, DateTime expireTime)  
+        {  
+            CookieOptions option = new CookieOptions();  
+            option.Expires = expireTime;
+            Response.Cookies.Append(key, value, option);  
         }
         
         [HttpPost]
