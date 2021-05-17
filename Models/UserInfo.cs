@@ -41,6 +41,6 @@ namespace Vista_historial_medico_blockchain.Models
         public string PhoneNumber { get; set; }
         
         [JsonInclude]
-        public string UserName { get; set; } 
+        public string Username { get; set; } 
     }
 }
