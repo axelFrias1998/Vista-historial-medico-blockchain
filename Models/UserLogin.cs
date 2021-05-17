@@ -7,21 +7,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Vista_historial_medico_blockchain.Models
 {
-    public partial class UserLogin
+    public partial class UserLogin 
     {
         public UserLogin ()
         {
-           // AspNetUsers = new HashSet<AspNetUser>();
-           // AspNetUserLogins = new HashSet<AspNetUserLogin>();
+           // AspNetUsers = new HashSet<AspNetUserLogin>();
+           // AspNetUserLogins = new HashSet<AspNetUserToken>();
         }
-
+        
         [JsonInclude]
-        public string UserName { get; set; } 
+        public string Username { get; set; } 
 
         [DataType(DataType.Password)]
         [JsonInclude]
-        public string Password { get; set; }
-
-        
+        /*[ContraseñaValidate(ErrorMessage = "Contraseña no valida")]*/
+        public string Password { get; set; }             
     }
 }
