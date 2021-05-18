@@ -1,4 +1,4 @@
-@model Vista_historial_medico_blockchain.Models.Hospital
+@model Vista_historial_medico_blockchain.Models.HospitalInfo
 <div class="row">
 		
         
@@ -64,8 +64,6 @@
                   @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                  @Html.EditorFor(model => model.RegisterDate, new { htmlAttributes = new { @class = "form-control", placeholder="Fecha de registro"} })
-                  @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                   @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
