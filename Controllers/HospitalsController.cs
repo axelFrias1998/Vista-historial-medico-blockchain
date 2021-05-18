@@ -23,6 +23,10 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
+        public IActionResult Hospitales()
+        {
+            return View();
+        }
        /* public HospitalsController(historialblockchain_dbContext context)
         {
             _context = context;
