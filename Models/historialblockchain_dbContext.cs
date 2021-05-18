@@ -164,7 +164,7 @@ namespace Vista_historial_medico_blockchain.Models
                     .HasDefaultValueSql("(N'')");
 
                 entity.HasOne(d => d.Admin)
-                    .WithMany(p => p.Hospitals)
+                    .WithMany(p => p.Hospital)
                     .HasForeignKey(d => d.AdminId);
 
                 entity.HasOne(d => d.ServiceCatalog)
