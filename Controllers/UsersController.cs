@@ -31,11 +31,10 @@ namespace Vista_historial_medico_blockchain.Controllers
         //    var historialblockchain_dbContext = _context.AspNetUsers.Include(a => a.Hospital);
         //    return View(await historialblockchain_dbContext.ToListAsync());
         //}
-
         // GET: Users/Details
         public async Task<IActionResult> Index ()
         {
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain20210512190841.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
+            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)
@@ -55,6 +54,8 @@ namespace Vista_historial_medico_blockchain.Controllers
             
             return View();
         }
+
+
 
         // GET: AspNetUsers/Create
         /*public IActionResult Create()
