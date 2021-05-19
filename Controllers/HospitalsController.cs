@@ -44,8 +44,21 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View(JsonConvert.DeserializeObject<List<Hospital>>(await client.GetStringAsync(url)).ToList());
         }
 
-        
+        public async Task<IActionResult> ServiceCaltalog ()
+        {
+            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
+            response.EnsureSuccessStatusCode();
 
+            if (!response.IsSuccessStatusCode)
+                return NotFound();
+
+            var serviceCatalog = JsonConvert.DeserializeObject<List<ServicesCatalog>>(await response.Content.ReadAsStringAsync());
+
+            if (serviceCatalog is null)
+                return NotFound();
+            ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
+            return View();
+        }
          
         public async Task<ActionResult> CreateH(HospitalInfo hospitalinfo)
         {
@@ -54,17 +67,32 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
                 var postTask = client.PostAsJsonAsync<HospitalInfo>("api/Accounts/Hospitals", hospitalinfo);
                 postTask.Wait();
-
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
+                  
                   return RedirectToAction("Index");
                 }
             }
 
+            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/CatalogOfServices");
+            response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+                return NotFound();
+
+            var serviceCatalog = JsonConvert.DeserializeObject<List<ServicesCatalog>>(await response.Content.ReadAsStringAsync());
+
+            if (serviceCatalog is null)
+                return NotFound();
+            ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
+
             ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
             return View(hospitalinfo);
+            
+
+            
         }
         
          
