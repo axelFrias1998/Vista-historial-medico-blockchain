@@ -124,7 +124,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                     var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadToken(userToken.Token);
                     var tokenS = jsonToken as JwtSecurityToken;
-                    var jti = tokenS.Claims.First(claim => claim.Type == "jti").Value;
+                    var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
 
                     if (userToken is null)
                         return NotFound();
