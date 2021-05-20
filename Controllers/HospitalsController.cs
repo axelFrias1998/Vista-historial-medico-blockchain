@@ -25,7 +25,7 @@ namespace Vista_historial_medico_blockchain.Controllers
        
         /*Get Hospital*/
 
-         public ActionResult Hospitales()
+         public async Task<ActionResult> Hospitales()
     {
         IEnumerable<HospitalInfo> hospitals = null;
 
@@ -33,20 +33,12 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
             //HTTP GET
-            var responseTask = client.GetAsync("api/Hospitals");
-            responseTask.Wait();
-
-            var result = responseTask.Result;
+            var result = await client.GetAsync("api/Hospitals");
             if (result.IsSuccessStatusCode)
-            {
-                var readTask = result.Content.ReadAsAsync<IList<HospitalInfo>>();
-                readTask.Wait();
-                hospitals = readTask.Result;
-            }
+                hospitals = await result.Content.ReadFromJsonAsync<IList<HospitalInfo>>();
             else //web api sent error response 
             {
-                        hospitals = Enumerable.Empty<HospitalInfo>();
-
+                hospitals = Enumerable.Empty<HospitalInfo>();
                 ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
             }
         }
