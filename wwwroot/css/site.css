@@ -399,8 +399,19 @@ th, td {
 .column5 {
   width: 10%;
 }
+
 .column6 {
   width: 14%;
+}
+
+.column7 {
+  width: 50%;
+  padding-left: 40px;
+}
+
+.column8 {
+  width: 50%;
+  padding-left: 40px;
 }
 
 .table100-head th {
