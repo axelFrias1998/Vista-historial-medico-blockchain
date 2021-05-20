@@ -414,6 +414,22 @@ th, td {
   padding-left: 40px;
 }
 
+.column9 {
+  width: 30%;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.column10{
+  width: 70%;
+  padding-left: 30px;
+  padding-top: 10px;
+  font-size: 18px;
+}
+
 .table100-head th {
   padding-top: 18px;
   padding-bottom: 18px;
@@ -472,4 +488,19 @@ th, td {
 
 .table100.ver1 .ps__rail-y .ps__thumb-y::before {
   background-color: #cccccc;
+}
+
+
+.cardinfo {
+  width: 500px;
+  left: 100px
+}
+.cardinfo-body {
+ background-color: black;
+ width: 100%;
+ margin: auto;
+ max-width: 500px;
+ min-height: 300px;
+ position: relative;
+ border-radius: 25px;
 }
