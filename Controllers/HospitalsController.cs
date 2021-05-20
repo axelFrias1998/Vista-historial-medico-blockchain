@@ -39,9 +39,9 @@ namespace Vista_historial_medico_blockchain.Controllers
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IList<HospitalInfo>>();
+               /* var readTask = result.Content.ReadAsAsync<IList<HospitalInfo>>();
                 readTask.Wait();
-                hospitals = readTask.Result;
+                hospitals = readTask.Result;*/
             }
             else //web api sent error response 
             {
