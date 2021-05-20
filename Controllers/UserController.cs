@@ -37,5 +37,31 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
+         public IActionResult InfoCli()
+
+        {
+
+            return View();
+
+        }
+
+        public IActionResult Doctores()
+
+        {
+
+            return View();
+
+        }
+
+
+         public IActionResult Info()
+
+        {
+
+            return View();
+
+        }
+
+
     }
 }
