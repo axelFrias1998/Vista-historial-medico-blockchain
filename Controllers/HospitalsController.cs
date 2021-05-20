@@ -25,33 +25,26 @@ namespace Vista_historial_medico_blockchain.Controllers
        
         /*Get Hospital*/
 
-         public ActionResult Hospitales()
-    {
-        IEnumerable<HospitalInfo> hospitals = null;
-
-        using (var client = new HttpClient())
+         public async Task<ActionResult> Hospitales()
         {
-            client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
-            //HTTP GET
-            var responseTask = client.GetAsync("api/Hospitals");
-            responseTask.Wait();
+            IEnumerable<HospitalInfo> hospitals = null;
 
-            var result = responseTask.Result;
-            if (result.IsSuccessStatusCode)
+            using (var client = new HttpClient())
             {
-               /* var readTask = result.Content.ReadAsAsync<IList<HospitalInfo>>();
-                readTask.Wait();
-                hospitals = readTask.Result;*/
+                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                //sacar token de la cookie y mandarlo como BearerToken
+                //sacar token de la cookie y mandarlo como BearerToken
+                var result = await client.GetAsync("api/Hospitals");
+                if (result.IsSuccessStatusCode)
+                    hospitals = await result.Content.ReadFromJsonAsync<IList<HospitalInfo>>();
+                else //web api sent error response 
+                {
+                    hospitals = Enumerable.Empty<HospitalInfo>();
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                }
             }
-            else //web api sent error response 
-            {
-                        hospitals = Enumerable.Empty<HospitalInfo>();
-
-                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-            }
+            return View(hospitals);
         }
-        return View(hospitals);
-    }
 
 
 
@@ -260,15 +253,5 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return _context.Hospitals.Any(e => e.Id == id);
         }*/
-
-         public IActionResult CreateH()
-        {
-            return View();
-        }
-
-        public IActionResult DetailsHos()
-        {
-            return View();
-        }
     }
 }
