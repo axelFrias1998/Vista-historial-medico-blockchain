@@ -110,10 +110,15 @@ namespace Vista_historial_medico_blockchain.Controllers
 
             ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
-            return View(hospitalinfo);
-            
+            return View(hospitalinfo);    
+        }
 
-            
+        public IActionResult DetailsHos()
+
+        {
+
+            return View();
+
         }
         
          
