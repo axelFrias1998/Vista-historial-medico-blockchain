@@ -36,5 +36,15 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return View();
         }
+
+        public IActionResult ClinicAdmin()
+        {
+            return View();
+        }
+
+        public IActionResult DoctorPanel()
+        {
+            return View();
+        }
     }
 }
