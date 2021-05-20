@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
-using System.Net.Http.Json; 
+using System.Net;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Vista_historial_medico_blockchain.Models;
 
@@ -23,17 +22,46 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
-        public IActionResult Hospitales()
+       
+        /*Get Hospital*/
+
+         public ActionResult Hospitales()
+    {
+        IEnumerable<HospitalInfo> hospitals = null;
+
+        using (var client = new HttpClient())
         {
-            return View();
+            client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+            //HTTP GET
+            var responseTask = client.GetAsync("api/Hospitals");
+            responseTask.Wait();
+
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IList<HospitalInfo>>();
+                readTask.Wait();
+                hospitals = readTask.Result;
+            }
+            else //web api sent error response 
+            {
+                        hospitals = Enumerable.Empty<HospitalInfo>();
+
+                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+            }
         }
+        return View(hospitals);
+    }
+
+
+
        /* public HospitalsController(historialblockchain_dbContext context)
         {
             _context = context;
         }*/
 
         // GET: Hospitals
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
@@ -42,7 +70,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 return NotFound();
             
             return View(JsonConvert.DeserializeObject<List<Hospital>>(await client.GetStringAsync(url)).ToList());
-        }
+        }*/
 
         public async Task<IActionResult> ServiceCaltalog ()
         {
