@@ -167,9 +167,9 @@ namespace Vista_historial_medico_blockchain.Models
                     .WithMany(p => p.Hospitals)
                     .HasForeignKey(d => d.AdminId);
 
-                entity.HasOne(d => d.ServiceCatalog)
-                    .WithMany(p => p.Hospitals)
-                    .HasForeignKey(d => d.ServiceCatalogId);
+                //entity.HasOne(d => d.ServiceCatalog)
+                    //.WithMany(p => p.Hospitals)
+                    //.HasForeignKey(d => d.ServiceCatalogId);
             });
 
             modelBuilder.Entity<ServicesCatalog>(entity =>

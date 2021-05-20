@@ -6,20 +6,15 @@ using System.Text.Json.Serialization;
 
 namespace Vista_historial_medico_blockchain.Models
 {
-    public partial class ServicesCatalog
+    public class ServicesCatalog
     {
-        public ServicesCatalog()
-        {
-            Hospitals = new HashSet<Hospital>();
-        }
-
+        
         [JsonInclude]
         public int Id { get; set; }
         [JsonInclude]
         public string Type { get; set; }
         [JsonInclude]
         public bool IsPublic { get; set; }
-
-        public virtual ICollection<Hospital> Hospitals { get; set; }
+        
     }
 }
