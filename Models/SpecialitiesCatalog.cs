@@ -20,7 +20,7 @@ namespace Vista_historial_medico_blockchain.Models
         public string Type { get; set; }
 
         [JsonInclude]
-        public bool Hospitals { get; set; }
+        public string Nombre { get; set; }
 
         //public virtual ICollection<Hospital> Hospitals { get; set; }
     }
