@@ -260,5 +260,15 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return _context.Hospitals.Any(e => e.Id == id);
         }*/
+
+         public IActionResult CreateH()
+        {
+            return View();
+        }
+
+        public IActionResult DetailsHos()
+        {
+            return View();
+        }
     }
 }
