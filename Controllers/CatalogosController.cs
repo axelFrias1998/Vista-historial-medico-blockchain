@@ -37,5 +37,12 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
+        public IActionResult Specialities()
+
+        {
+
+            return View();
+
+        }
     }
 }
