@@ -53,6 +53,15 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
+        public IActionResult CreateDoc()
+
+        {
+
+            return View();
+
+        }
+
+
 
          public IActionResult Info()
 
