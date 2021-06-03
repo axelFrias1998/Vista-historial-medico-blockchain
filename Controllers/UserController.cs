@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using Vista_historial_medico_blockchain.Models;
+using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Json;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -21,23 +25,90 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
+        //public async Task<ActionResult> AdminInfo()
+        //{
+            //USEN DISPOSABLES CON USING O RESPONSE.DISPOSE();
+            //HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api​/Accounts​/GetAdmins​/" AGREGAR BOOLEANO);
+            //response.Headers.Add("BearerToken", obtener cookie)
+            //if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            //    return NotFound();
+            //var userToken = JsonConvert.DeserializeObject<UserToken>(await response.Content.ReadAsStringAsync());
+ //
+            //var handler = new JwtSecurityTokenHandler();
+            //var jsonToken = handler.ReadToken(userToken.Token);
+            //var tokenS = jsonToken as JwtSecurityToken;
+            //var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
+//
+            //if (userToken is null)
+            //    return NotFound();
+            //return View(JsonConvert.DeserializeObject<List<CreatedUserDTO>>(await response.Content.ReadAsStringAsync()).ToList());
+                      
+
+        //}
+
         public IActionResult AdminInfo()
-
         {
-
             return View();
-
         }
 
-         public IActionResult CreateAdmin()
-
+        public async Task<ActionResult> CreateAdmin(UserInfo userinfo)
         {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAdmin/{type}", userinfo);
+                postTask.Wait();
 
-            return View();
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadToken(userToken.Token);
+                    var tokenS = jsonToken as JwtSecurityToken;
+                    var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
 
+                    if (userToken is null)
+                    return NotFound();
+                    return RedirectToAction("AdminInfo");
+                }
+
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Users/GetRoles");
+            response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+                return NotFound();
+
+            var identityRol = JsonConvert.DeserializeObject<List<IdentityRol>>(await response.Content.ReadAsStringAsync());
+
+            if (identityRol is null)
+                return NotFound();
+            ViewBag.IdentityRol = new SelectList(identityRol, "id", "name");
+
+            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+            return View(userinfo); 
+            }
         }
+
 
          public IActionResult InfoCli()
+
+        {
+
+            return View();
+
+        }
+
+        public IActionResult ClinicAdmin()
+
+        {
+
+            return View();
+
+        }
+
+        public IActionResult CreateClinicAdmin()
 
         {
 
@@ -53,7 +124,7 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
-        public IActionResult CreateDoc()
+        public IActionResult CreateDoctores()
 
         {
 
@@ -61,9 +132,15 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
+              public IActionResult Pacientes()
 
+        {
 
-         public IActionResult Info()
+            return View();
+
+        }
+
+        public IActionResult Info()
 
         {
 
