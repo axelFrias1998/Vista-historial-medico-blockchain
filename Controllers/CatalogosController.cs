@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,47 +25,77 @@ namespace Vista_historial_medico_blockchain.Controllers
         public async Task<ActionResult> Catalogos()
 
         {
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/CatalogOfServices");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/CatalogOfServices");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)
                 return NotFound();
             
-            return View(JsonConvert.DeserializeObject<List<ServicesCatalog>>(await client.GetStringAsync("https://historial-blockchain.azurewebsites.net/api/CatalogOfServices")).ToList());
-                      
-
+            return View(JsonConvert.DeserializeObject<List<ServicesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/CatalogOfServices")).ToList());             
         }
 
         public async Task<ActionResult> Especia()
 
         {
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/SpecialitiesCatalog");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/SpecialitiesCatalog");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)
                 return NotFound();
             
-            return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await client.GetStringAsync("https://historial-blockchain.azurewebsites.net/api/SpecialitiesCatalog")).ToList());
+            return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/SpecialitiesCatalog")).ToList());
                       
 
         }
 
 
-    
-        public IActionResult CreateSpecialities()
-
+        /*public async Task<ActionResult>  CreateSpecialities( ServicesCatalog serviceCatalog)
         {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
+                postTask.Wait();
 
-            return View();
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Especia");
+                }
+            }
 
-        }
+            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+            return View(userinfo);
+        }*/
+    
+       
 
         public IActionResult Specialities()
 
         {
-
+            
             return View();
 
+        }
+
+        
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]*/
+         public async Task<ActionResult> CreateSpecialities(SpecialitiesCatalog specialitiescatalog)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = client.PostAsJsonAsync<SpecialitiesCatalog>("api/SpecialitiesCatalog", specialitiescatalog);
+                postTask.Wait();
+                var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
+                }
+            }
+            return View(specialitiescatalog);
         }
     }
 }
