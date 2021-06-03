@@ -22,7 +22,7 @@ namespace Vista_historial_medico_blockchain.Controllers
         private readonly ILogger<HomeController> _logger;
         
         HttpClient Client = new HttpClient();
-        string url = "https://historial-blockchain.azurewebsites.net/api/Accounts/CreateAccount"; 
+        string url = "https://localhost:44349/api/Accounts/CreateAccount"; 
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -61,7 +61,7 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                client.BaseAddress = new Uri("https://localhost:44349");
                 var postTask = client.PostAsJsonAsync<UserLogin>("api/Accounts/Login", userlogin);
                 postTask.Wait();
 
@@ -112,7 +112,7 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                client.BaseAddress = new Uri("https://localhost:44349");
                 var postTask = client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
                 postTask.Wait();
 

@@ -16,11 +16,17 @@ namespace Vista_historial_medico_blockchain.Controllers
     {
         
         static readonly HttpClient client = new HttpClient();
-        string url = "https://historial-blockchain20210512190841.azurewebsites.net/api/Hospitals";
+        string url = "https://localhost:44349/api/Hospitals";
         public HospitalsController()
         {
 
         }
+
+        public IActionResult Medicamentos()
+        {
+            return View();
+        }
+
 
        
         /*Get Hospital*/
@@ -31,7 +37,7 @@ namespace Vista_historial_medico_blockchain.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                client.BaseAddress = new Uri("https://localhost:44349/");
                 //sacar token de la cookie y mandarlo como BearerToken
                 var result = await client.GetAsync("api/Hospitals");
                 if (result.IsSuccessStatusCode)
@@ -66,7 +72,7 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         public async Task<IActionResult> ServiceCaltalog ()
         {
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Hospitals/GetCatalogOfServices");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)
@@ -84,7 +90,7 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
+                client.BaseAddress = new Uri("https://localhost:44349");
                 var postTask = client.PostAsJsonAsync<HospitalInfo>("api/Accounts/Hospitals", hospitalinfo);
                 postTask.Wait();
                 var result = postTask.Result;
@@ -95,7 +101,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 }
             }
 
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/CatalogOfServices");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/CatalogOfServices");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)

@@ -34,7 +34,7 @@ namespace Vista_historial_medico_blockchain.Controllers
         // GET: Users/Details
         public async Task<IActionResult> Index ()
         {
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Hospitals/GetCatalogOfServices");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)
