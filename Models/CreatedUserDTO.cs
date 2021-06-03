@@ -11,8 +11,10 @@ namespace Vista_historial_medico_blockchain.Models
         
         [JsonInclude]
         public string id { get; set; }
+
         [JsonInclude]
         public string nombre { get; set; }
+        
         [JsonInclude]
         public string apellido { get; set; }
 
