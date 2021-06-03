@@ -33,7 +33,6 @@ namespace Vista_historial_medico_blockchain.Controllers
             {
                 client.BaseAddress = new Uri("https://historial-blockchain.azurewebsites.net/");
                 //sacar token de la cookie y mandarlo como BearerToken
-                //sacar token de la cookie y mandarlo como BearerToken
                 var result = await client.GetAsync("api/Hospitals");
                 if (result.IsSuccessStatusCode)
                     hospitals = await result.Content.ReadFromJsonAsync<IList<HospitalInfo>>();
