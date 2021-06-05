@@ -27,6 +27,11 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
+        public IActionResult CrearMedicamento()
+        {
+            return View();
+        }
+
 
        
         /*Get Hospital*/
