@@ -22,6 +22,17 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
+        /*public async Task<ActionResult> PanelAdmin(CreatedUserDTO createdUserDTO){
+            using(var client = new HttpClient()){
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<CreatedUserDTO>("api/Accounts/GetAdmins", createdUserDTO);
+                if (postTask.IsSuccessStatusCode){
+
+                }
+            }
+            return View();
+        }*/
+
          public IActionResult AdminHospital()
         {
             return View();
