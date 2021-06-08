@@ -28,7 +28,6 @@ namespace Vista_historial_medico_blockchain.Controllers
         
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> AdminInfo(CreatedUserDTO createdUserDTO)
         {
             using(var client = new HttpClient()){

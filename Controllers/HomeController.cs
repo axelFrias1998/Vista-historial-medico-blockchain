@@ -81,9 +81,11 @@ namespace Vista_historial_medico_blockchain.Controllers
                         return View("../AdminPanel/PanelAdmin");
                 }
                 else
+                {
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Login");
+                }
             }
-            return View("UserLogin");
         }
 
         public void SetCookie(string key, string value, DateTime expireTime)  
@@ -122,7 +124,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("UserInfo");
+                    return View("Registrer");
                 }
             }
         }
