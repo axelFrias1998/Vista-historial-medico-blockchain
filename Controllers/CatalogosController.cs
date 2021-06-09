@@ -27,16 +27,15 @@ namespace Vista_historial_medico_blockchain.Controllers
         
         [HttpGet]
         public async Task<ActionResult> Catalogos(ServicesCatalog servicesCatalog)
-
         {
-           using(var client = new HttpClient()){
+            using(var client = new HttpClient()){
                 /*Mandar Token en el Header*/
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.GetAsync("api/CatalogOfServices");
                 if (response.IsSuccessStatusCode){
-                     return View(JsonConvert.DeserializeObject<List<ServicesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/CatalogOfServices")).ToList());  ;
+                    return View(JsonConvert.DeserializeObject<List<ServicesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/CatalogOfServices")).ToList());  ;
                 }
                 else{
                     return NotFound();
@@ -45,53 +44,59 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Especia()
-
+        public async Task<ActionResult> Especia(SpecialitiesCatalog specialitiesCatalog)
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/SpecialitiesCatalog");
-            response.EnsureSuccessStatusCode();
-
-            if (!response.IsSuccessStatusCode)
-                return NotFound();
-            
-            return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/SpecialitiesCatalog")).ToList());
-                      
-
+           using(var client = new HttpClient()){
+                /*Mandar Token en el Header*/
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.GetAsync("api/SpecialitiesCatalog");
+                if (response.IsSuccessStatusCode){
+                     return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/SpecialitiesCatalog")).ToList());
+                }
+                else{
+                    return NotFound();
+                }
+            }
         }
-                  
-        public IActionResult Specialities()
 
+        [HttpGet]               
+        public ActionResult CreateSpecialities()
         {
-            
             return View();
-
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateSpecialities (SpecialitiesCatalog specialitiescatalog)
+        [HttpPost]               
+        public async Task<ActionResult> CreateSpecialities(CreateSpeciality createSpeciality)
         {
             using(var client = new HttpClient())
             {
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = await client.PostAsJsonAsync<SpecialitiesCatalog>("api/SpecialitiesCatalog",specialitiescatalog);
+                var postTask = await client.PostAsJsonAsync<CreateSpeciality>("api/SpecialitiesCatalog", createSpeciality);
 
                 if (postTask.IsSuccessStatusCode)
                 {
-                   return View("Especia");
+                   return RedirectToAction(@"Especia");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("UserInfo");
+                    return View("CreateSpecialities");
                 }
-               
             }
-
         }
-        
 
-        [HttpPut]
+        
+        [HttpGet]               
+        public ActionResult EditSpecia(int id)
+        {
+            ViewData["Specialityid"] = id;
+            return View();
+        }
+
+        [HttpPost]
         public async Task<ActionResult> EditSpecia(SpecialitiesCatalog specialitiesCatalog)
         {
             using (var client = new HttpClient())
@@ -99,9 +104,9 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.GetAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Nombre}");
+                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Nombre}", null);
                 if (response.IsSuccessStatusCode){
-                    return View("Especia");
+                    return RedirectToAction(@"Especia");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
@@ -139,7 +144,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.DeleteAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}");
                 if (response.IsSuccessStatusCode){
-                    return View("Especia");
+                     return RedirectToAction(@"Especia");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
