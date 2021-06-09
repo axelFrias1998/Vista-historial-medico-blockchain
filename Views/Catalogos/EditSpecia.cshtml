@@ -4,22 +4,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-              @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading"> Editar Especialidad</h4>
-            </div>
-              <div class="modal-body">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Id)
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
-                  @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                </div>
-              </div>
-              <div class="modal-footer ">
-              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
-              </div>
-            }
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <h4 class="modal-title custom_align" id="Heading"> Editar Especialidad</h4>
+  </div>
+  <div class="modal-body">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => ViewData["SpecialityId"])
+  <div class="form-group">
+      @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
+      @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+  </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Actualizar</button>
+  </div>
+}
