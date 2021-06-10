@@ -153,6 +153,113 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        public async Task<ActionResult> Medicamentos(ListadoGrupoMedicamentosDTO listadogrupoMedicamentos)
+        {
+           using(var client = new HttpClient()){
+                /*Mandar Token en el Header*/
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.GetAsync("api/CatalogoGrupoMedicamentos");
+                if (response.IsSuccessStatusCode){
+                     return View(JsonConvert.DeserializeObject<List<ListadoGrupoMedicamentosDTO>>(await client.GetStringAsync("https://localhost:44349/api/CatalogoGrupoMedicamentos")).ToList());
+                }
+                else{
+                    return NotFound();
+                }
+            }
+        }
+
+        [HttpGet]               
+        public ActionResult CreateTipoMedicamento()
+        {
+            return View();
+        }
+
+        [HttpPost]               
+        public async Task<ActionResult> CreateTipoMedicamento(CreateTipoMedicamento createtipoMedicamento)
+        {
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<CreateTipoMedicamento>("api/CatalogoGrupoMedicamentos", createtipoMedicamento);
+
+                if (postTask.IsSuccessStatusCode)
+                {
+                   return RedirectToAction(@"Medicamentos");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("CreateTipoMedicamento");
+                }
+            }
+        }
+
+        
+        [HttpGet]               
+        public ActionResult EditTipoMedicamento(int id)
+        {
+            ViewData["Medicamentoid"] = id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditTipoMedicamento(ListadoGrupoMedicamentosDTO listadogrupoMedicamentos)
+        {
+            using (var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.PutAsync($"api/CatalogoGrupoMedicamentos/{listadogrupoMedicamentos.Id}/{listadogrupoMedicamentos.Type}", null);
+                if (response.IsSuccessStatusCode){
+                    return RedirectToAction(@"Medicamentos");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("EditTipoMedicamentos");
+                } 
+            }
+        }
+
+     [HttpDelete]
+     public async Task<ActionResult> DeleteMedicamentos(ListadoGrupoMedicamentosDTO listadogrupoMedicamentos)
+        {
+            using (var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.DeleteAsync($"api/CatalogoGrupoMedicamentos/{listadogrupoMedicamentos.Id}");
+                if (response.IsSuccessStatusCode){
+                     return RedirectToAction(@"Medicamentos");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Medicamentos");
+                } 
+            }
+        }
+
+    public IActionResult EleccionMedicamentos()  
+    {
+        return View();
+    }  
        
     }
 }
