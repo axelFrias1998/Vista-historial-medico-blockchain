@@ -7,7 +7,9 @@ namespace Vista_historial_medico_blockchain.Models
     public class HospitalInfo
     {
 
-        
+        [JsonInclude]
+        public int hospitalId{ get;set;}
+
         [MaxLength(150, ErrorMessage = "El Nombre de usuario debe tener como máximo 150 caracteres")]
         [MinLength(3, ErrorMessage = "El Nombre de usuario debe tener al menos 3 caracteres")]
         public string Name { get; set; }
