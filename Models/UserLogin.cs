@@ -7,20 +7,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Vista_historial_medico_blockchain.Models
 {
-    public partial class UserLogin 
+    public partial class UserLogin
     {
-        public UserLogin ()
+        public UserLogin()
         {
-           // AspNetUsers = new HashSet<AspNetUserLogin>();
-           // AspNetUserLogins = new HashSet<AspNetUserToken>();
+            // AspNetUsers = new HashSet<AspNetUserLogin>();
+            // AspNetUserLogins = new HashSet<AspNetUserToken>();
         }
-        
-        [JsonInclude]
-        public string Username { get; set; } 
 
-        [DataType(DataType.Password)]
         [JsonInclude]
-        /*[ContraseñaValidate(ErrorMessage = "Contraseña no valida")]*/
-        public string Password { get; set; }             
+        [Required(ErrorMessage = "El Username es un campo requerido")]
+        public string Username { get; set; }
+
+        [DataType(DataType.Password), Compare("Password")]
+        [JsonInclude]
+        [Required(ErrorMessage = "La confirmación de Password es un campo requerido")]
+        public string Password { get; set; }
     }
 }

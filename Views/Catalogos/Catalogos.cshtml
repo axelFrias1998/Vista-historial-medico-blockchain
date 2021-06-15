@@ -9,22 +9,27 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column7"> @Html.DisplayNameFor(model => model.Type) </th>
-									<th class="cell100 column8"> @Html.DisplayNameFor(model => model.IsPublic) </th>
+									<th class="cell100 column11"> Tipo de Servicio </th>
 								</tr>
 							</thead>
 								<tbody>
 								@foreach (var item in Model)
 								{
 								<tr class="row100 body">
-									<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Type)</td>
-									<td class="cell100 column8">@Html.DisplayFor(modelItem => item.IsPublic)</td>
+									<td class="cell100 column11"><h5>@Html.DisplayFor(modelItem => item.Type)</h5></td>
 								</tr>
 								}	
 								</tbody>		
 						</table>
 					</div>
 				</div>
+        
+        <center>
+        <br>
+                <div class="btn-group">
+                  <center></center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="Seleccion"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+                </div>
+        </center>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
       <div class="modal-dialog">

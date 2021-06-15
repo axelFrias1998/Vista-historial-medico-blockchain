@@ -22,7 +22,12 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         }
 
-        public IActionResult Medicamentos()
+        public IActionResult ListaMedicamentos()
+        {
+            return View();
+        }
+
+        public IActionResult CrearMedicamento()
         {
             return View();
         }

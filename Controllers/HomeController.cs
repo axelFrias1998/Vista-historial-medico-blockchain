@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -21,15 +22,13 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         private readonly ILogger<HomeController> _logger;
         
-        HttpClient Client = new HttpClient();
-        string url = "https://localhost:44349/api/Accounts/CreateAccount"; 
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             /*var myObject = new SomeObject
             {
@@ -61,80 +60,73 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             using (var client = new HttpClient())
             {
+                /*Mandar Token en el Header
+                 * var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                 * client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);*/
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = client.PostAsJsonAsync<UserLogin>("api/Accounts/Login", userlogin);
-                postTask.Wait();
+                var postTask = await client.PostAsJsonAsync<UserLogin>("api/Accounts/Login", userlogin);
 
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
+                if (postTask.IsSuccessStatusCode)
                 {
-                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
                     SetCookie("Token", userToken.Token, userToken.Expiration);
-                    /*var handler = new JwtSecurityTokenHandler();
-                    var jsonToken = handler.ReadToken(userToken.Token);
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadJwtToken(userToken.Token);
                     var tokenS = jsonToken as JwtSecurityToken;
-                    var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
-                    
-                    
-                    var roles = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
-                    if (userToken is null)
-                        return NotFound();   
-                    if(roles == "Sysadmin")
-                        RedirectToAction("Panel", "PanelsController", ViewBag.Role = "roles");  */          
-                }
+                    string rool = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
 
-            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    /*if (rool.Equals("SysAdmin"))
+                        /*RedirectToAction("PanelAdmin");*/
+                        /*return View("../Views/AdminPanel/PanelAdmin.cshtml");*/
+                        return View("../AdminPanel/PanelAdmin");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Login");
+                }
             }
-            return View(userlogin);
         }
 
         public void SetCookie(string key, string value, DateTime expireTime)  
         {  
             CookieOptions option = new CookieOptions();  
             option.Expires = expireTime;
-            Response.Cookies.Append(key, value, option);  
+            Response.Cookies.Append(key, value, option);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        /*public async Task <IActionResult> Registrer([Bind("Apellido,Email,Password,ConfirmPassword,Nombre,PhoneNumber,UserName")] UserInfo UserInfo)
-        {
-            if (ModelState.IsValid)
-            {
-                await client.PostAsJsonAsync<UserInfo>(url, UserInfo);
-
-                return RedirectToAction(nameof(Index));
-            }
-            return View(UserInfo);
-        }*/
-
         public async Task<ActionResult> Registrer(UserInfo userinfo)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
-                postTask.Wait();
+                var postTask = await client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
 
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
+                if (postTask.IsSuccessStatusCode)
                 {
-                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
- 
-                    var handler = new JwtSecurityTokenHandler();
-                    var jsonToken = handler.ReadToken(userToken.Token);
-                    var tokenS = jsonToken as JwtSecurityToken;
-                    var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
-
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
                     if (userToken is null)
+                    {
                         return NotFound();
-                    return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        SetCookie("Token", userToken.Token, userToken.Expiration);
+                        /*var handler = new JwtSecurityTokenHandler();
+                        var jsonToken = handler.ReadToken(userToken.Token);
+                        var tokenS = jsonToken as JwtSecurityToken;
+                        var rool = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;*/
+
+                        return View("Login");
+                    }
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Registrer");
                 }
             }
-
-            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-            return View(userinfo);
         }
         
          public IActionResult Registrer()
@@ -146,9 +138,6 @@ namespace Vista_historial_medico_blockchain.Controllers
         {
             return View();
         }
-        
-        
-        
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
