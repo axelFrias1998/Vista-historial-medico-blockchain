@@ -35,7 +35,13 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.GetAsync("api/Accounts/GetAdmins/true");
+                string tipo = "true";
+                /*if(){
+                    tipo = "true";
+                }else{
+                    tipo = "false";
+                }*/
+                var response = await client.GetAsync($"api/Accounts/GetAdmins/{tipo}");
                 if (response.IsSuccessStatusCode){
                     return View(JsonConvert.DeserializeObject<List<CreatedUserDTO>>(await response.Content.ReadAsStringAsync()).ToList());
                 }
@@ -68,38 +74,49 @@ namespace Vista_historial_medico_blockchain.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAdmin/{type}", userinfo);
-                postTask.Wait();
+                /*HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Users/GetRoles");
+                response.EnsureSuccessStatusCode();
 
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    var userToken = JsonConvert.DeserializeObject<UserToken>(await result.Content.ReadAsStringAsync());
-                    var handler = new JwtSecurityTokenHandler();
-                    var jsonToken = handler.ReadToken(userToken.Token);
-                    var tokenS = jsonToken as JwtSecurityToken;
-                    var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
-
-                    if (userToken is null)
+                if (!response.IsSuccessStatusCode)
                     return NotFound();
-                    return RedirectToAction("AdminInfo");
+
+                var identityRol = JsonConvert.DeserializeObject<List<IdentityRol>>(await response.Content.ReadAsStringAsync());
+
+                if (identityRol is null)
+                    return NotFound();
+                ViewBag.IdentityRol = new SelectList(identityRol, "id", "name");*/
+                List<SelectListItem> lst = new List<SelectListItem>();
+
+                lst.Add(new SelectListItem() { Text = "PacsAdmin", Value = "0" });
+                lst.Add(new SelectListItem() { Text = "ClinicAdmin", Value = "1" });
+
+                ViewBag.IdentityRol= lst;
+                string rol = userinfo.SelectedUsuario;
+                string tipo = string.Empty;
+                /*Request.Form["Id"].ToString()*/
+                if(string.IsNullOrEmpty(rol)){
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View();
+                }else{
+                    if(rol.Equals("1")){
+                        tipo = "true";
+                    }
+                    else if(rol.Equals("0")){
+                        tipo = "false";
+                    }
+                    /*Mandar Token en el Header*/
+                    var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                    var postTask = await client.PostAsJsonAsync<UserInfo>($"api/Accounts/CreateAdmin/{tipo}", userinfo);
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                            return RedirectToAction("AdminInfo");
+                    }
+                    else{
+                        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                        return View("CreateAdmin");
+                    }
                 }
-
-            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Users/GetRoles");
-            response.EnsureSuccessStatusCode();
-
-            if (!response.IsSuccessStatusCode)
-                return NotFound();
-
-            var identityRol = JsonConvert.DeserializeObject<List<IdentityRol>>(await response.Content.ReadAsStringAsync());
-
-            if (identityRol is null)
-                return NotFound();
-            ViewBag.IdentityRol = new SelectList(identityRol, "id", "name");
-
-            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-            return View(userinfo); 
             }
         }
 

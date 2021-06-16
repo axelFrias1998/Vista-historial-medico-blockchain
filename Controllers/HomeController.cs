@@ -100,11 +100,6 @@ namespace Vista_historial_medico_blockchain.Controllers
                     else
                     {
                         SetCookie("Token", userToken.Token, userToken.Expiration);
-                        /*var handler = new JwtSecurityTokenHandler();
-                        var jsonToken = handler.ReadToken(userToken.Token);
-                        var tokenS = jsonToken as JwtSecurityToken;
-                        var rool = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;*/
-
                         return View("Login");
                     }
                 }

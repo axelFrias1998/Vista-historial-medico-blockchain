@@ -49,5 +49,7 @@ namespace Vista_historial_medico_blockchain.Models
         [JsonInclude]
         [Required(ErrorMessage = "El Username es un campo requerido")]
         public string Username { get; set; } 
+
+        public string SelectedUsuario {get;set;}
     }
 }

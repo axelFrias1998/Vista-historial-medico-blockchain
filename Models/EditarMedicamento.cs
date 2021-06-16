@@ -6,9 +6,8 @@ using System.Text.Json.Serialization;
 
 namespace Vista_historial_medico_blockchain.Models
 {
-    public class HospitalMedicamentosCreateDTO
+    public class EditarMedicamento
     {
-        
         [JsonInclude]
         public string nombreMedicamento { get; set; }
         
@@ -22,16 +21,9 @@ namespace Vista_historial_medico_blockchain.Models
         public string viaAdministracion { get; set; }
 
         [JsonInclude]
-        public int grupoMedicamentosId { get; set; }
-
-        [JsonInclude]
-        public string hospitalId { get; set; }
-
-        [JsonInclude]
         public string precauciones { get; set; }
         
         [JsonInclude]
         public string efectosSecundarios { get; set; }
-
-    }
+        }
 }

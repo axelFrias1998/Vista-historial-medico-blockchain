@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Vista_historial_medico_blockchain.Models;
+using System.Net.Http.Headers;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -35,25 +36,20 @@ namespace Vista_historial_medico_blockchain.Controllers
 
        
         /*Get Hospital*/
-
-         public async Task<ActionResult> Hospitales()
+        [HttpGet]
+         public async Task<ActionResult> Hospitales(HospitalInfo hospitalInfo)
         {
-            IEnumerable<HospitalInfo> hospitals = null;
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44349/");
-                //sacar token de la cookie y mandarlo como BearerToken
-                var result = await client.GetAsync("api/Hospitals");
-                if (result.IsSuccessStatusCode)
-                    hospitals = await result.Content.ReadFromJsonAsync<IList<HospitalInfo>>();
-                else //web api sent error response 
-                {
-                    hospitals = Enumerable.Empty<HospitalInfo>();
-                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+            /*Mandar Token en el Header*/
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.GetAsync($"api/Hospitals");
+                if (response.IsSuccessStatusCode){
+                    return View(JsonConvert.DeserializeObject<List<HospitalInfo>>(await response.Content.ReadAsStringAsync()).ToList());
                 }
-            }
-            return View(hospitals);
+                else{
+                    return NotFound();
+                }
         }
 
 
