@@ -4,44 +4,44 @@
     ViewData["Title"] = "Home Page";
 }
 
-              @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Crear nuevo Doctor</h4>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control", placeholder="Apellido"} })
-                  @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder="Email"} })
-                  @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder="Password"} })
-                  @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder="Confirmar Password"} })
-                  @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
-                  @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder="Teléfono"} })
-                  @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder="Username"} })
-                  @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                </div>
-              </div>
-              <div class="modal-footer ">
-              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
-              </div>
-            }
+  @using (Html.BeginForm())
+  {
+    @Html.AntiForgeryToken()
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <h4 class="modal-title custom_align" id="Heading">Crear nuevo Doctor</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control", placeholder="Apellido"} })
+      @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder="Email"} })
+      @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder="Password"} })
+      @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder="Confirmar Password"} })
+      @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
+      @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder="Teléfono"} })
+      @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder="Username"} })
+      @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+    </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
+  </div>
+}

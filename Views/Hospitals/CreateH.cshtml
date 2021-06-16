@@ -4,34 +4,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-              @using (Html.BeginForm()){
-              @Html.AntiForgeryToken()
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Crear nuevo Hospital</h4>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
-                  @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                  @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder="Teléfono"} })
-                  @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                </div>
-                <div class="form-group">
-                  @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.CatalogoServicios, null, new { @class = "form-control" })
-                </div>
-                <div class="form-group">
-                  <!-- Html.EditorFor(model => model.AdminId, new { htmlAttributes = new { class = "form-control", placeholder="Id Admin"} }) -->
-                  <!-- Html.ValidationMessageFor(model => model.AdminId, "", new { class = "text-danger" }) -->
-                </div>
-              </div>
-              <div class="modal-footer ">
-              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
-              </div>
-            }
+@using (Html.BeginForm()){
+  @Html.AntiForgeryToken()
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <h4 class="modal-title custom_align" id="Heading">Crear nuevo Hospital</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
+      @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder="Teléfono"} })
+      @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.CatalogoServicios, null, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      <!-- Html.EditorFor(model => model.AdminId, new { htmlAttributes = new { class = "form-control", placeholder="Id Admin"} }) -->
+      <!-- Html.ValidationMessageFor(model => model.AdminId, "", new { class = "text-danger" }) -->
+    </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
+  </div>
+}
 
             

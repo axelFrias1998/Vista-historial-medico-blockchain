@@ -42,6 +42,8 @@ namespace Vista_historial_medico_blockchain.Controllers
                     var jsonToken = handler.ReadJwtToken(userToken.Token);
                     var tokenS = jsonToken as JwtSecurityToken;
                     string rol = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
+                    string nombreUsuario = tokenS.Claims.First(claim => claim.Type == "NombreUsuario").Value;
+                    ViewData["nombreUsuario"] = nombreUsuario;
                     if(rol.Equals("SysAdmin"))
                         return RedirectToAction("PanelAdmin", "AdminPanel");
                     else if(rol.Equals("ClinicAdmin") || rol.Equals("PacsAdmin"))
