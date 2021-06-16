@@ -46,7 +46,6 @@ namespace Vista_historial_medico_blockchain.Controllers
                         /*RedirectToAction("PanelAdmin");*/
                         /*return View("../Views/AdminPanel/PanelAdmin.cshtml");*/
                     return RedirectToAction("PanelAdmin", "AdminPanel");
-                    return View("../AdminPanel/PanelAdmin");
                 }
                 else
                 {

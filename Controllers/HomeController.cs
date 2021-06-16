@@ -59,24 +59,19 @@ namespace Vista_historial_medico_blockchain.Controllers
                     var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadJwtToken(userToken.Token);
                     var tokenS = jsonToken as JwtSecurityToken;
-                    string rool = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
+                    string rol = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
 
-                    /*if (rool.Equals("SysAdmin"))
-                        /*RedirectToAction("PanelAdmin");*/
-                        /*return View("../Views/AdminPanel/PanelAdmin.cshtml");*/
-                    if(rool.Equals("SysAdmin")){
-                        return View("../AdminPanel/PanelAdmin");
-                    }else if(rool.Equals("ClinicAdmin")){
-                        return View("../AdminPanel/ClinicAdmin");
-                    }else if(rool.Equals("PacsAdmin")){
-                        return View("../AdminPanel/ClinicAdmin");
-                    }else if(rool.Equals("Doctor")){
-                        return View("../AdminPanel/DoctorPanel");
-                    }else if(rool.Equals("Pacient")){
-                        return View("../AdminPanel/ClinicAdmin");
-                    }else{
+                    if(rol.Equals("SysAdmin"))
+                        return RedirectToAction("PanelAdmin", "AdminPanel");
+                    else if(rol.Equals("ClinicAdmin") || rol.Equals("PacsAdmin"))
+                        return RedirectToAction("ClinicAdmin", "AdminPanel");
+                    else if(rol.Equals("Doctor"))
+                        return RedirectToAction("DoctorPanel", "AdminPanel");
+                    else if(rol.Equals("Pacient"))
+                        return RedirectToAction("ClinicAdmin", "AdminPanel");
+                    else
+
                         return View();
-                    }
                 }
                 else
                 {
@@ -106,16 +101,15 @@ namespace Vista_historial_medico_blockchain.Controllers
                 {
                     var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
                     if (userToken is null)
-                    {
                         return NotFound();
-                    }
                     else
                     {
                         SetCookie("Token", userToken.Token, userToken.Expiration);
                         return View("Login");
                     }
                 }
-                else{
+                else
+                {
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
                     return View("Registrer");
                 }
