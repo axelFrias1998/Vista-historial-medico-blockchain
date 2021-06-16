@@ -6,7 +6,7 @@
 
               @using (Html.BeginForm())
                                 {
-                                    @Html.AntiForgeryToken()
+              @Html.AntiForgeryToken()
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                 <h4 class="modal-title custom_align" id="Heading">Crear nuevo Administrador</h4>
@@ -41,7 +41,7 @@
                   @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                  @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.IdentityRol, null, new { @class = "form-control" })
+                  @Html.DropDownListFor(model => model.SelectedUsuario, (IEnumerable<SelectListItem>)ViewBag.IdentityRol, "Tipo de Cuenta" , new { @class = "form-control", @onChange = "SelectedValue(this)" })
                 </div>
               </div>
               <div class="modal-footer ">
@@ -50,3 +50,16 @@
             }
 
             
+<script>  
+    //To get selected value an text of dropdownlist  
+    function SelectedValue(ddlObject)  
+    {  
+        //Selected value of dropdownlist  
+        var selectedValue = ddlObject.value;  
+        //Selected text of dropdownlist  
+        var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;  
+          
+        //alert popup with detail of seleceted value and text  
+        alert(" Selected Value: " + selectedValue+" -- "+"Selected Text: " + selectedText ) ;
+    }  
+</script>
