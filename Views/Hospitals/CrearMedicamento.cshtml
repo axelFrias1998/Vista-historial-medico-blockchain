@@ -13,7 +13,11 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control", placeholder="Descripcion"} })
+                  @Html.EditorFor(model => model.nombreMedicamento, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre del medicamento"} })
+                  @Html.ValidationMessageFor(model => model.nombreMedicamento, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                  @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control", placeholder="Descripción"} })
                   @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
@@ -25,12 +29,19 @@
                   @Html.ValidationMessageFor(model => model.viaAdministracion, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                  @Html.EditorFor(model => model.grupoMedicamentosId, new { htmlAttributes = new { @class = "form-control", placeholder="Id Grupo de Medicamento"} })
-                  @Html.ValidationMessageFor(model => model.grupoMedicamentosId, "", new { @class = "text-danger" })
+                  @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.SpecialitiesCatalog, null, new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                   @Html.EditorFor(model => model.hospitalId, new { htmlAttributes = new { @class = "form-control", placeholder="Id Hospital"} })
                   @Html.ValidationMessageFor(model => model.hospitalId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                  @Html.EditorFor(model => model.precauciones, new { htmlAttributes = new { @class = "form-control", placeholder="Precauciones"} })
+                  @Html.ValidationMessageFor(model => model.precauciones, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                  @Html.EditorFor(model => model.efectosSecundarios, new { htmlAttributes = new { @class = "form-control", placeholder="Efectos Secundarios"} })
+                  @Html.ValidationMessageFor(model => model.efectosSecundarios, "", new { @class = "text-danger" })
                 </div>
               </div>
               <div class="modal-footer ">
