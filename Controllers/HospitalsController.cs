@@ -32,6 +32,53 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
+        [HttpPost]               
+        public async Task<ActionResult> CrearMedicamento(HospitalMedicamentosCreateDTO crearMedicamento)
+        {
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<HospitalMedicamentosCreateDTO>("api/HospitalMedicamentos", crearMedicamento);
+
+                if (postTask.IsSuccessStatusCode)
+                {
+                   return RedirectToAction(@"ListaMedicamentos");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("CrearMedicamento");
+                }
+            }
+        }
+
+        [HttpGet]               
+        public ActionResult EditarMedicamento(int id)
+        {
+            ViewData["EditarMedicamento"] = id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditarMedicamento(SpecialitiesCatalog specialitiesCatalog)
+        {
+            using (var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Nombre}", null);
+                if (response.IsSuccessStatusCode){
+                    return RedirectToAction(@"Especia");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("EditSpecia");
+                } 
+            }
+        }
+
 
        
         /*Get Hospital*/

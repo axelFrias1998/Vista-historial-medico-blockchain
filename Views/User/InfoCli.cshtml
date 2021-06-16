@@ -1,25 +1,35 @@
-
+@model CreatedUserDTO
 @{
     ViewData["Title"] = "Home Page";
 }
+
+    <form method="post">
+    <div class="form-group">
+    <label for="id">Id:</label>
+    <input class="form-control" name="id" />
+    </div>
+    <div class="text-center panel-body">
+    <button type="submit" class="btn btn-sm btn-primary">Get Reservation</button>
+    </div>
+    </form>
 
 <br><h1>Información Personal</h1><br>
     <table style="background-color: white; border-radius:8px;">
         <tr>
             <td class="column9">Apellido:</td>
-            <td class="column10">(model => model.Apellido)</td>
+            <td class="column10">@Model.apellido</td>
         </tr>
         <tr> 
             <td class="column9">Email:</td>
-            <td class="column10">(model => model.Email)</td>
+            <td class="column10">@Model.email</td>
         </tr>
         <tr> 
             <td class="column9">Nombre:</td>
-            <td class="column10">(model => model.Nombre)</td>
+            <td class="column10">@Model.nombre</td>
         </tr>
-        <tr> 
-            <td class="column9">Telefono:</td>
-            <td class="column10">(model => model.PhoneNumber)</td>
+        <tr>
+        <td class="column9">Número de teléfono:</td>
+        <td class="column10">@Model.phoneNumber</td>
         </tr>
         <tr> 
             <td class="column9">Nombre de usuario:</td>
@@ -27,7 +37,7 @@
         </tr>
         <tr> 
             <td class="column9">Especialidad:</td>
-            <td class="column10">(model => model.Username)</td>
+             <td class="column10">@Model.userName</td>
         </tr>
         <tr>
             <td colspan="2" style="background-color: #688391; font-size: 22px;"><center><b>Hospital</b></center></td>
