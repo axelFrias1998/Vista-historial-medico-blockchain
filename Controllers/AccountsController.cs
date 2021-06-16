@@ -41,11 +41,17 @@ namespace Vista_historial_medico_blockchain.Controllers
                     var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadJwtToken(userToken.Token);
                     var tokenS = jsonToken as JwtSecurityToken;
-                    string rool = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
-                    /*if (rool.Equals("SysAdmin"))
-                        /*RedirectToAction("PanelAdmin");*/
-                        /*return View("../Views/AdminPanel/PanelAdmin.cshtml");*/
-                    return RedirectToAction("PanelAdmin", "AdminPanel");
+                    string rol = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
+                    if(rol.Equals("SysAdmin"))
+                        return RedirectToAction("PanelAdmin", "AdminPanel");
+                    else if(rol.Equals("ClinicAdmin") || rol.Equals("PacsAdmin"))
+                        return RedirectToAction("ClinicAdmin", "AdminPanel");
+                    else if(rol.Equals("Doctor"))
+                        return RedirectToAction("DoctorPanel", "AdminPanel");
+                    else if(rol.Equals("Pacient"))
+                        return RedirectToAction("ClinicAdmin", "AdminPanel");
+                    else
+                        return View();
                 }
                 else
                 {

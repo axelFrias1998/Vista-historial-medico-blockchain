@@ -4,62 +4,52 @@
 
 
 <section id="services" class="services">
-      <div class="container">
-        <center>
-        <div class="section-title">
-          <br><h2>¡Bienvenido _________!</h2>
-          <br><p>Este es el panel en donde podrás realizar las siguentes actividades:</p><br><br>
+  <div class="container">
+    <center>
+    <div class="section-title">
+      <br><h2>¡Bienvenido _________!</h2>
+      <br><p>Este es el panel en donde podrás realizar las siguentes actividades:</p><br><br>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063189.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="Catalogos" asp-action="Especia">Especialidades</a></h4>
+          <br><p>Aquí podrás añadir nuevas especialidades al hospital.</p>
         </div>
-
-        <div class="row">
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063189.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="Catalogos" asp-action="Especia">Especialidades</a></h4>
-              <br><p>Aquí podrás añadir nuevas especialidades al hospital.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3952/3952988.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="User" asp-action="Doctores">Doctores</a></h4>
-              <br><p>Aquí podrás registrar, actualizar, borrar y leer doctores del hospital.</p>
-            </div>
-          </div>              
-
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063022.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="User" asp-action="InfoCli">Tu Información</a></h4>
-              <br><p>Aquí podrás visualizar y actualizar los datos del hospital y del administrador.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063083.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="AdminPanel" asp-action="Admin">Consultas   </a></h4>
-              <br><p>Aquí podrás visualizar el listado de consultas realizadas en el hospital.</p>
-            </div>
-          </div>
-
-          
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="Catalogos" asp-action="EleccionMedicamentos">Medicamentos</a></h4>
-              <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
-            </div>
-          </div>
       </div>
 
-      
-<center>
-        <br><br>
-                <div class="btn-group">
-                  <center></center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="Seleccion"><button style='width:140px; height:80px' class="btn btn-lg btn-primary btn-block">Cerrar Sesión</button></a></center>
-                </div>
-        </center>
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3952/3952988.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="User" asp-action="Doctores">Doctores</a></h4>
+          <br><p>Aquí podrás registrar, actualizar, borrar y leer doctores del hospital.</p>
+        </div>
+      </div>              
 
-    </section>
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063022.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="User" asp-action="InfoCli">Tu Información</a></h4>
+          <br><p>Aquí podrás visualizar y actualizar los datos del hospital y del administrador.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063083.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="AdminPanel" asp-action="Admin">Consultas   </a></h4>
+          <br><p>Aquí podrás visualizar el listado de consultas realizadas en el hospital.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="Catalogos" asp-action="EleccionMedicamentos">Medicamentos</a></h4>
+          <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -2,40 +2,38 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <section id="services" class="services">
-      <div class="container">
-        <center>
-        <div class="section-title">
-           <br><h2>¡Bienvenido _________!</h2>
-           <br><p>Este es el panel en donde podrás realizar las siguentes actividades:</p><br><br>
+  <div class="container">
+    <center>
+    <div class="section-title">
+      <br><h2>¡Bienvenido _________!</h2>
+      <br><p>Este es el panel en donde podrás realizar las siguentes actividades:</p><br><br>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063194.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="User" asp-action="Info">Tu informacion</a></h4>
+          <br><p>Aquí podrás visualizar y actualizar información personal.</p>
         </div>
-
-        <div class="row">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063194.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="User" asp-action="Info">Tu informacion</a></h4>
-              <br><p>Aquí podrás visualizar y actualizar información personal.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209000.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="AdminPanel" asp-action="Admin">Nueva Consulta</a></h4>
-              <br><p>Aquí podrás realizar el registro de una nueva consulta.</p>
-            </div>
-          </div>              
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height=70px;"></i></div>
-              <h4><a asp-controller="AdminPanel" asp-action="Admin">Tus consultas</a></h4>
-              <br><p>Aquí podrás visualizar el listado de consultas realizadas.</p>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </section>
+
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209000.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="AdminPanel" asp-action="Admin">Nueva Consulta</a></h4>
+          <br><p>Aquí podrás realizar el registro de una nueva consulta.</p>
+        </div>
+      </div>              
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height=70px;"></i></div>
+          <h4><a asp-controller="AdminPanel" asp-action="Admin">Tus consultas</a></h4>
+          <br><p>Aquí podrás visualizar el listado de consultas realizadas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
