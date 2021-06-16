@@ -6,12 +6,14 @@ using System.Text.Json.Serialization;
 
 namespace Vista_historial_medico_blockchain.Models
 {
-    public class HospitlaMedicamentosDTO
+    public class HospitalMedicamentosDTO
     {
-        
         [JsonInclude]
-        public string id { get; set; }
+        public int id { get; set; }
 
+        [JsonInclude]
+        public string nombreMedicamento { get; set; }
+        
         [JsonInclude]
         public string descripcion { get; set; }
         
@@ -22,7 +24,12 @@ namespace Vista_historial_medico_blockchain.Models
         public string viaAdministracion { get; set; }
 
         [JsonInclude]
-        public string grupoMedicamentosId { get; set; }
+        public int grupoMedicamentos { get; set; }
 
-        }
+        [JsonInclude]
+        public string precauciones { get; set; }
+        
+        [JsonInclude]
+        public string efectosSecundarios { get; set; }
+    }
 }
