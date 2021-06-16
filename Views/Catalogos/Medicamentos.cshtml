@@ -1,15 +1,15 @@
-@model IEnumerable<Vista_historial_medico_blockchain.Models.SpecialitiesCatalog>
+@model IEnumerable<Vista_historial_medico_blockchain.Models.ListadoGrupoMedicamentosDTO>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<br><h1>Catálogo de Servicios</h1>
+<br><h1>Catálogo de Medicamentos</h1>
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column7"> @Html.DisplayNameFor(model => model.Nombre) </th>
+									<th class="cell100 column7"> @Html.DisplayNameFor(model => model.Type) </th>
 									<th class="cell100 column8"></th>
 								</tr>
 							</thead>
@@ -20,9 +20,9 @@
 									<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Type)</td>
 									<td class="cell100 column8">
 										<data-placement="top" data-toggle="tooltip" title="Edit">
-											@Html.ActionLink("Editar", "EditSpecia", new { id = item.Id }) |
+											@Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.Id }) |
 										<data-placement="top" data-toggle="tooltip" title="Edit">
-											@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+											@Html.ActionLink("Eliminar", "DeleteMedicamentos", new { id = item.Id })
 									</td>
 																
 								</tr>
@@ -31,14 +31,14 @@
 						</table>
 					</div>
 				</div>
-				<br>
+
+                <br>
                 <div class="btn-group">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="Seleccion"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="CreateSpecialities"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
+                    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="EleccionMedicamentos"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="CreateTipoMedicamento"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
                 </div>
-
                <!-- <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">

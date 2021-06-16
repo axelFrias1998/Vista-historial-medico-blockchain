@@ -367,7 +367,11 @@ input, textarea {
   background-color: #fff;
   
 }
-
+.table101 {
+  background-color: #fff;
+  width: 70%;
+  
+}
 table {
   width: 100%;
   
@@ -429,6 +433,11 @@ th, td {
   padding-left: 30px;
   padding-top: 10px;
   font-size: 18px;
+}
+.column11{
+  width: 100%;
+  padding-left: 60px;
+  padding-top: 10px;
 }
 
 .table100-head th {
