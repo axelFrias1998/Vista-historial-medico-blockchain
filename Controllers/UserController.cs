@@ -50,21 +50,6 @@ namespace Vista_historial_medico_blockchain.Controllers
                 }
             }
             
-            //USEN DISPOSABLES CON USING O RESPONSE.DISPOSE();
-            //HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api​/Accounts​/GetAdmins​/" AGREGAR BOOLEANO);
-            //response.Headers.Add("BearerToken", obtener cookie)
-            //if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            //    return NotFound();
-            //var userToken = JsonConvert.DeserializeObject<UserToken>(await response.Content.ReadAsStringAsync());
- //
-            //var handler = new JwtSecurityTokenHandler();
-            //var jsonToken = handler.ReadToken(userToken.Token);
-            //var tokenS = jsonToken as JwtSecurityToken;
-            //var jti = tokenS.Claims.First(claim => claim.Type == "UserId").Value;
-//
-            //if (userToken is null)
-            //    return NotFound();
-            //return View(JsonConvert.DeserializeObject<List<CreatedUserDTO>>(await response.Content.ReadAsStringAsync()).ToList());
         }
 
        
@@ -74,17 +59,6 @@ namespace Vista_historial_medico_blockchain.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
-                /*HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Users/GetRoles");
-                response.EnsureSuccessStatusCode();
-
-                if (!response.IsSuccessStatusCode)
-                    return NotFound();
-
-                var identityRol = JsonConvert.DeserializeObject<List<IdentityRol>>(await response.Content.ReadAsStringAsync());
-
-                if (identityRol is null)
-                    return NotFound();
-                ViewBag.IdentityRol = new SelectList(identityRol, "id", "name");*/
                 List<SelectListItem> lst = new List<SelectListItem>();
 
                 lst.Add(new SelectListItem() { Text = "PacsAdmin", Value = "0" });
@@ -128,6 +102,50 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
 
         }
+                /*[HttpGet]
+        public async Task<ActionResult> InfoCli(CreatedUserDTO createduserDTO)
+        {
+        using(var client = new HttpClient()){
+        /*Mandar Token en el Header
+        var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+        client.BaseAddress = new Uri("https://localhost:44349");
+        var response = await client.GetAsync($"api/Accounts/GetAccountInfo/{createduserDTO.id}");
+        if (response.IsSuccessStatusCode){
+        return View(JsonConvert.DeserializeObject<CreatedUserDTO>(await client.GetStringAsync($"https://localhost:44349/api/Accounts/GetAccountInfo/{createduserDTO.id}")));
+        }
+        else{
+        return NotFound();
+        }
+        }
+        }*/
+
+        /*
+        public ViewResult InfoCli() => View();
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> InfoCli( string id)
+        {
+        CreatedUserDTO createdUserDTO = new CreatedUserDTO();
+        using (var httpClient = new HttpClient())
+        {
+        var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+        using (var response = await httpClient.GetAsync("https://localhost:44349/api/GetAccountInfo/" + id))
+        {
+        if (response.IsSuccessStatusCode)
+        {
+        string apiResponse = await response.Content.ReadAsStringAsync();
+        createdUserDTO = JsonConvert.DeserializeObject<CreatedUserDTO>(apiResponse);
+        }
+        else
+        ViewBag.StatusCode = response.StatusCode;
+        }
+        }
+        return View(createdUserDTO);
+        }*/
 
         public IActionResult ClinicAdmin()
 
