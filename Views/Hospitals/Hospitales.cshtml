@@ -1,56 +1,57 @@
 @model IEnumerable<Vista_historial_medico_blockchain.Models.HospitalInfo>
-<div class="row">
-  <div class="col-md-12">
-    <h4>Hospitales</h4>
-    <div class="table-responsive">           
-      <table id="mytable" class="table table-bordred table-striped">
-        <tr>
-          <th>Nombre</th>
-          <th>Número de teléfono</th>
-          <th>Fecha de registro</th>
-          <th>Administradores</th>
-          <th>Especialidades</th>
-          <th>Tipo de Servicio</th>
-          <th>Editar | Deshabilitar</th>
-        </tr>
-    
-    <!--foreach (var item in Model)
-    {
-      
-  <tr>
-    <td>Html.DisplayFor(modelItem => item.Name)</td>
-    <td>Html.DisplayFor(modelItem => item.PhoneNumber)</td>
-    <td>Html.DisplayFor(modelItem => item.RegisterDate)</td>
-    <td><data-placement="top" data-toggle="tooltip" title="Edit">
-        Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } )</td>
-    <td><data-placement="top" data-toggle="tooltip" title="Edit">
-        Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } )</td>
-    <td>Html.DisplayFor(modelItem => item.Especialidades)</td>
-    <td>Html.DisplayFor(modelItem => item.ServicesCatalog)</td>
-    <td>          
-      <data-placement="top" data-toggle="tooltip" title="Edit">
-        Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } ) |
-      <data-placement="top" data-toggle="tooltip" title="Edit">
-        Html.ActionLink("Eliminar", "DeleteMedicamentos", new { id = item.hospitalId } )
-    </td>
-  </tr>
-     }
-     -->
+  @{
+    ViewData["Title"] = "Home Page";
+}
+<h4>Hospitales</h4>
+<br>
+<div class="table100 ver1 m-b-110">
+  <div class="table100-head">
+    <div class="table-responsive"> 
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th class="cell100">Nombre</th>
+            <th class="cell100">Número de teléfono</th>
+            <th class="cell100">Fecha de registro</th>
+            <th class="cell100">Administradores</th>
+            <th class="cell100">Especialidades</th>
+            <th class="cell100">Tipo de Servicio</th>
+            <th class="cell100">Editar | Deshabilitar</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model)
+          {
+          <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+            <td>@Html.DisplayFor(modelItem => item.registerDate)</td>
+            <td><data-placement="top" data-toggle="tooltip" title="Edit">
+                @Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } )</td>
+            <td><data-placement="top" data-toggle="tooltip" title="Edit">
+                @Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } )</td>
+            <td>@Html.DisplayFor(modelItem => item.especialidades)</td>
+            <td>@Html.DisplayFor(modelItem => item.servicesCatalog)</td>
+            <td>          
+              <data-placement="top" data-toggle="tooltip" title="Edit">
+                @Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } ) |
+              <data-placement="top" data-toggle="tooltip" title="Edit">
+                @Html.ActionLink("Eliminar", "DeleteMedicamentos", new { id = item.hospitalId } )
+            </td>
+          </tr>
+          }
+          </tbody>
+      </table>
+    </div> 
+  </div>  
+</div>             
 
-     <tr>
-        <td>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        </td>
-    </tr>
-      
-</table>               
-            </div>
-            
-        </div>
-	</div>
-</div>
-
-
+<br>
+<div class="btn-group">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="Regresar"><a asp-controller="AdminPanel" asp-action="PanelAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="Agregar"><a asp-controller="Hospitals" asp-action="CreateH"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
 </div>
 
 
