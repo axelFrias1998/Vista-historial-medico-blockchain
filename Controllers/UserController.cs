@@ -74,17 +74,6 @@ namespace Vista_historial_medico_blockchain.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
-                /*HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Users/GetRoles");
-                response.EnsureSuccessStatusCode();
-
-                if (!response.IsSuccessStatusCode)
-                    return NotFound();
-
-                var identityRol = JsonConvert.DeserializeObject<List<IdentityRol>>(await response.Content.ReadAsStringAsync());
-
-                if (identityRol is null)
-                    return NotFound();
-                ViewBag.IdentityRol = new SelectList(identityRol, "id", "name");*/
                 List<SelectListItem> lst = new List<SelectListItem>();
 
                 lst.Add(new SelectListItem() { Text = "PacsAdmin", Value = "0" });
