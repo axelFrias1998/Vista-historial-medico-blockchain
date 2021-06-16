@@ -30,39 +30,25 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         public IActionResult Index()
         {
-            /*var myObject = new SomeObject
-            {
-                SomeProperty = "someValue"
-            };*/
-
-            /*var objAsJson = new JavaScriptSerializer().Serialize(myObject);
-            //var objAsJson = JsonConvert.SerializeObject(myObject);
-            var content = new StringContent(objAsJson, Encoding.UTF8, "application/json");
-            var _httpClient = new HttpClient();
-            var result = await _httpClient.PutAsync("http://someDomain.com/someUrl", content); //or PostAsync for POST
-
-            HttpResponseMessage response = await client.GetAsync("https://historial-blockchain20210512190841.azurewebsites.net/api/Hospitals/GetCatalogOfServices");
-            response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-            // Above three lines can be replaced with new helper method below
-            // string responseBody = await client.GetStringAsync(uri);
-
-            Console.WriteLine(responseBody);*/
             return View();
         }
-          public IActionResult Login()
+
+        public IActionResult Login()
         {
             return View();
-        } 
+        }
+
+        public IActionResult Registrer()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-         public async Task<ActionResult> Login(UserLogin userlogin)
+        public async Task<ActionResult> Login(UserLogin userlogin)
         {
             using (var client = new HttpClient())
             {
-                /*Mandar Token en el Header
-                 * var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                 * client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);*/
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var postTask = await client.PostAsJsonAsync<UserLogin>("api/Accounts/Login", userlogin);
 
@@ -129,15 +115,7 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
         
-         public IActionResult Registrer()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
