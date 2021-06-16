@@ -76,7 +76,6 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var postTask = await client.PostAsJsonAsync<CreateSpeciality>("api/SpecialitiesCatalog", createSpeciality);
-
                 if (postTask.IsSuccessStatusCode)
                 {
                    return RedirectToAction(@"Especia");
