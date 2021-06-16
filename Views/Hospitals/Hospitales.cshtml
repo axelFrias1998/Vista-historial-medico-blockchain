@@ -1,24 +1,18 @@
 @model IEnumerable<Vista_historial_medico_blockchain.Models.HospitalInfo>
 <div class="row">
-		
-        
-        <div class="col-md-12">
-        <h4>Hospitales</h4>
-        <div class="table-responsive">
-
-                
-              <table id="mytable" class="table table-bordred table-striped">
-                   
-                   <tr>
-                    <th>Nombre</th>
-                    <th>Número de teléfono</th>
-                    <th>Fecha de registro</th>
-                    <th>Administradores</th>
-                    <th>Especialidades</th>
-                    <th>Tipo de Servicio</th>
-                    <th>Editar | Deshabilitar</th>
-                      
-                   </tr>
+  <div class="col-md-12">
+    <h4>Hospitales</h4>
+    <div class="table-responsive">           
+      <table id="mytable" class="table table-bordred table-striped">
+        <tr>
+          <th>Nombre</th>
+          <th>Número de teléfono</th>
+          <th>Fecha de registro</th>
+          <th>Administradores</th>
+          <th>Especialidades</th>
+          <th>Tipo de Servicio</th>
+          <th>Editar | Deshabilitar</th>
+        </tr>
     
     <!--foreach (var item in Model)
     {
@@ -62,84 +56,76 @@
 
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Editar Detalles</h4>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Telefono">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Fecha de registro">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Apellido">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Email">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Tipo">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Admin">
-                </div>
-              </div>
-              <div class="modal-footer ">
-              <button type="button" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
-              </div>
-        </div>
-    <!-- /.modal-content --> 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Editar Detalles</h4>
       </div>
-      <!-- /.modal-dialog --> 
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Telefono">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Fecha de registro">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Apellido">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Tipo">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Admin">
+        </div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
+      </div>
+    </div> 
+  </div> 
 </div>
     
-    
-    
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-          <div class="modal-header">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         <h4 class="modal-title custom_align" id="Heading">Deshabilitar Hospital</h4>
       </div>
-          <div class="modal-body">
-       
-       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>¿Esta seguro que desea deshabilitar este hospital?</div>
-       
+      <div class="modal-body">
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>¿Esta seguro que desea deshabilitar este hospital?</div>
       </div>
-        <div class="modal-footer ">
+      <div class="modal-footer ">
         <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-      </div>
-        </div>
-    <!-- /.modal-content --> 
-  </div>*/
+    </div>
+  </div> 
+</div>
     
-    <script>
-        $(document).ready(function(){
-$("#mytable #checkall").click(function () {
-        if ($("#mytable #checkall").is(':checked')) {
-            $("#mytable input[type=checkbox]").each(function () {
-                $(this).prop("checked", true);
-            });
-
-        } else {
-            $("#mytable input[type=checkbox]").each(function () {
-                $(this).prop("checked", false);
-            });
-        }
+<script>
+  $(document).ready(function(){
+    $("#mytable #checkall").click(function () {
+      if ($("#mytable #checkall").is(':checked')) {
+        $("#mytable input[type=checkbox]").each(function () {
+          $(this).prop("checked", true);
+        });
+      } 
+      else {
+        $("#mytable input[type=checkbox]").each(function () {
+          $(this).prop("checked", false);
+        });
+      }
     });
-    
     $("[data-toggle=tooltip]").tooltip();
-});
+  });
 </script>

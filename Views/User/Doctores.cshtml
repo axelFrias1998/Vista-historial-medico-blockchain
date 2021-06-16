@@ -2,109 +2,106 @@
     ViewData["Title"] = "Home Page";
 }
 
-        <div class="table100 ver1 m-b-110">
-					<div class="table100-head">
-						<table>
-							<thead>
-								<tr class="row100 head">
-									<th class="cell100 column1">Nombre</th>
-									<th class="cell100 column2">Apellido</th>
-									<th class="cell100 column3">User Name</th>
-									<th class="cell100 column4">Email</th>
-                  <th class="cell100 column5">Telefono</th>
-									<th class="cell100 column6">Edit|Delete</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
+<div class="table100 ver1 m-b-110">
+  <div class="table100-head">
+    <table>
+      <thead>
+        <tr class="row100 head">
+          <th class="cell100 column1">Nombre</th>
+          <th class="cell100 column2">Apellido</th>
+          <th class="cell100 column3">User Name</th>
+          <th class="cell100 column4">Email</th>
+          <th class="cell100 column5">Telefono</th>
+          <th class="cell100 column6">Edit|Delete</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
 
-					<div class="table100-body ">
-						<table>
-							<tbody>
-								
-								<tr>
-									<td class="cell100 column1">(model => model.Name)</td>
-									<td class="cell100 column2">(model => model.Apellido)</td>
-									<td class="cell100 column3">(model => model.Username)</td>
-									<td class="cell100 column4">(model => model.Email)</td> 
-									<td class="cell100 column5">(model => model.PhoneNumber)</td>
-									<td class="cell100 column5"><data-placement="top" data-toggle="tooltip" title="Edit"><a data-title="Edit" data-toggle="modal" data-target="#edit"><img src="https://image.flaticon.com/icons/png/128/1828/1828667.png" style="width:40px;height:40px;"></a>&nbsp;<data-placement="top" data-toggle="tooltip" title="Delete"><a data-title="Delete" data-toggle="modal" data-target="#delete"><img src="https://image.flaticon.com/icons/png/128/1828/1828851.png" style="width:35px;height:35px;"></a></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-        </div>
-       <br><br><center> <a asp-controller="User" asp-action="CreateDoc"><img src="https://image.flaticon.com/icons/png/128/1828/1828821.png" style="width:40px;height:40px;"></a></center>
+  <div class="table100-body ">
+    <table>
+      <tbody>
+        <tr>
+          <td class="cell100 column1">(model => model.Name)</td>
+          <td class="cell100 column2">(model => model.Apellido)</td>
+          <td class="cell100 column3">(model => model.Username)</td>
+          <td class="cell100 column4">(model => model.Email)</td> 
+          <td class="cell100 column5">(model => model.PhoneNumber)</td>
+          <td class="cell100 column5"><data-placement="top" data-toggle="tooltip" title="Edit"><a data-title="Edit" data-toggle="modal" data-target="#edit"><img src="https://image.flaticon.com/icons/png/128/1828/1828667.png" style="width:40px;height:40px;"></a>&nbsp;<data-placement="top" data-toggle="tooltip" title="Delete"><a data-title="Delete" data-toggle="modal" data-target="#delete"><img src="https://image.flaticon.com/icons/png/128/1828/1828851.png" style="width:35px;height:35px;"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br><br>
+<center> 
+  <a asp-controller="User" asp-action="CreateDoc"><img src="https://image.flaticon.com/icons/png/128/1828/1828821.png" style="width:40px;height:40px;"></a>
+</center>
 
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Editar Datos</h4>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Apellido">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Username">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Email">
-                </div>
-                <div class="form-group">
-                <input class="form-control " type="text" placeholder="Teléfono">
-                </div>
-              </div>
-              <div class="modal-footer ">
-              <button type="button" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
-              </div>
-        </div>-->
-        <!-- /.modal-content --> 
-      </div>
-      <!-- /.modal-dialog --> 
-    </div>
-    
-    
-    
-    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-            <h4 class="modal-title custom_align" id="Heading">Deshabilitar Hospital</h4>
+            <h4 class="modal-title custom_align" id="Heading">Editar Datos</h4>
           </div>
           <div class="modal-body">
-            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>¿Esta seguro que desea eliminar este doctor?</div>
+            <div class="form-group">
+              <input class="form-control " type="text" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+              <input class="form-control " type="text" placeholder="Apellido">
+            </div>
+            <div class="form-group">
+              <input class="form-control " type="text" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input class="form-control " type="text" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input class="form-control " type="text" placeholder="Teléfono">
+            </div>
           </div>
           <div class="modal-footer ">
-            <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+            <button type="button" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
           </div>
-        </div>
-        <!-- /.modal-content --> 
-      </div>*/
-    </div>
-    <script>
-        $(document).ready(function(){
-		$("#mytable #checkall").click(function () {
-				if ($("#mytable #checkall").is(':checked')) {
-					$("#mytable input[type=checkbox]").each(function () {
-						$(this).prop("checked", true);
-					});
+    </div> 
+  </div> 
+</div>
 
-				} else {
-					$("#mytable input[type=checkbox]").each(function () {
-						$(this).prop("checked", false);
-					});
-				}
-			});
-			
-			$("[data-toggle=tooltip]").tooltip();
-		});
-    </script>
-				
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Deshabilitar Hospital</h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>¿Esta seguro que desea eliminar este doctor?</div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>*/
+</div>
+<script>
+  $(document).ready(function(){
+    $("#mytable #checkall").click(function () {
+      if ($("#mytable #checkall").is(':checked')) {
+        $("#mytable input[type=checkbox]").each(function () {
+          $(this).prop("checked", true);
+        });
+      } 
+      else {
+        $("#mytable input[type=checkbox]").each(function () {
+          $(this).prop("checked", false);
+        });
+      }
+    });
+    $("[data-toggle=tooltip]").tooltip();
+  });
+</script>
+    
