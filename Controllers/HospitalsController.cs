@@ -107,7 +107,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 }
             }
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/CatalogOfServices");
+            /*HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/CatalogOfServices");
             response.EnsureSuccessStatusCode();
 
             if (!response.IsSuccessStatusCode)
@@ -119,9 +119,9 @@ namespace Vista_historial_medico_blockchain.Controllers
                 return NotFound();
             ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
 
-            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");*/
 
-            return View(hospitalinfo);    
+            return View(hospitalinfo);   
         }
 
         public IActionResult DetailsHos()
