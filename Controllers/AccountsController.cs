@@ -1,91 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Vista_historial_medico_blockchain.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
     public class AccountsController : Controller
     { 
-    //{
-    //    private readonly pubsContext _context;
+        public IActionResult Login()
+        {
+            return View();
+        }
 
-    //    HttpClient client = new HttpClient();
-    //    string url = "https://localhost:5001/api/Accounts/Register";
+        public IActionResult Registrer()
+        {
+            return View();
+        }
 
-    //    public AccountsController(pubsContext context)
-    //    {
-    //        _context = context;
-    //    }
-    //    // POST: AccountsController/Register
-        
-    //    [HttpPost]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> create([Bind("apellido,email,password,confirmPassword, nombre, phoneNumber,userName")] Resgitrer registrer)
-    //    {
-    //        if(ModelsState.IsValid)
-    //        {
-    //            await client.PostAsJsonAsync<Registrer>(url, registrer);
-    //            return RedirectToAction(nameof(Registrer));
-    //        }
-    //        return view(registrer);
-    //    }
-    //    // POST: AccountsController/CreateAdimin
-    //    [HttpPost]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> create([Bind("apellido,email,password,confirmPassword, nombre, phoneNumber,userName")] Admin admin)
-    //    {
-    //        if (ModelsState.IsValid)
-    //        {
-    //            await client.PostAsJsonAsync<Registrer>(url, admin);
-    //            return RedirectToAction(nameof(Admin));
-    //        }
-    //        return view(admin);
-    //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Login(UserLogin userlogin)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<UserLogin>("api/Accounts/Login", userlogin);
 
-    //    // POST: AccountsController/CreateDoctor
-    //    [HttpPost]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> Create([Bind("apellido,email,password,confirmPassword, nombre, phoneNumber,userName"),Bind("hospitalId")] Doctor doctor)
-    //    {
-    //        if (ModelsState.IsValid)
-    //        {
-    //            await client.PostAsJsonAsync<Registrer>(url, doctor);
-    //            return RedirectToAction(nameof(Doctor));
-    //        }
-    //        return View(doctor);
-    //    }
+                if (postTask.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
+                    SetCookie("Token", userToken.Token, userToken.Expiration);
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadJwtToken(userToken.Token);
+                    var tokenS = jsonToken as JwtSecurityToken;
+                    string rool = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
+                    /*if (rool.Equals("SysAdmin"))
+                        /*RedirectToAction("PanelAdmin");*/
+                        /*return View("../Views/AdminPanel/PanelAdmin.cshtml");*/
+                    return RedirectToAction("PanelAdmin", "AdminPanel");
+                    return View("../AdminPanel/PanelAdmin");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Login");
+                }
+            }
+        }
 
-    //    // GET: AccountsController/Delete/5
-    //    public async Task<IActionResult>Delete(string id)
-    //    {
-    //        if(id == null)
-    //        {
-    //            return NotFund();
-    //        }
-    //        var doctor = JsonConvert.DeserializarObjet<doctor>
-    //            (await client.GetStringAsync(url + id));
-    //        if (doctor == null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        return view(doctor);
-    //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Registrer(UserInfo userinfo)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
+                if (postTask.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
+                    if (userToken is null)
+                        return NotFound();
+                    else
+                    {
+                        SetCookie("Token", userToken.Token, userToken.Expiration);
+                        return View("Login");
+                    }
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Registrer");
+                }
+            }
+        }
 
-    //    // POST: HomeController1/Delete/5
-    //    [HttpPost, ActionName("Delete")]
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> DeleteConfirmed(string id)
-    //    {
-    //        await client.DeleteAsync(url + id);
+        public RedirectToActionResult LogOut()
+        {
+            Response.Cookies.Delete("Token");
+            return RedirectToAction("Index", "Home");
+        }
 
-    //        return RedirectToAction(nameof(Index));
-    //    }
-    //    private bool DoctorExists(string id)
-    //    {
-    //        return _context.Doctor.Any(e => e.Doctor_Id == id);
-    //    }
+        private void SetCookie(string key, string value, DateTime expireTime)  
+        {  
+            CookieOptions option = new CookieOptions();  
+            option.Expires = expireTime;
+            Response.Cookies.Append(key, value, option);
+        }
     }
 }
