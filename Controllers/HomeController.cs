@@ -64,7 +64,19 @@ namespace Vista_historial_medico_blockchain.Controllers
                     /*if (rool.Equals("SysAdmin"))
                         /*RedirectToAction("PanelAdmin");*/
                         /*return View("../Views/AdminPanel/PanelAdmin.cshtml");*/
+                    if(rool.Equals("SysAdmin")){
                         return View("../AdminPanel/PanelAdmin");
+                    }else if(rool.Equals("ClinicAdmin")){
+                        return View("../AdminPanel/ClinicAdmin");
+                    }else if(rool.Equals("PacsAdmin")){
+                        return View("../AdminPanel/ClinicAdmin");
+                    }else if(rool.Equals("Doctor")){
+                        return View("../AdminPanel/DoctorPanel");
+                    }else if(rool.Equals("Pacient")){
+                        return View("../AdminPanel/ClinicAdmin");
+                    }else{
+                        return View();
+                    }
                 }
                 else
                 {
