@@ -10,7 +10,7 @@
     <h4 class="modal-title custom_align" id="Heading">Crear nueva consulta</h4>
   </div>
   <div class="modal-body">
-      <b>S(subjetivo)</b>
+      <b>Subjetivo</b>
       <hr >
     <div class="form-group">
       @Html.EditorFor(model => model.dolencia, new { htmlAttributes = new { @class = "form-control", placeholder="Dolencia"} })
@@ -21,7 +21,7 @@
       @Html.ValidationMessageFor(model => model.relacionPasada, "", new { @class = "text-danger" })
     </div>
     <br>
-    <b>O(objetivo)</b>
+    <b>Objetivo</b>
       <hr >
     <div class="form-group">
       @Html.EditorFor(model => model.hallazgos, new { htmlAttributes = new { @class = "form-control", placeholder="Hallazgos"} })
@@ -32,7 +32,7 @@
       @Html.ValidationMessageFor(model => model.pruebasDiagnosticas, "", new { @class = "text-danger" })
     </div>
     <br>
-    <b>A(análisis)</b>
+    <b>Análisis</b>
       <hr >
     <div class="form-group">
       @Html.EditorFor(model => model.resumen, new { htmlAttributes = new { @class = "form-control", placeholder="Resumen"} })
@@ -51,7 +51,7 @@
       @Html.ValidationMessageFor(model => model.razonamiento, "", new { @class = "text-danger" })
     </div>
     <br>
-    <b>P(plan)</b>
+    <b>Plan</b>
     <hr>
     <div class="form-group">
       @Html.EditorFor(model => model.planMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
