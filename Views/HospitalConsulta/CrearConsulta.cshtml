@@ -1,85 +1,111 @@
-@model Vista_historial_medico_blockchain.Models.CosultaMedica
+@model Vista_historial_medico_blockchain.Models.ConsultaMedica
 @{
     ViewData["Title"] = "Home Page";
 }
-@using (Html.BeginForm())
-{
-  @Html.AntiForgeryToken()
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-    <h4 class="modal-title custom_align" id="Heading">Crear nueva consulta</h4>
-  </div>
-  <div class="modal-body">
-      <b>Subjetivo</b>
-      <hr >
-    <div class="form-group">
-      @Html.EditorFor(model => model.dolencia, new { htmlAttributes = new { @class = "form-control", placeholder="Dolencia"} })
-      @Html.ValidationMessageFor(model => model.dolencia, "", new { @class = "text-danger" })
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#Consultas" aria-controls="home" role="tab" data-toggle="tab">Consultas</a></li>
+                    <li role="presentation"><a href="#CrearConsulta" aria-controls="CrearConsulta" role="tab" data-toggle="tab">Crear Consulta</a></li>
+                   
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content tabs">
+                    <div role="Consultas" class="tab-pane fade in active" id="Consultas">
+                        Motrar consultas que tiene
+                    </div>
+                    <div role="Crear Consulta" class="tab-pane fade" id="CrearConsulta">
+                                                   
+                      @using (Html.BeginForm())
+                      {
+                        @Html.AntiForgeryToken()
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                          <h4 class="modal-title custom_align" id="Heading">Crear nueva consulta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <b>Subjetivo</b>
+                            <hr >
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Dolencia, new { htmlAttributes = new { @class = "form-control", placeholder="Dolencia"} })
+                            @Html.ValidationMessageFor(model => model.Dolencia, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.RelacionPasada, new { htmlAttributes = new { @class = "form-control", placeholder="Relación Pasada"} })
+                            @Html.ValidationMessageFor(model => model.RelacionPasada, "", new { @class = "text-danger" })
+                          </div>
+                          <br>
+                          <b>Objetivo</b>
+                            <hr >
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Hallazgos, new { htmlAttributes = new { @class = "form-control", placeholder="Hallazgos"} })
+                            @Html.ValidationMessageFor(model => model.Hallazgos, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.PruebasDiagnosticas, new { htmlAttributes = new { @class = "form-control", placeholder="Pruebas diagnósticas"} })
+                            @Html.ValidationMessageFor(model => model.PruebasDiagnosticas, "", new { @class = "text-danger" })
+                          </div>
+                          <br>
+                          <b>Análisis</b>
+                            <hr >
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Resumen, new { htmlAttributes = new { @class = "form-control", placeholder="Resumen"} })
+                            @Html.ValidationMessageFor(model => model.Resumen, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Problemas, new { htmlAttributes = new { @class = "form-control", placeholder="Problemas"} })
+                            @Html.ValidationMessageFor(model => model.Problemas, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Diferenciales, new { htmlAttributes = new { @class = "form-control", placeholder="Diferenciales"} })
+                            @Html.ValidationMessageFor(model => model.Diferenciales, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Razonamiento, new { htmlAttributes = new { @class = "form-control", placeholder="Razonamiento"} })
+                            @Html.ValidationMessageFor(model => model.Razonamiento, "", new { @class = "text-danger" })
+                          </div>
+                          <br>
+                          <b>Plan</b>
+                          <hr>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.PlanMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
+                            @Html.ValidationMessageFor(model => model.PlanMedicamentos, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.PlanTerapeutico, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Terapéutico"} })
+                            @Html.ValidationMessageFor(model => model.PlanTerapeutico, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Educacion, new { htmlAttributes = new { @class = "form-control", placeholder="Educación"} })
+                            @Html.ValidationMessageFor(model => model.Educacion, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.Seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
+                            @Html.ValidationMessageFor(model => model.Seguimiento, "", new { @class = "text-danger" })
+                          </div>
+                        </div>
+                        <div class="modal-footer ">
+                          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
+                        </div>
+                      }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.relacionPasada, new { htmlAttributes = new { @class = "form-control", placeholder="Relación Pasada"} })
-      @Html.ValidationMessageFor(model => model.relacionPasada, "", new { @class = "text-danger" })
-    </div>
-    <br>
-    <b>Objetivo</b>
-      <hr >
-    <div class="form-group">
-      @Html.EditorFor(model => model.hallazgos, new { htmlAttributes = new { @class = "form-control", placeholder="Hallazgos"} })
-      @Html.ValidationMessageFor(model => model.hallazgos, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.pruebasDiagnosticas, new { htmlAttributes = new { @class = "form-control", placeholder="Pruebas diagnósticas"} })
-      @Html.ValidationMessageFor(model => model.pruebasDiagnosticas, "", new { @class = "text-danger" })
-    </div>
-    <br>
-    <b>Análisis</b>
-      <hr >
-    <div class="form-group">
-      @Html.EditorFor(model => model.resumen, new { htmlAttributes = new { @class = "form-control", placeholder="Resumen"} })
-      @Html.ValidationMessageFor(model => model.resumen, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.problemas, new { htmlAttributes = new { @class = "form-control", placeholder="Problemas"} })
-      @Html.ValidationMessageFor(model => model.problemas, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.diferenciales, new { htmlAttributes = new { @class = "form-control", placeholder="Diferenciales"} })
-      @Html.ValidationMessageFor(model => model.diferenciales, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.razonamiento, new { htmlAttributes = new { @class = "form-control", placeholder="Razonamiento"} })
-      @Html.ValidationMessageFor(model => model.razonamiento, "", new { @class = "text-danger" })
-    </div>
-    <br>
-    <b>Plan</b>
-    <hr>
-    <div class="form-group">
-      @Html.EditorFor(model => model.planMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
-      @Html.ValidationMessageFor(model => model.planMedicamentos, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.planTerapeutico, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Terapéutico"} })
-      @Html.ValidationMessageFor(model => model.planTerapeutico, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.educacion, new { htmlAttributes = new { @class = "form-control", placeholder="Educación"} })
-      @Html.ValidationMessageFor(model => model.educacion, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-      @Html.EditorFor(model => model.seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
-      @Html.ValidationMessageFor(model => model.seguimiento, "", new { @class = "text-danger" })
-    </div>
-  </div>
-  <div class="modal-footer ">
-    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
-  </div>
-}
-
-
-<br>
-<div class="btn-group">
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="ClinicAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> 
 </div>
-<br><br><br>
+
+
+                        <br>
+                        <div class="btn-group">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="ClinicAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> 
+                        </div>
+                        <br><br><br>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
