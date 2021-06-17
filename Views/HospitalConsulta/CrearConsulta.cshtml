@@ -1,0 +1,76 @@
+@model Vista_historial_medico_blockchain.Models.CosultaMedica
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <h4 class="modal-title custom_align" id="Heading">Crear nueva consulta</h4>
+  </div>
+  <div class="modal-body">
+      <b>S(subjetivo)</b>
+      <hr >
+    <div class="form-group">
+      @Html.EditorFor(model => model.dolencia, new { htmlAttributes = new { @class = "form-control", placeholder="Dolencia"} })
+      @Html.ValidationMessageFor(model => model.dolencia, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.relacionPasada, new { htmlAttributes = new { @class = "form-control", placeholder="Relación Pasada"} })
+      @Html.ValidationMessageFor(model => model.relacionPasada, "", new { @class = "text-danger" })
+    </div>
+    <br>
+    <b>O(ojetivo)</b>
+      <hr >
+    <div class="form-group">
+      @Html.EditorFor(model => model.hallazgos, new { htmlAttributes = new { @class = "form-control", placeholder="Hallazgos"} })
+      @Html.ValidationMessageFor(model => model.hallazgos, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.pruebasDiagnosticas, new { htmlAttributes = new { @class = "form-control", placeholder="Pruebas diagnósticas"} })
+      @Html.ValidationMessageFor(model => model.pruebasDiagnosticas, "", new { @class = "text-danger" })
+    </div>
+    <br>
+    <b>A(analisis)</b>
+      <hr >
+    <div class="form-group">
+      @Html.EditorFor(model => model.resumen, new { htmlAttributes = new { @class = "form-control", placeholder="Resumen"} })
+      @Html.ValidationMessageFor(model => model.resumen, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.problemas, new { htmlAttributes = new { @class = "form-control", placeholder="Problemas"} })
+      @Html.ValidationMessageFor(model => model.problemas, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.diferenciales, new { htmlAttributes = new { @class = "form-control", placeholder="Diferenciales"} })
+      @Html.ValidationMessageFor(model => model.diferenciales, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.razonamiento, new { htmlAttributes = new { @class = "form-control", placeholder="Razonamiento"} })
+      @Html.ValidationMessageFor(model => model.razonamiento, "", new { @class = "text-danger" })
+    </div>
+    <br>
+    <b>P(plan)</b>
+    <hr>
+    <div class="form-group">
+      @Html.EditorFor(model => model.planMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
+      @Html.ValidationMessageFor(model => model.planMedicamentos, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.planTerapeutico, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Terapéutico"} })
+      @Html.ValidationMessageFor(model => model.planTerapeutico, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.educacion, new { htmlAttributes = new { @class = "form-control", placeholder="Educación"} })
+      @Html.ValidationMessageFor(model => model.educacion, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+      @Html.EditorFor(model => model.seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
+      @Html.ValidationMessageFor(model => model.seguimiento, "", new { @class = "text-danger" })
+    </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
+  </div>
+}
