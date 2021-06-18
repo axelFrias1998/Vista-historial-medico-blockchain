@@ -2,18 +2,17 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<center>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
             <div class="login-box">
-                <div class="card-body text-center">
-                    @using (Html.BeginForm())
+                <div class="card-body-2 text-center">
+                    @using (Html.BeginForm("subir", "home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
-                        <center><img src="https://image.flaticon.com/icons/png/128/3209/3209008.png" style="width:200px;height:200px;"/></center>
                         <br>
-                        <h1 class="h3 mb-3 font-weight-normal"><b>Iniciar Sesión</b></h1>
+                        <h1 class="h3 mb-3 font-weight-normal"><b>Verificar sesión Paciente</b></h1>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger"})
                         <div class="form-group">
                             @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder="Usuario", required = "required"} })
@@ -23,6 +22,8 @@
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder="Contraseña", required = "required"} })
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </div>
+                        <input type="file" name="file"/>
+                        <br><br>
                         <button type="submit" class="btn btn-lg btn-primary btn-block">Ingresar</button>
                     }
                 </div>
@@ -30,10 +31,10 @@
         </div>
     </div>
 </div>
+</center>
 <br><br>
 <div class="btn-group">
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="DoctorPanel"><button style='width:140px; height:75px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="Seleccion"><button style='width:140px; height:75px' class="btn btn-lg btn-primary btn-block">Subir archivo</button></a></center> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="DoctorPanel"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
 </div>
