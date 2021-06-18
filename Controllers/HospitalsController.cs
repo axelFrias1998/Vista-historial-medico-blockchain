@@ -73,13 +73,69 @@ namespace Vista_historial_medico_blockchain.Controllers
                 } 
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ModalEspecialidades(string idSpecialities){
+            using(HttpClient client = new HttpClient()){
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/HospitalSpecialities/{idSpecialities}");
+                if (response.IsSuccessStatusCode){
+                    return View("ModalEspecialidades",JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList());
+                }
+                else{
+                    return NotFound();
+                }
+                
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ModalAdministrador(string idHospital){
+            using(HttpClient client = new HttpClient()){
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/HospitalAdministrador/{idHospital}");
+                if (response.IsSuccessStatusCode){
+                    return View("ModalAdministrador",JsonConvert.DeserializeObject<List<CreatedUserDTO>>(await response.Content.ReadAsStringAsync()).ToList());
+                }
+                else{
+                    return NotFound();
+                }
+                
+            }
+        }
+
+        public IActionResult GetViewEspecialities(string id){
+            return RedirectToAction("ModalEspecialidades",new{ idSpecialities = id});
+        }
+
+        public IActionResult GetViewAdmin(string id){
+            return RedirectToAction("ModalAdministrador",new{ idHospital = id});
+        } 
   
         /*Get Hospital*/
         [HttpGet]
-        public IActionResult Hospitales(HospitalInfo hospitalInfo)
+        public async Task<ActionResult> Hospitales()
         {
-            return View();
+            using(var client = new HttpClient()){
+                /*Mandar Token en el Header*/
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.GetAsync($"api/Hospitals");
+                if (response.IsSuccessStatusCode){
+                    return View(JsonConvert.DeserializeObject<List<HospitalInfo>>(await response.Content.ReadAsStringAsync()).ToList());
+                }
+                else{
+                    return NotFound();
+                }
+            }
         }
+
+
         public async Task<IActionResult> ServiceCaltalog ()
         {
             HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Hospitals/GetCatalogOfServices");
