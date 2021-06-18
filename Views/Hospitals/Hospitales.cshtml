@@ -20,18 +20,18 @@
           </tr>
         </thead>
         <tbody>
-          @*foreach (var item in Model)
+          @foreach (var item in Model)
           {
           <tr>
+            <td style="display:none;">@Html.DisplayFor(modelItem => item.hospitalId)</td>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
             <td>@Html.DisplayFor(modelItem => item.registerDate)</td>
             <td><data-placement="top" data-toggle="tooltip" title="Edit">
-                @Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } )</td>
+                @Html.ActionLink("Ver más", "GetViewAdmin", new { id = item.hospitalId } )</td>
             <td><data-placement="top" data-toggle="tooltip" title="Edit">
-                @Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } )</td>
-            <td>@Html.DisplayFor(modelItem => item.especialidades)</td>
-            <td>@Html.DisplayFor(modelItem => item.servicesCatalog)</td>
+                @Html.ActionLink("Ver más", "GetViewEspecialities", new { id = item.hospitalId })</td>
+            <td>@Html.DisplayFor(modelItem => item.servicesCatalog.Type)</td>
             <td>          
               <data-placement="top" data-toggle="tooltip" title="Edit">
                 @Html.ActionLink("Editar", "EditTipoMedicamento", new { id = item.hospitalId } ) |
@@ -39,7 +39,7 @@
                 @Html.ActionLink("Eliminar", "DeleteMedicamentos", new { id = item.hospitalId } )
             </td>
           </tr>
-          }*@
+          }
           </tbody>
       </table>
     </div> 

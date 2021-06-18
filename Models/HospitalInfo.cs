@@ -2,6 +2,7 @@ using System;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using Vista_historial_medico_blockchain.Models;
+using System.Collections.Generic;
 
 namespace Vista_historial_medico_blockchain.Models
 {
@@ -9,7 +10,7 @@ namespace Vista_historial_medico_blockchain.Models
     {
 
         [JsonInclude]
-        public int hospitalId{ get;set;}
+        public string hospitalId{ get;set;}
 
         [JsonInclude]
         [MaxLength(150, ErrorMessage = "El Nombre de usuario debe tener como máximo 150 caracteres")]
@@ -25,10 +26,10 @@ namespace Vista_historial_medico_blockchain.Models
         public DateTime registerDate { get; set; }
 
         [JsonInclude]
-        public UserInfo admins { get; set; }
+        public List<UserInfo> admins { get; set; }
 
         [JsonInclude]
-        public SpecialitiesCatalog especialidades { get; set; }
+        public List<SpecialitiesCatalog> especialidades { get; set; }
 
         [JsonInclude]
         public ServicesCatalog servicesCatalog { get; set; }
