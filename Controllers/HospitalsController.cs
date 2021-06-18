@@ -154,7 +154,9 @@ namespace Vista_historial_medico_blockchain.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = await client.PostAsJsonAsync<HospitalInfo>("api/Accounts/Hospitals", hospitalinfo);
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var postTask = client.PostAsJsonAsync<HospitalInfo>("api/Accounts/Hospitals", hospitalinfo);
                 postTask.Wait();
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -36,6 +37,8 @@ namespace Vista_historial_medico_blockchain.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 var postTask = await client.PostAsJsonAsync<PacientValidation>("api/HospitalConsultas/GetNode", pacientValidation);
                 if (postTask.IsSuccessStatusCode)
                 {
