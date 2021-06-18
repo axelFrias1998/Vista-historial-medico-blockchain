@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 #nullable disable
@@ -48,17 +49,20 @@ namespace Vista_historial_medico_blockchain.Models
        //Pruebas Dx
         public string Pruebas { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         public List<PlanMedicamento> PlanMedicamentos { get; set; }
         
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         public string PlanTerapeutico { get; set; }
         
-        //[DataType(DataType.MultilineText)]
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Indicaciones o recomendaciones
         public string Educacion { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         public string Seguimiento { get; set; }
 
