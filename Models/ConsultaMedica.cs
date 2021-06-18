@@ -9,41 +9,50 @@ namespace Vista_historial_medico_blockchain.Models
 {
     public partial class ConsultaMedica
     {
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         /////////////SUBJETIVO
         //Dolencia principal, enfermedad actual, apropiada revisión por sistemas
         public string Dolencia { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Partes apropiadas o significativas de la historia médica pasada
         public string RelacionPasada { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         /////////////OBJETIVO
         //Hallazgos al examen físico
         public string Hallazgos { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Pruebas diagnósticas
         public string PruebasDiagnosticas { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         /////////ANALISIS
         //Resumen del paciente
         public string Resumen { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Sus problemas
         public string Problemas { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Posibles diferenciales
         public string Diferenciales { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Razonamiento clínico
         public string Razonamiento { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
        //////////PLAN
        //Pruebas Dx
