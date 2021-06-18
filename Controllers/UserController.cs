@@ -166,6 +166,26 @@ namespace Vista_historial_medico_blockchain.Controllers
         return View(createdUserDTO);
         }*/
 
+
+        [HttpGet]
+        public async Task<ActionResult> Doctores (){
+            using(var client = new HttpClient()){
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(ck);
+                var tokenS = jsonToken as JwtSecurityToken;
+                string idHospital = tokenS.Claims.First(claim => claim.Type == "HospitalId").Value;
+                var response = await client.GetAsync($"api/HospitalDoctors/{idHospital}");
+                if (response.IsSuccessStatusCode){
+                    return View(JsonConvert.DeserializeObject<List<HospitalDoctorsInfoDTO>>(await response.Content.ReadAsStringAsync()).ToList());
+                }
+                else
+                    return NotFound();
+            }
+        }
+
         public IActionResult ClinicAdmin()
 
         {
@@ -175,14 +195,6 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         public IActionResult CreateClinicAdmin()
-
-        {
-
-            return View();
-
-        }
-
-        public IActionResult Doctores()
 
         {
 

@@ -26,7 +26,7 @@
         @foreach (var item in Model)
         {
           <tr>
-            <td class="cell100 column1"> <!-- Html.DisplayFor(model => model.nombre) --> @item.nombre </td> 
+            <td class="cell100 column1"> <!-- Html.DisplayFor(modelItem => model.nombre) --> @Html.DisplayFor(modelItem => item.nombre) </td> 
             <td class="cell100 column2"><!-- Html.DisplayFor(modelItem => item.apellido) -->  @item.apellido </td> 
             <td class="cell100 column3"><!-- Html.DisplayFor(modelItem => item.userName)--> @item.userName</td> 
             <td class="cell100 column4"><!-- Html.DisplayFor(modelItem => item.email)--> @item.email</td> 

@@ -149,17 +149,23 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
          
+        [HttpPost]
         public async Task<ActionResult> CreateH(HospitalInfo hospitalinfo)
         {
+
             using (var client = new HttpClient())
             {
+
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = client.PostAsJsonAsync<HospitalInfo>("api/Accounts/Hospitals", hospitalinfo);
-                postTask.Wait();
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
+                var postTask = await client.PostAsJsonAsync<HospitalInfo>("api/Hospitals", hospitalinfo);
+                if (postTask.IsSuccessStatusCode)
                 {
-                  return RedirectToAction("Index");
+                  return RedirectToAction("Hospitales");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("CreateH");
                 }
             }
 
@@ -182,6 +188,14 @@ namespace Vista_historial_medico_blockchain.Controllers
 
         public IActionResult DetailsHos()
         {
+            return View();
+        } 
+        public IActionResult CreateH()
+        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+            lst.Add(new SelectListItem() { Text = "PacsAdmin", Value = "0" });
+            lst.Add(new SelectListItem() { Text = "ClinicAdmin", Value = "1" });
+            ViewBag.ServiceCatalog = lst;
             return View();
         }     
     }

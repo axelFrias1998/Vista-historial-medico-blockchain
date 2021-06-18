@@ -33,5 +33,9 @@ namespace Vista_historial_medico_blockchain.Models
 
         [JsonInclude]
         public ServicesCatalog servicesCatalog { get; set; }
+
+        [JsonInclude]
+        public int serviceCatalogId { get; set; }
+
     }
 }
