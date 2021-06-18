@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,6 @@ using System.Net.Http.Json;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Net.Http.Headers;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -95,21 +95,22 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AdminInfo(UserInfo userInfo){
-
-            using(HttpClient client = new HttpClient()){
+        public async Task<ActionResult> AdminInfo(UserInfo userInfo)
+        {
+            using(HttpClient client = new HttpClient())
+            {
                 client.BaseAddress = new Uri("https://localhost:44349");
                 string id = "1";
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 var postTask = await client.PutAsJsonAsync<UserInfo>($"api/Accounts/{id}", userInfo);
-                if (postTask.IsSuccessStatusCode){
+                if (postTask.IsSuccessStatusCode)
                             return RedirectToAction("AdminInfo");
-                }else{
+                else
+                {
                         ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
                         return RedirectToAction("AdminInfo");
-                    }
-                
+                }
             }
         }
 

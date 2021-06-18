@@ -86,7 +86,6 @@ namespace Vista_historial_medico_blockchain.Controllers
                 }
             }
         }
-
         
         [HttpGet]               
         public ActionResult EditSpecia(int id)
@@ -114,7 +113,7 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
-            [HttpGet]
+        [HttpGet]
        /* public async Task<ActionResult> Especia(SpecialitiesCatalog specialitiesCatalog)
 
         {
@@ -133,8 +132,8 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }*/
 
-     [HttpDelete]
-     public async Task<ActionResult> Delete(SpecialitiesCatalog specialitiesCatalog)
+        [HttpGet]
+        public async Task<ActionResult> Delete(SpecialitiesCatalog specialitiesCatalog)
         {
             using (var client = new HttpClient())
             {
@@ -152,33 +151,18 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         [HttpGet]
         public async Task<ActionResult> Medicamentos(ListadoGrupoMedicamentosDTO listadogrupoMedicamentos)
         {
-           using(var client = new HttpClient()){
-                /*Mandar Token en el Header*/
+           using(var client = new HttpClient())
+           {
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.GetAsync("api/CatalogoGrupoMedicamentos");
-                if (response.IsSuccessStatusCode){
-                     return View(JsonConvert.DeserializeObject<List<ListadoGrupoMedicamentosDTO>>(await client.GetStringAsync("https://localhost:44349/api/CatalogoGrupoMedicamentos")).ToList());
-                }
-                else{
-                    return NotFound();
-                }
+                if (response.IsSuccessStatusCode)
+                    return View(JsonConvert.DeserializeObject<List<ListadoGrupoMedicamentosDTO>>(await client.GetStringAsync("https://localhost:44349/api/CatalogoGrupoMedicamentos")).ToList());
+                return NotFound();
             }
         }
 
@@ -208,7 +192,6 @@ namespace Vista_historial_medico_blockchain.Controllers
                 }
             }
         }
-
         
         [HttpGet]               
         public ActionResult EditTipoMedicamento(int id)
@@ -236,8 +219,8 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
-     [HttpDelete]
-     public async Task<ActionResult> DeleteMedicamentos(ListadoGrupoMedicamentosDTO listadogrupoMedicamentos)
+        [HttpGet]
+        public async Task<ActionResult> DeleteMedicamentos(ListadoGrupoMedicamentosDTO listadogrupoMedicamentos)
         {
             using (var client = new HttpClient())
             {
@@ -255,10 +238,9 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
-    public IActionResult EleccionMedicamentos()  
-    {
-        return View();
-    }  
-       
+        public IActionResult EleccionMedicamentos()  
+        {
+            return View();
+        }  
     }
 }

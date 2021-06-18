@@ -152,11 +152,11 @@ namespace Vista_historial_medico_blockchain.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateH(HospitalInfo hospitalinfo)
         {
-
             using (var client = new HttpClient())
             {
-
                 client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 var postTask = await client.PostAsJsonAsync<HospitalInfo>("api/Hospitals", hospitalinfo);
                 if (postTask.IsSuccessStatusCode)
                 {
@@ -167,23 +167,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
                     return View("CreateH");
                 }
-            }
-
-            /*HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/CatalogOfServices");
-            response.EnsureSuccessStatusCode();
-
-            if (!response.IsSuccessStatusCode)
-                return NotFound();
-
-            var serviceCatalog = JsonConvert.DeserializeObject<List<ServicesCatalog>>(await response.Content.ReadAsStringAsync());
-
-            if (serviceCatalog is null)
-                return NotFound();
-            ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
-
-            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");*/
-
-            return View(hospitalinfo);   
+            }  
         }
 
         public IActionResult DetailsHos()

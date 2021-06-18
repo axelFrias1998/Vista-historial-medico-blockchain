@@ -115,6 +115,15 @@ body {
  position: relative;
  border-radius: 25px;
 }
+.card-body-2 {
+  background-color: #94b8d7;
+  width: 100%;
+  margin: auto;
+  width: 500px;
+  min-height: 300px;
+  position: relative;
+  border-radius: 25px;
+ }
 
 /*--------------------------------------------------------------
 # Hero Section
@@ -591,4 +600,30 @@ a:focus{
         width: 100%;
         text-align: center;
     }
+
+    .column12 {
+      width: 40%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .column13 {
+      width: 20%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    .column14 {
+      width: 25%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+  }
 }
