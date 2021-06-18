@@ -39,7 +39,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var postTask = await client.PostAsJsonAsync<PacientValidation>("api/HospitalConsultas/GetNode", pacientValidation);
                 if (postTask.IsSuccessStatusCode)
                 {
-                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
+                    var userToken = JsonConvert.DeserializeObject<NodeInfo>(await postTask.Content.ReadAsStringAsync());
                     if (userToken is null)
                         return NotFound();
                     return View("Login");
