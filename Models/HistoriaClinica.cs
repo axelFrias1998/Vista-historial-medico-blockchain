@@ -7,20 +7,18 @@ namespace Vista_historial_medico_blockchain.Models
 {
     public class HistoriaClinica
     {
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Date)]
         [JsonInclude]
         public DateTime FechaElaboracion { get; set; }
 
-        [DataType(DataType.MultilineText)]
+        [DataType(DataType.Date)]
         [JsonInclude]
         public DateTime FechaNacimiento { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //1 = Mujer, 0 = hombre 
         public bool Sexo { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [JsonInclude]
         //Indirecto (1) o directo (0) 
         public bool Interrogatorio { get; set; }
