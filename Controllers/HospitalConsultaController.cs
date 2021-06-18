@@ -31,8 +31,9 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpPost]
-        public void ValidacionArchivo(string hola) 
+        public IActionResult ValidacionArchivo(PacientValidation PacientValidation) 
         {
+            return R();
          //   if (file == null) return;
          //   string archivo = (DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + file.FileName).ToLower();
          //   file.SaveAs(Server.MapPath("~/Uploads/" + archivo));
