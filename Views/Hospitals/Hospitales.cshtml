@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          @*foreach (var item in Model)
+          @foreach (var item in Model)
           {
           <tr>
             <td style="display:none;">@Html.DisplayFor(modelItem => item.hospitalId)</td>
@@ -39,7 +39,7 @@
                 @Html.ActionLink("Eliminar", "DeleteMedicamentos", new { id = item.hospitalId } )
             </td>
           </tr>
-          }*@
+          }
           </tbody>
       </table>
     </div> 
