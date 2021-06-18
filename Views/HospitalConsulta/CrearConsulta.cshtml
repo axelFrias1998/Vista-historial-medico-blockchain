@@ -26,22 +26,32 @@
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                           <h4 class="modal-title custom_align" id="Heading">Crear nueva consulta</h4>
                         </div>
-                      
+                      <br>
                       <h1>Historial Médico</h1>
                         <div class="modal-body">
-                            <b>Historial Médico</b>
-                            <hr >
                           <div class="form-group">
+                            <h6>Fecha de elaboración</h6>
                             @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.FechaElaboracion, new { htmlAttributes = new { @class = "form-control", placeholder="Fecha de elaboración"} })
                             @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.FechaElaboracion, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
+                             <h6>Fecha de nacimiento</h6>
                             @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.FechaNacimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Fecha de nacimiento"} })
                             @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.FechaNacimiento, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.Sexo, new { htmlAttributes = new { @class = "form-control", placeholder="Sexo"} })
-                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.Sexo, "", new { @class = "text-danger" })
+                            <h6>Sexo</h6>
+                            <input type="radio" id="male" name="gender" value="0">
+                            <label for="male">Hombre</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="female" name="gender" value="1">
+                            <label for="female">Mujer</label><br>
+                          </div>
+                          <div class="form-group">
+                            <h6>Interrogatorio</h6>
+                            <input type="radio" id="directo" name="interrogatorio" value="0">
+                            <label for="directo">Directo</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="indirecto" name="interrogatorio" value="1">
+                            <label for="indirecto">Indirecto</label><br>
                           </div>
                           <div class="form-group">
                             @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosMadre, new { htmlAttributes = new { @class = "form-control", placeholder="Padecimientos de la madre"} })
@@ -88,23 +98,24 @@
 
                         <h1>Plan de Medicamento</h1>
                         <div class="modal-body">
-                            <b>Plan de Medicamento</b>
-                            <hr >
                           <div class="form-group">
-                            cALENDARIO INIT)
+                            <h6>Fecha de inicio</h6>
+                            <input class="form-control" type="date" name="fecha_inicio">
                           </div>
                           <div class="form-group">
                             DROP DOWN LIST DE LOS MEDICAMENTOS DISPONIBLES
                           </div>
                           <div class="form-group">
-                            INPUT DE INDICACIONES
+                            <textarea class="form-control" name="indicaciones">Indicaciones</textarea>
                           </div> 
                           <div class="form-group">
-                            CALENDARIO FINISH
+                            <h6>Fecha de termino</h6>
+                            <input class="form-control" type="date" name="fecha_termino">
                           </div>
                           <br>
                         </div>
 
+                        <h1>Consulta Médica</h1>
                         <div class="modal-body">
                             <b>Subjetivo</b>
                             <hr >
