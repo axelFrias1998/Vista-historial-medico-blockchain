@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 #nullable disable
 
@@ -19,7 +20,11 @@ namespace Vista_historial_medico_blockchain.Models
         [Required(ErrorMessage = "La confirmación de Password es un campo requerido")]
         public string Password { get; set; }
 
-        [DataType(DataType.Upload)]
-        public string File { get; set; }
+        [Display(Name = "File")]
+        [Required(ErrorMessage = "Elige tu archivo")]
+        public IFormFile File { get; set; }
+
+        [FileExtensions(Extensions = "gti")]
+        public string FileName => File?.FileName;
     }
 }
