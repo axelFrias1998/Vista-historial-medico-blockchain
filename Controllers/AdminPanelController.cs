@@ -58,6 +58,11 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
+         public IActionResult PacientPanel()
+        {
+            return View();
+        }
+
         public IActionResult Seleccion()
         {
         return View();
