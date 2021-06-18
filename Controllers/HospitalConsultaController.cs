@@ -31,12 +31,24 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpPost]
-        public IActionResult ValidacionArchivo(PacientValidation PacientValidation) 
+        public async Task<ActionResult> ValidacionArchivo(PacientValidation pacientValidation) 
         {
-            return R();
-         //   if (file == null) return;
-         //   string archivo = (DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + file.FileName).ToLower();
-         //   file.SaveAs(Server.MapPath("~/Uploads/" + archivo));
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<PacientValidation>("api/HospitalConsultas/GetNode", pacientValidation);
+                if (postTask.IsSuccessStatusCode)
+                {
+                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
+                    if (userToken is null)
+                        return NotFound();
+                    return View("Login");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Registrer");
+                }
+            }
         }
 
         public IActionResult MisConsultasP()
