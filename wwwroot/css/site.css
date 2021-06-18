@@ -115,6 +115,15 @@ body {
  position: relative;
  border-radius: 25px;
 }
+.card-body-2 {
+  background-color: #94b8d7;
+  width: 100%;
+  margin: auto;
+  width: 500px;
+  min-height: 300px;
+  position: relative;
+  border-radius: 25px;
+ }
 
 /*--------------------------------------------------------------
 # Hero Section
