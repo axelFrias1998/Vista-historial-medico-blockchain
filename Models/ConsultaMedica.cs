@@ -54,6 +54,7 @@ namespace Vista_historial_medico_blockchain.Models
         [JsonInclude]
         public string PlanTerapeutico { get; set; }
         
+        //[DataType(DataType.MultilineText)]
         [JsonInclude]
         //Indicaciones o recomendaciones
         public string Educacion { get; set; }

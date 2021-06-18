@@ -15,8 +15,6 @@ namespace Vista_historial_medico_blockchain.Controllers
 {
     public class HospitalConsultaController : Controller
     { 
-       
-
         public IActionResult CrearConsulta()
         {
             return View();
@@ -32,14 +30,18 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
+        [HttpPost]
+        public void ValidacionArchivo(string hola) 
+        {
+         //   if (file == null) return;
+         //   string archivo = (DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + file.FileName).ToLower();
+         //   file.SaveAs(Server.MapPath("~/Uploads/" + archivo));
+        }
+
         public IActionResult MisConsultasP()
         {
             return View();
-        }
-
-
-        
-        
-        
+        } 
     }
 }
+

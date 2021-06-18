@@ -1,4 +1,4 @@
-@model Vista_historial_medico_blockchain.Models.ConsultaMedica
+@model Vista_historial_medico_blockchain.Models.CreateConsultaDTO
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -26,65 +26,144 @@
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                           <h4 class="modal-title custom_align" id="Heading">Crear nueva consulta</h4>
                         </div>
+                      
+                      <h1>Historial Médico</h1>
+                        <div class="modal-body">
+                            <b>Historial Médico</b>
+                            <hr >
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.FechaElaboracion, new { htmlAttributes = new { @class = "form-control", placeholder="Fecha de elaboración"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.FechaElaboracion, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.FechaNacimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Fecha de nacimiento"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.FechaNacimiento, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.Sexo, new { htmlAttributes = new { @class = "form-control", placeholder="Sexo"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.Sexo, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosMadre, new { htmlAttributes = new { @class = "form-control", placeholder="Padecimientos de la madre"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosMadre, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosPadre, new { htmlAttributes = new { @class = "form-control", placeholder="Padecimientos del padre"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosPadre, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosHermanos, new { htmlAttributes = new { @class = "form-control", placeholder="Padecimientos de los hermanos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosHermanos, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosRamaMaterna, new { htmlAttributes = new { @class = "form-control", placeholder="Padecimientos de los familiares maternos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosRamaMaterna, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosRamaPaterna, new { htmlAttributes = new { @class = "form-control", placeholder="Padecimientos de los familiares paternos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.PadecimientosRamaPaterna, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.EsquemaVacunacion, new { htmlAttributes = new { @class = "form-control", placeholder="Esquema de vacunación"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.EsquemaVacunacion, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesQuirurgicos, new { htmlAttributes = new { @class = "form-control", placeholder="Antecedentes quirúrgicos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesQuirurgicos, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesTraumaticos, new { htmlAttributes = new { @class = "form-control", placeholder="Antecedentes traumáticos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesTraumaticos, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesAlergicos, new { htmlAttributes = new { @class = "form-control", placeholder="Antecedentes alérgicos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesAlergicos, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesHospitalizaciones, new { htmlAttributes = new { @class = "form-control", placeholder="Antecedentes de hospitalizaciones"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.HistoriaClinica.AntecedentesHospitalizaciones, "", new { @class = "text-danger" })
+                          </div>
+                          <br>
+                        </div>
+
+                        <h1>Plan de Medicamento</h1>
+                        <div class="modal-body">
+                            <b>Plan de Medicamento</b>
+                            <hr >
+                          <div class="form-group">
+                            cALENDARIO INIT)
+                          </div>
+                          <div class="form-group">
+                            DROP DOWN LIST DE LOS MEDICAMENTOS DISPONIBLES
+                          </div>
+                          <div class="form-group">
+                            INPUT DE INDICACIONES
+                          </div> 
+                          <div class="form-group">
+                            CALENDARIO FINISH
+                          </div>
+                          <br>
+                        </div>
+
                         <div class="modal-body">
                             <b>Subjetivo</b>
                             <hr >
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Dolencia, new { htmlAttributes = new { @class = "form-control", placeholder="Dolencia"} })
-                            @Html.ValidationMessageFor(model => model.Dolencia, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Dolencia, new { htmlAttributes = new { @class = "form-control", placeholder="Dolencia"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Dolencia, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.RelacionPasada, new { htmlAttributes = new { @class = "form-control", placeholder="Relación Pasada"} })
-                            @Html.ValidationMessageFor(model => model.RelacionPasada, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.RelacionPasada, new { htmlAttributes = new { @class = "form-control", placeholder="Relación Pasada"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.RelacionPasada, "", new { @class = "text-danger" })
                           </div>
                           <br>
                           <b>Objetivo</b>
                             <hr >
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Hallazgos, new { htmlAttributes = new { @class = "form-control", placeholder="Hallazgos"} })
-                            @Html.ValidationMessageFor(model => model.Hallazgos, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Hallazgos, new { htmlAttributes = new { @class = "form-control", placeholder="Hallazgos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Hallazgos, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.PruebasDiagnosticas, new { htmlAttributes = new { @class = "form-control", placeholder="Pruebas diagnósticas"} })
-                            @Html.ValidationMessageFor(model => model.PruebasDiagnosticas, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.PruebasDiagnosticas, new { htmlAttributes = new { @class = "form-control", placeholder="Pruebas diagnósticas"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PruebasDiagnosticas, "", new { @class = "text-danger" })
                           </div>
                           <br>
                           <b>Análisis</b>
                             <hr >
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Resumen, new { htmlAttributes = new { @class = "form-control", placeholder="Resumen"} })
-                            @Html.ValidationMessageFor(model => model.Resumen, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Resumen, new { htmlAttributes = new { @class = "form-control", placeholder="Resumen"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Resumen, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Problemas, new { htmlAttributes = new { @class = "form-control", placeholder="Problemas"} })
-                            @Html.ValidationMessageFor(model => model.Problemas, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Problemas, new { htmlAttributes = new { @class = "form-control", placeholder="Problemas"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Problemas, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Diferenciales, new { htmlAttributes = new { @class = "form-control", placeholder="Diferenciales"} })
-                            @Html.ValidationMessageFor(model => model.Diferenciales, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Diferenciales, new { htmlAttributes = new { @class = "form-control", placeholder="Diferenciales"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Diferenciales, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Razonamiento, new { htmlAttributes = new { @class = "form-control", placeholder="Razonamiento"} })
-                            @Html.ValidationMessageFor(model => model.Razonamiento, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Razonamiento, new { htmlAttributes = new { @class = "form-control", placeholder="Razonamiento"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Razonamiento, "", new { @class = "text-danger" })
                           </div>
                           <br>
                           <b>Plan</b>
                           <hr>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.PlanMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
-                            @Html.ValidationMessageFor(model => model.PlanMedicamentos, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.PlanTerapeutico, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Terapéutico"} })
-                            @Html.ValidationMessageFor(model => model.PlanTerapeutico, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.PlanTerapeutico, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Terapéutico"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanTerapeutico, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Educacion, new { htmlAttributes = new { @class = "form-control", placeholder="Educación"} })
-                            @Html.ValidationMessageFor(model => model.Educacion, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Educacion, new { htmlAttributes = new { @class = "form-control", placeholder="Educación"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Educacion, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.Seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
-                            @Html.ValidationMessageFor(model => model.Seguimiento, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ConsultaMedica.Seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Seguimiento, "", new { @class = "text-danger" })
                           </div>
                         </div>
                         <div class="modal-footer ">
@@ -97,7 +176,6 @@
         </div>
     </div>
 </div>
-
 
                         <br>
                         <div class="btn-group">
