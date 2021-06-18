@@ -51,7 +51,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                     else if(rol.Equals("Doctor"))
                         return RedirectToAction("DoctorPanel", "AdminPanel");
                     else if(rol.Equals("Pacient"))
-                        return RedirectToAction("ClinicAdmin", "AdminPanel");
+                        return RedirectToAction("PacientPanel", "AdminPanel");
                     else
                         return View();
                 }
