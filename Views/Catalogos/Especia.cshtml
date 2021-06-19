@@ -9,8 +9,8 @@
 		<table>
 			<thead>
 				<tr class="row100 head">
-					<th class="cell100 column7"> @Html.DisplayNameFor(model => model.Nombre) </th>
-					<th class="cell100 column8"></th>
+					<th class="cell100 column7"><h5>@Html.DisplayNameFor(model => model.Nombre)</h5></th>
+					<th class="cell100 column8"><h5>Editar | Eliminar</h5></th>
 				</tr>
 			</thead>
 				<tbody>
@@ -20,9 +20,9 @@
 					<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Type)</td>
 					<td class="cell100 column8">
 						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Editar", "EditSpecia", new { id = item.Id }) |
+							<h6>@Html.ActionLink("Editar", "EditSpecia", new { id = item.Id }) |
 						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+							@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })</h6>
 					</td>
 												
 				</tr>
