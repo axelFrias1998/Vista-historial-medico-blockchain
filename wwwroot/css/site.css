@@ -626,4 +626,12 @@ a:focus{
       font-size: 20px;
       font-weight: bold;
   }
+    .column15 {
+      width: 15%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
 }
