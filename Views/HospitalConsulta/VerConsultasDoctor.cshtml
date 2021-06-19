@@ -2,15 +2,15 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<h3>Tus consultas</h3>
+<br>
+<h1>Tus consultas</h1>
     <div class="table100 ver1 m-b-110">
 	    <div class="table100-head">
             <table >
                 <thead>
                 <tr class="row100 head">
-                    <th class="cell100 column8" >Paciente</th>
-                    <th class="cell100 column8" >Fecha de consulta</th>
+                    <th class="cell100 column8"><h5>Paciente</h5></th>
+                    <th class="cell100 column8"><h5>Fecha de consulta</h5></th>
                     
                 </tr>
                 </thead>
@@ -18,8 +18,8 @@
                 <!--foreach (var item in Model.MisConsultas)
                 {-->
                 <tr class="row100 body">
-                    <td class="cell100 column8">Html.DisplayFor(modelItem => item.NombreDoctor)</td>
-                    <td class="cell100 column8"> Html.DisplayFor(modelItem => item.NombreHospital)</td>
+                    <td class="cell100 column8"><h6>Html.DisplayFor(modelItem => item.NombreDoctor)</h6></td>
+                    <td class="cell100 column8"><h6>Html.DisplayFor(modelItem => item.NombreHospital)</h6></td>
                 </tr>
                 <tr>
                     <td colspan="2"><hr></td>
@@ -29,4 +29,10 @@
             </table>	
 	    </div>
     </div>
+
 <br><br>
+<div class="btn-group">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="DoctorPanel"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+</div>
