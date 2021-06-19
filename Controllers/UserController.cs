@@ -114,13 +114,43 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
-
-         public IActionResult InfoCli()
-
+        [HttpGet]               
+        public ActionResult EditAdmin(string id)
         {
-
+            ViewData["Adminid"] = id;
             return View();
+        }
 
+        [HttpPost]
+        public async Task<ActionResult> EditAdmin(CreatedUserDTO createdUserDTO)
+        {
+            using (var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var updateUserDTO = new UpdateUserDTO
+                {
+                    nombre = createdUserDTO.nombre,
+                    apellido = createdUserDTO.apellido,
+                    userName = createdUserDTO.userName,
+                    email = createdUserDTO.email,
+                    phoneNumber = createdUserDTO.phoneNumber
+                };
+                var response = await client.PutAsJsonAsync<UpdateUserDTO>($"api/Accounts/{createdUserDTO.id}", updateUserDTO);
+                if (response.IsSuccessStatusCode){
+                    return RedirectToAction(@"AdminInfo");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("EditAdmin");
+                } 
+            }
+        }
+
+        public IActionResult InfoCli()
+        {
+            return View();
         }
                 /*[HttpGet]
         public async Task<ActionResult> InfoCli(CreatedUserDTO createduserDTO)
