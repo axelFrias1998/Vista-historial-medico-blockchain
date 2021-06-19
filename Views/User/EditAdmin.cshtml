@@ -1,0 +1,49 @@
+@model Vista_historial_medico_blockchain.Models.CreatedUserDTO
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <h4 class="modal-title custom_align" id="Heading"> Editar datos Administrador</h4>
+  </div>
+  <div class="modal-body">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => ViewData["AdminId"])
+    <div class="form-group">
+        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre"} })
+        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control", placeholder="Apellido"} })
+        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", placeholder="UserName"} })
+        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder="Email"} })
+        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder="Número de teléfono"} })
+        @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
+    </div>
+  </div>
+  <div class="modal-footer ">
+    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Actualizar</button>
+  </div>
+}
+
+<br>
+<div class="btn-group">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="regresar"><a asp-controller="User" asp-action="AdminInfo"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+</div>
+<br><br><br>
