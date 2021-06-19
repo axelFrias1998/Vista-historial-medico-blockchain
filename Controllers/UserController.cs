@@ -217,6 +217,51 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
+        [HttpGet]               
+        public ActionResult CreateDoctores()
+        {
+            return View();
+        }
+
+        [HttpPost]               
+        public async Task<ActionResult> CreateDoctores(DoctorInfo doctorInfo)
+        {
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var postTask = await client.PostAsJsonAsync<DoctorInfo>("api/Accounts/CreateDoctor", doctorInfo);
+                if (postTask.IsSuccessStatusCode)
+                {
+                   return RedirectToAction(@"Doctores");
+                }
+                else{
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("CreateDoctores");
+                }
+            }
+        }
+
+        /*public async Task<ActionResult> CreateDoctores(DoctorInfo doctorinfo)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var postTask = await client.PostAsJsonAsync<DoctorInfo>("api/Accounts/CreateDoctor", doctorinfo);
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Doctores");
+                    }
+                    else{
+                        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                        return View("CreateDoctores");
+                    }
+            }
+        }*/
+
         public IActionResult ClinicAdmin()
 
         {
@@ -226,14 +271,6 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         public IActionResult CreateClinicAdmin()
-
-        {
-
-            return View();
-
-        }
-
-        public IActionResult CreateDoctores()
 
         {
 
