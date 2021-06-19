@@ -4,8 +4,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<br><h1>Información Personal</h1><br>
+<br><h1>Información Personal</h1>
 <table style="background-color: white; border-radius:8px;">
+    <tr> 
+        <td class="column9">Nombre:</td>
+        <td class="column10">(model => model.Nombre)</td>
+    </tr>
     <tr>
         <td class="column9">Apellido:</td>
         <td class="column10">(model => model.Apellido)</td>
@@ -13,10 +17,6 @@
     <tr> 
         <td class="column9">Email:</td>
         <td class="column10">(model => model.Email)</td>
-    </tr>
-    <tr> 
-        <td class="column9">Nombre:</td>
-        <td class="column10">(model => model.Nombre)</td>
     </tr>
     <tr> 
         <td class="column9">Telefono:</td>
@@ -28,14 +28,17 @@
     </tr>
     <tr> 
         <td class="column9">Especialidad:</td>
-        <td class="column10">(model => model.Username)</td>
-    </tr>
-            
+        <td class="column10">(model => model.Especialidad)</td>
+    </tr>      
 </table>
-<br><br>
-<center>
-    <button data-title="Edit" data-toggle="modal" data-target="#edit" class="btn btn-lg btn-primary btn-block">Editar</button>
-</center>
+
+<br>
+<div class="btn-group">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="DoctorPanel"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="User" asp-action="CreateAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
+</div>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog">
@@ -45,14 +48,14 @@
                 <h4 class="modal-title custom_align" id="Heading">Editar Datos</h4>
             </div>
             <div class="modal-body">
+                 <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Nombre">
+                </div>
                 <div class="form-group">
                     <input class="form-control " type="text" placeholder="Apellido">
                 </div>
                 <div class="form-group">
                     <input class="form-control " type="text" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                     <input class="form-control " type="text" placeholder="Telefono">
