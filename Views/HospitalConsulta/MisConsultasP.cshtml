@@ -2,60 +2,60 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<h3>Tus consultas</h3>
+<br>
+<h1>Tus consultas</h1>
     <div class="table100 ver1 m-b-110">
 	    <div class="table100-head">
             <table >
                 <thead>
                 <tr class="row100 head">
-                    <th class="cell100 column12" >Nombre Doctor</th>
-                    <th class="cell100 column12" >Hospital</th>
-                    <th class="cell100 column13" >Fecha </th>
+                    <th class="cell100 column12"><h5>Nombre Doctor</h5></th>
+                    <th class="cell100 column12"><h5>Hospital</h5></th>
+                    <th class="cell100 column13"><h5>Fecha</h5></th>
                 </tr>
                 </thead>
                 <tbody>	
-                @foreach (var item in Model.MisConsultas)
+                @*foreach (var item in Model.MisConsultas)
                 {
                 <tr class="row100 body">
-                    <td class="cell100 column12">@Html.DisplayFor(modelItem => item.NombreDoctor)</td>
-                    <td class="cell100 column12"> @Html.DisplayFor(modelItem => item.NombreHospital)</td>
-                    <td class="cell100 column13"> @Html.DisplayFor(modelItem => item.FechaConsulta)</td>
+                    <td class="cell100 column12"><h6>@Html.DisplayFor(modelItem => item.NombreDoctor)</h6></td>
+                    <td class="cell100 column12"><h6>@Html.DisplayFor(modelItem => item.NombreHospital)</h6></td>
+                    <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.FechaConsulta)</h6></td>
                 </tr>
-                }	   
+                }	*@   
                 </tbody>
             </table>	
 	    </div>
     </div>
 <br><br>
 
-<h3>Tus medicamentos</h3>
+<h1>Tus medicamentos</h1>
     <div class="table100 ver1 m-b-110">
 	    <div class="table100-head">
             <table >
                 <thead>
                 <tr class="row100 head">
-                    <th class="cell100 column13" >Fecha de inicio</th>
-                    <th class="cell100 column9" >Medicamento</th>
-                    <th class="cell100 column9" >Indicaciones</th>
-                    <th class="cell100 column13" >Fecha de fin</th>
+                    <th class="cell100 column13"><h5>Fecha de inicio</h5></th>
+                    <th class="cell100 column9"><h5>Medicamento</h5></th>
+                    <th class="cell100 column9"><h5>Indicaciones</h5></th>
+                    <th class="cell100 column13"><h5>Fecha de fin</h5></th>
                 </tr>
                 </thead>
                 <tbody>	
-                @foreach (var item in Model.MisMedicamentos)
+                @*foreach (var item in Model.MisMedicamentos)
                 {   
                 <tr class="row100 body">
-                    <td class="cell100 column13"> @Html.DisplayFor(modelItem => item.Init)</td>
-                    <td class="cell100 column9"> @Html.DisplayFor(modelItem => item.NombreMedicamento)</td>
-                    <td class="cell100 column9"> @Html.DisplayFor(modelItem => item.Indicaciones)</td>
-                    <td class="cell100 column13"> @Html.DisplayFor(modelItem => item.Finish)</td>
+                    <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.Init)</h6></td>
+                    <td class="cell100 column9"><h6>@Html.DisplayFor(modelItem => item.NombreMedicamento)</h6></td>
+                    <td class="cell100 column9"><h6>@Html.DisplayFor(modelItem => item.Indicaciones)</h6></td>
+                    <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.Finish)</h6></td>
                 </tr>
-                } 
+                } *@
                 </tbody>
             </table>	
 	    </div>
     </div>
- <br>
+ <br><br>
 <div class="btn-group">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
