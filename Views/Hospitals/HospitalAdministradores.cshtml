@@ -28,7 +28,7 @@
               @Html.DisplayFor(modelItem => item.Apellido) </td> 
             <td class="cell100 column5">
               <data-placement="top" data-toggle="tooltip" title="Borrar">
-              <h6>@Html.ActionLink("Borrar", "BorrarAdministrador", new { adminId = item.AdminId, hospitalId = Model.HospitalId } )</h6>
+              <h6>@Html.ActionLink("Borrar", "BorrarAdministrador", new { adminId = item.AdminId, hospitalId = Model.HospitalId })</h6>
             </td>
           </tr>
         }
@@ -42,7 +42,7 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <data-placement="top" data-toggle="tooltip" title="regresar"><a asp-controller="Hospitals" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a>
-	<data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="CreateSpecialities"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a>
+	<data-placement="top" data-toggle="tooltip" title="new"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">@Html.ActionLink("Agregar", "AgregarAdministrador", new { hospitalId = Model.HospitalId })</button></a>
 </div>
 <br><br><br>
 

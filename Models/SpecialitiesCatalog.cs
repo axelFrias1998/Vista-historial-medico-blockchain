@@ -8,13 +8,9 @@ namespace Vista_historial_medico_blockchain.Models
 {
     public partial class SpecialitiesCatalog
     {
-        public SpecialitiesCatalog()
-        {
-            //Hospitals = new HashSet<Hospital>();
-        }
 
         [JsonInclude]
-        public int Id { get; set; }
+        public string EspecialidadId { get; set; }
 
         [JsonInclude]
         public string Type { get; set; }

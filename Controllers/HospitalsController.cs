@@ -33,6 +33,113 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> BorrarEspecialidad(string hospitalId, int specialityId)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.DeleteAsync($"api/HospitalSpecialities/{hospitalId}/{specialityId}");
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("HospitalEspecialidades", "Hospitals", new { id = hospitalId });
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> AgregarEspecialidad(string hospitalId)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/SpecialitiesCatalog");
+                if (response.IsSuccessStatusCode)
+                {
+                    List<SelectListItem> lst = new List<SelectListItem>();
+                    foreach (var speciality in JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList())
+                        lst.Add(new SelectListItem() { Text = $"{speciality.Type}", Value = $"{speciality.EspecialidadId}"});
+                    ViewBag.Especialidades = lst;
+                    var hospitalEspecialidad = new HospitalSpeciality
+                    {
+                        HospitalId = hospitalId
+                    };
+                    return View(hospitalEspecialidad);
+                }
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AgregarEspecialidad(HospitalSpeciality hospitalSpeciality)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var map = new HospitalSpecialityAdd
+                {
+                    HospitalId = hospitalSpeciality.HospitalId,
+                    EspecialidadId = Convert.ToInt32(hospitalSpeciality.EspecialidadId)
+                };
+                var response = await client.PostAsJsonAsync<HospitalSpecialityAdd>($"api/HospitalSpecialities", map);
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("HospitalEspecialidades", "Hospitals", new { id = hospitalSpeciality.HospitalId });
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> AgregarAdministrador(string hospitalId)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/Hospitals/GetHospitalInfo/{hospitalId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var hospitalInfo = JsonConvert.DeserializeObject<HospitalInfo>(await response.Content.ReadAsStringAsync());
+                    var responseAvailableAdmins = (hospitalInfo.servicesCatalog.Id <= 2) ? await client.GetAsync($"api/HospitalAdministrador/AvailableAdmins/true") : await client.GetAsync($"api/HospitalAdministrador/AvailableAdmins/false");
+                    if(!responseAvailableAdmins.IsSuccessStatusCode)
+                        return NotFound();
+                    var hospitalAdminsInfo = new HospitalAdminInfo
+                    {
+                        HospitalId = hospitalId
+                    };
+                    
+                    List<SelectListItem> lst = new List<SelectListItem>();
+                    foreach (var admin in JsonConvert.DeserializeObject<List<HospitalAdminDTO>>(await responseAvailableAdmins.Content.ReadAsStringAsync()).ToList())
+                        lst.Add(new SelectListItem() { Text = $"{admin.Nombre} {admin.Apellido}", Value = admin.AdminId });
+                    ViewBag.Admins = lst;
+                    return View(hospitalAdminsInfo);
+                }
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AgregarAdministrador(HospitalAdminInfo hospitalAdminInfo)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.PostAsJsonAsync<HospitalAdminInfo>($"api/HospitalAdministrador", hospitalAdminInfo);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Hospitals");
+                }
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
         public async Task<ActionResult> HospitalAdministradores(string id)
         {
             using(HttpClient client = new HttpClient())
@@ -170,7 +277,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Nombre}", null);
+                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.EspecialidadId}/{specialitiesCatalog.Nombre}", null);
                 if (response.IsSuccessStatusCode){
                     return RedirectToAction(@"Especia");
                 }

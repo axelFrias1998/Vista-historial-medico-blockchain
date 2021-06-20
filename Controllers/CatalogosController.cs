@@ -87,7 +87,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Nombre}", null);
+                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.EspecialidadId}/{specialitiesCatalog.Nombre}", null);
                 if (response.IsSuccessStatusCode){
                     return RedirectToAction("Especialidades");
                 }
@@ -106,7 +106,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.DeleteAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}");
+                var response = await client.DeleteAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.EspecialidadId}");
                 if (response.IsSuccessStatusCode){
                      return RedirectToAction("Especialidades");
                 }
