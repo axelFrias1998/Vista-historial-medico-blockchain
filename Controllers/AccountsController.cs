@@ -38,22 +38,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 {
                     var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
                     SetCookie("Token", userToken.Token, userToken.Expiration);
-                    var handler = new JwtSecurityTokenHandler();
-                    var jsonToken = handler.ReadJwtToken(userToken.Token);
-                    var tokenS = jsonToken as JwtSecurityToken;
-                    string rol = tokenS.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
-                    string nombreUsuario = tokenS.Claims.First(claim => claim.Type == "NombreUsuario").Value;
-                    ViewData["nombreUsuario"] = nombreUsuario;
-                    if(rol.Equals("SysAdmin"))
-                        return RedirectToAction("PanelAdmin", "AdminPanel");
-                    else if(rol.Equals("ClinicAdmin") || rol.Equals("PacsAdmin"))
-                        return RedirectToAction("ClinicAdmin", "AdminPanel");
-                    else if(rol.Equals("Doctor"))
-                        return RedirectToAction("DoctorPanel", "AdminPanel");
-                    else if(rol.Equals("Pacient"))
-                        return RedirectToAction("PacientPanel", "AdminPanel");
-                    else
-                        return View();
+                    return RedirectToAction("Menu", "Panels");
                 }
                 else
                 {
@@ -76,13 +61,11 @@ namespace Vista_historial_medico_blockchain.Controllers
                     var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
                     if (userToken is null)
                         return NotFound();
-                    else
-                    {
-                        SetCookie("Token", userToken.Token, userToken.Expiration);
-                        return View("Login");
-                    }
+                    SetCookie("Token", userToken.Token, userToken.Expiration);
+                    return View("Login");
                 }
-                else{
+                else
+                {
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
                     return View("Registrer");
                 }

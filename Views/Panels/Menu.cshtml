@@ -1,0 +1,190 @@
+@model Vista_historial_medico_blockchain.Models.LoggedUser
+
+@{
+    ViewData["Tile"] = "Menú";
+    var userInfo = Model;
+}
+
+<section id="services" class="services">
+  <div class="container">
+    <center>
+    <div class="section-title">
+      <br><h2>¡Bienvenido @userInfo.Username!</h2>
+      <br><p>Este es el panel en donde podrás realizar las siguentes actividades:</p><br><br>
+    </div>
+
+    @if (userInfo.Rol.Equals("SysAdmin"))
+    {
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209074.png" style="width:70px;height:70px;"></i></div>
+              <h4><a asp-controller="Hospitals" asp-action="Index">Hospital</a></h4>
+              <br><p>Aquí podrás crear, actualizar  y deshabilitar hospitales.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063148.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="User" asp-action="AdminInfo">Administradores</a></h4>
+            <br><p>Aquí podrás crear, actualizar, eliminar y leer administradores por rol.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063190.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="AdminPanel" asp-action="Seleccion">Catálogos</a></h4>
+            <br><p>Aquí podrás editar el Catálogo de Servicios y Catálogo de Especialidades</p>
+          </div>
+        </div>   
+      </div>
+    }
+    else if(userInfo.Rol.Equals("PacsAdmin"))
+    {
+        <div class="row">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063189.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="Catalogos" asp-action="Especia">Especialidades</a></h4>
+            <br><p>Aquí podrás añadir nuevas especialidades al hospital.</p>
+          </div>
+        </div>     
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3952/3952988.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="User" asp-action="Doctores">Doctores</a></h4>
+            <br><p>Aquí podrás registrar, actualizar, borrar y leer doctores del hospital.</p>
+          </div>
+        </div>              
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063022.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="User" asp-action="InfoCli">Tu hospital</a></h4>
+            <br><p>Aquí podrás visualizar y actualizar los datos del hospital y del administrador.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063083.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="HospitalConsulta" asp-action="CrearConsulta">Consultas</a></h4>
+            <br><p>Aquí podrás visualizar el listado de consultas realizadas en el hospital.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="Catalogos" asp-action="EleccionMedicamentos">Medicamentos</a></h4>
+            <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
+          </div>
+        </div>
+      </div>
+    }
+    else if(userInfo.Rol.Equals("ClinicAdmin"))
+    {
+        <div class="row">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063189.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="Catalogos" asp-action="Especia">Especialidades</a></h4>
+            <br><p>Aquí podrás añadir nuevas especialidades al hospital.</p>
+          </div>
+        </div>     
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3952/3952988.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="User" asp-action="Doctores">Doctores</a></h4>
+            <br><p>Aquí podrás registrar, actualizar, borrar y leer doctores del hospital.</p>
+          </div>
+        </div>              
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063022.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="User" asp-action="InfoCli">Tu Información</a></h4>
+            <br><p>Aquí podrás visualizar y actualizar los datos del hospital y del administrador.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063083.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="HospitalConsulta" asp-action="CrearConsulta">Consultas   </a></h4>
+            <br><p>Aquí podrás visualizar el listado de consultas realizadas en el hospital.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="Catalogos" asp-action="EleccionMedicamentos">Medicamentos</a></h4>
+            <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209000.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="HospitalConsulta" asp-action="ValidacionArchivo">Nueva Consulta</a></h4>
+            <br><p>Aquí podrás realizar el registro de una nueva consulta.</p>
+          </div>
+        </div>              
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="HospitalConsulta" asp-action="VerConsultasDoctor">Tus consultas</a></h4>
+            <br><p>Aquí podrás visualizar el listado de consultas realizadas.</p>
+          </div>
+        </div>
+      </div>
+    }
+    else if(userInfo.Rol.Equals("Doctor"))
+    {
+        <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063194.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="User" asp-action="Info">Tu informacion</a></h4>
+            <br><p>Aquí podrás visualizar y actualizar información personal.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209000.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="HospitalConsulta" asp-action="ValidacionArchivo">Nueva Consulta</a></h4>
+            <br><p>Aquí podrás realizar el registro de una nueva consulta.</p>
+          </div>
+        </div>              
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
+            <h4><a asp-controller="HospitalConsulta" asp-action="VerConsultasDoctor">Tus consultas</a></h4>
+            <br><p>Aquí podrás visualizar el listado de consultas realizadas.</p>
+          </div>
+        </div>
+      </div>
+    }
+    else if(userInfo.Rol.Equals("Pacient"))
+    {
+      <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
+          <h4><a asp-controller="HospitalConsulta" asp-action="MisConsultasP">Tus consultas</a></h4>
+          <br><p>Aquí podrás visualizar el historial de tus consultas médicas.</p>
+        </div>
+      </div>
+    }
+
+    </div>
+  </div>
+  <br><br>
+</section>

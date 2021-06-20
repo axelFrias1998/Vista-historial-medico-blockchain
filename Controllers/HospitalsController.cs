@@ -17,6 +17,57 @@ namespace Vista_historial_medico_blockchain.Controllers
     {
         static readonly HttpClient client = new HttpClient();
 
+        [HttpGet]
+        public async Task<ActionResult> Hospitales()
+        {
+            using(var client = new HttpClient()){
+                /*Mandar Token en el Header*/
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var response = await client.GetAsync($"api/Hospitals");
+                if (response.IsSuccessStatusCode){
+                    return View(JsonConvert.DeserializeObject<List<HospitalInfo>>(await response.Content.ReadAsStringAsync()).ToList());
+                }
+                else
+                    return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            List<SelectListItem> lst = new List<SelectListItem>();
+            lst.Add(new SelectListItem() { Text = "Hospital público", Value = "1" });
+            lst.Add(new SelectListItem() { Text = "Hospital privado", Value = "2" });
+            lst.Add(new SelectListItem() { Text = "Clínica pública", Value = "3" });
+            lst.Add(new SelectListItem() { Text = "Clínica privada", Value = "4" });
+            
+            ViewBag.ServiceCatalog = lst;
+            return View();
+        }     
+
+        [HttpPost]
+        public async Task<ActionResult> Create(HospitalInfo hospitalinfo)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var postTask = await client.PostAsJsonAsync<HospitalInfo>("api/Hospitals", hospitalinfo);
+                if (postTask.IsSuccessStatusCode)
+                {
+                  return RedirectToAction("Hospitales");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                    return View("Create");
+                }
+            }  
+        }
+
         public IActionResult ListaMedicamentos()
         {
             return View();
@@ -112,31 +163,12 @@ namespace Vista_historial_medico_blockchain.Controllers
             return RedirectToAction("ModalEspecialidades",new{ idSpecialities = id});
         }
 
-        public IActionResult GetViewAdmin(string id){
-            return RedirectToAction("ModalAdministrador",new{ idHospital = id});
-        } 
-  
-        /*Get Hospital*/
-        [HttpGet]
-        public async Task<ActionResult> Hospitales()
+        public IActionResult GetViewAdmin(string id)
         {
-            using(var client = new HttpClient()){
-                /*Mandar Token en el Header*/
-                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.GetAsync($"api/Hospitals");
-                if (response.IsSuccessStatusCode){
-                    return View(JsonConvert.DeserializeObject<List<HospitalInfo>>(await response.Content.ReadAsStringAsync()).ToList());
-                }
-                else{
-                    return NotFound();
-                }
-            }
+            return RedirectToAction("ModalAdministrador",new{ idHospital = id});
         }
 
-
-        public async Task<IActionResult> ServiceCaltalog ()
+        public async Task<IActionResult> ServiceCaltalog()
         {
             HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/Hospitals/GetCatalogOfServices");
             response.EnsureSuccessStatusCode();
@@ -149,40 +181,13 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
          
-        public async Task<ActionResult> CreateH(HospitalInfo hospitalinfo)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = client.PostAsJsonAsync<HospitalInfo>("api/Accounts/Hospitals", hospitalinfo);
-                postTask.Wait();
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                  return RedirectToAction("Index");
-                }
-            }
-
-            /*HttpResponseMessage response = await client.GetAsync("https://localhost:44349/api/CatalogOfServices");
-            response.EnsureSuccessStatusCode();
-
-            if (!response.IsSuccessStatusCode)
-                return NotFound();
-
-            var serviceCatalog = JsonConvert.DeserializeObject<List<ServicesCatalog>>(await response.Content.ReadAsStringAsync());
-
-            if (serviceCatalog is null)
-                return NotFound();
-            ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
-
-            ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");*/
-
-            return View(hospitalinfo);   
-        }
+        
 
         public IActionResult DetailsHos()
         {
             return View();
-        }     
+        } 
+        
+        
     }
 }

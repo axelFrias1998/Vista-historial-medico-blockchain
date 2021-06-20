@@ -10,6 +10,10 @@ namespace Vista_historial_medico_blockchain.Models
 {
     public partial class PacientValidation
     {
+        //public PacientValidation()
+        //{
+        //    
+        //}
 
         [JsonInclude]
         [Required(ErrorMessage = "El Username es un campo requerido")]

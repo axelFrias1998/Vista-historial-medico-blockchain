@@ -600,4 +600,38 @@ a:focus{
         width: 100%;
         text-align: center;
     }
+
+    .column12 {
+      width: 40%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .column13 {
+      width: 20%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    .column14 {
+      width: 25%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+  }
+    .column15 {
+      width: 15%;
+      padding-left: 30px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
 }

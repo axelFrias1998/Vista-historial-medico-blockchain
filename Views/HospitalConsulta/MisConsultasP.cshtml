@@ -2,76 +2,60 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<br><h1>Tus consultas</h1>
-<div class="table100 ver1 m-b-110">
-	<div class="table100-head">
-		<table>
-            <thead>
-			<tr class="row100 head">
-				<th class="cell100" colspan="2"><center><h5>@Html.DisplayNameFor(model => model.MisConsultas)</h5> </center> </th>
-			</tr>
-            </thead>
-            <tbody>	
-            @foreach (var item in Model.MisConsultas)
-            {
-             <tr class="row100 body">
-				<td class="cell100"><b>Doctor:</b></td>
-                <td class="cell100"> @Html.DisplayFor(modelItem => item.NombreDoctor)</td>
-    		</tr>
-            <tr class="row100 body">
-				<td class="cell100"><b>Hospital:</b></td>
-                <td class="cell100"> @Html.DisplayFor(modelItem => item.NombreHospital)</td>
-    		</tr>
-            <tr class="row100 body">
-				<td class="cell100"><b>Fecha:</b></td>
-                <td class="cell100"> @Html.DisplayFor(modelItem => item.FechaConsulta)</td>
-    		</tr>
-            <tr>
-                <td  colspan="2"><hr></td>
-            </tr>   
-            }	
-            </tbody>
-        </table>	
-	</div>
-</div>
-
-<div class="table100 ver1 m-b-110">
-	<div class="table100-head">
- 		<table>
-            <thead>
-                <tr class="row100 head">
-                    <th class="cell100" colspan="2"><center><h5>@Html.DisplayNameFor(model => model.MisMedicamentos)</h5> </center> </th>
-                </tr>
-            </thead>
-            <tbody>
-                 @foreach (var item in Model.MisMedicamentos)
-                {   
-                    <tr class="row100 body">
-                        <td class="cell100 column7"><b>Fecha de inicio:</b></td>
-                        <td class="cell100"> @Html.DisplayFor(modelItem => item.Init)</td>
-                    </tr>
-                    <tr class="row100 body">
-                        <td class="cell100 column7"><b>Medicamento:</b></td>
-                        <td class="cell100"> @Html.DisplayFor(modelItem => item.NombreMedicamento)</td>
-                    </tr>
-                    <tr class="row100 body">
-                        <td class="cell100 column7"><b>Indicaciones:</b></td>
-                        <td class="cell100"> @Html.DisplayFor(modelItem => item.Indicaciones)</td>
-                    </tr>
-                    <tr class="row100 body">
-                        <td class="cell100 column7"><b>Fecha de fin:</b></td>
-                        <td class="cell100"> @Html.DisplayFor(modelItem => item.Finish)</td>
-                    </tr>
-                    <tr>
-                    <td colspan="2"><hr></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
 <br>
+<h1>Tus consultas</h1>
+    <div class="table100 ver1 m-b-110">
+	    <div class="table100-head">
+            <table >
+                <thead>
+                <tr class="row100 head">
+                    <th class="cell100 column12"><h5>Nombre del Doctor</h5></th>
+                    <th class="cell100 column12"><h5>Hospital</h5></th>
+                    <th class="cell100 column13"><h5>Fecha</h5></th>
+                </tr>
+                </thead>
+                <tbody>	
+                @*foreach (var item in Model.MisConsultas)
+                {
+                <tr class="row100 body">
+                    <td class="cell100 column12"><h6>@Html.DisplayFor(modelItem => item.NombreDoctor)</h6></td>
+                    <td class="cell100 column12"><h6>@Html.DisplayFor(modelItem => item.NombreHospital)</h6></td>
+                    <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.FechaConsulta)</h6></td>
+                </tr>
+                }	*@   
+                </tbody>
+            </table>	
+	    </div>
+    </div>
+<br><br>
+
+<h1>Tus medicamentos</h1>
+    <div class="table100 ver1 m-b-110">
+	    <div class="table100-head">
+            <table >
+                <thead>
+                <tr class="row100 head">
+                    <th class="cell100 column13"><h5>Fecha de inicio</h5></th>
+                    <th class="cell100 column9"><h5>Medicamento</h5></th>
+                    <th class="cell100 column9"><h5>Indicaciones</h5></th>
+                    <th class="cell100 column13"><h5>Fecha de termino</h5></th>
+                </tr>
+                </thead>
+                <tbody>	
+                @*foreach (var item in Model.MisMedicamentos)
+                {   
+                <tr class="row100 body">
+                    <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.Init)</h6></td>
+                    <td class="cell100 column9"><h6>@Html.DisplayFor(modelItem => item.NombreMedicamento)</h6></td>
+                    <td class="cell100 column9"><h6>@Html.DisplayFor(modelItem => item.Indicaciones)</h6></td>
+                    <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.Finish)</h6></td>
+                </tr>
+                } *@
+                </tbody>
+            </table>	
+	    </div>
+    </div>
+ <br><br>
 <div class="btn-group">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
