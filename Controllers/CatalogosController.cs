@@ -20,13 +20,8 @@ namespace Vista_historial_medico_blockchain.Controllers
     {
         static readonly HttpClient client = new HttpClient();
 
-        public CatalogosController()
-        {
-
-        }
-        
         [HttpGet]
-        public async Task<ActionResult> Catalogos(ServicesCatalog servicesCatalog)
+        public async Task<ActionResult> Servicios(ServicesCatalog servicesCatalog)
         {
             using(var client = new HttpClient()){
                 /*Mandar Token en el Header*/
@@ -34,41 +29,35 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.GetAsync("api/CatalogOfServices");
-                if (response.IsSuccessStatusCode){
-                    return View(JsonConvert.DeserializeObject<List<ServicesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/CatalogOfServices")).ToList());  ;
-                }
-                else{
-                    return NotFound();
-                }
+                if (response.IsSuccessStatusCode)
+                    return View(JsonConvert.DeserializeObject<List<ServicesCatalog>>(await response.Content.ReadAsStringAsync()).ToList());
+                return NotFound();
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> Especia(SpecialitiesCatalog specialitiesCatalog)
+        public async Task<ActionResult> Especialidades()
         {
-           using(var client = new HttpClient()){
+            using(var client = new HttpClient()){
                 /*Mandar Token en el Header*/
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.GetAsync("api/SpecialitiesCatalog");
-                if (response.IsSuccessStatusCode){
-                     return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/SpecialitiesCatalog")).ToList());
-                }
-                else{
-                    return NotFound();
-                }
+                if (response.IsSuccessStatusCode)
+                     return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList());
+                return NotFound();
             }
         }
 
         [HttpGet]               
-        public ActionResult CreateSpecialities()
+        public ActionResult CrearEspecialidad()
         {
             return View();
         }
 
         [HttpPost]               
-        public async Task<ActionResult> CreateSpecialities(CreateSpeciality createSpeciality)
+        public async Task<ActionResult> CrearEspecialidad(CreateSpeciality createSpeciality)
         {
             using(var client = new HttpClient())
             {
@@ -77,25 +66,21 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var postTask = await client.PostAsJsonAsync<CreateSpeciality>("api/SpecialitiesCatalog", createSpeciality);
                 if (postTask.IsSuccessStatusCode)
-                {
-                   return RedirectToAction(@"Especia");
-                }
-                else{
-                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("CreateSpecialities");
-                }
+                   return RedirectToAction("Especialidades");
+                ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                return View("CrearEspecialidad");
             }
         }
         
         [HttpGet]               
-        public ActionResult EditSpecia(int id)
+        public ActionResult EditarEspecialidad(int id)
         {
             ViewData["Specialityid"] = id;
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditSpecia(SpecialitiesCatalog specialitiesCatalog)
+        public async Task<ActionResult> EditarEspecialidad(SpecialitiesCatalog specialitiesCatalog)
         {
             using (var client = new HttpClient())
             {
@@ -104,7 +89,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Nombre}", null);
                 if (response.IsSuccessStatusCode){
-                    return RedirectToAction(@"Especia");
+                    return RedirectToAction("Especialidades");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
@@ -112,28 +97,9 @@ namespace Vista_historial_medico_blockchain.Controllers
                 } 
             }
         }
-
+        
         [HttpGet]
-       /* public async Task<ActionResult> Especia(SpecialitiesCatalog specialitiesCatalog)
-
-        {
-           using(var client = new HttpClient()){
-                
-                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.GetAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}");
-                if (response.IsSuccessStatusCode){
-                     return View(JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await client.GetStringAsync("https://localhost:44349/api/api/SpecialitiesCatalog/{specialitiesCatalog.Id}")).ToList());  ;
-                }
-                else{
-                    return NotFound();
-                }
-            }
-        }*/
-
-        [HttpGet]
-        public async Task<ActionResult> Delete(SpecialitiesCatalog specialitiesCatalog)
+        public async Task<ActionResult> BorrarEspecialidad(SpecialitiesCatalog specialitiesCatalog)
         {
             using (var client = new HttpClient())
             {
@@ -142,11 +108,11 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.BaseAddress = new Uri("https://localhost:44349");
                 var response = await client.DeleteAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}");
                 if (response.IsSuccessStatusCode){
-                     return RedirectToAction(@"Especia");
+                     return RedirectToAction("Especialidades");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("Especia");
+                    return View("Especialidades");
                 } 
             }
         }

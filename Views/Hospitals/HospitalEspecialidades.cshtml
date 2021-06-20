@@ -1,0 +1,53 @@
+@model Vista_historial_medico_blockchain.Models.HospitalSpecialitiesInfo
+@{
+    ViewData["Title"] = "Especialidades";
+}
+
+<br><h1>Catálogo de Servicios</h1>
+<div class="table100 ver1 m-b-110">
+	<div class="table100-head">
+		<table>
+			<thead>
+				<tr class="row100 head">
+					<th class="cell100 column7">Nombre</th>
+					<th class="cell100 column8">Eliminar</th>
+				</tr>
+			</thead>
+				<tbody>
+				@foreach (var item in Model.Specialities)
+				{
+					<tr class="row100 body">
+						<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Nombre)</td>
+						<td class="cell100 column8">
+							<data-placement="top" data-toggle="tooltip" title="Borrar">
+							<h6>@Html.ActionLink("Borrar", "BorrarEspecialidad", new { hospitalId = Model.HospitalId, specialityId = item.Id } )</h6>
+						</td>						
+					</tr>
+				}	
+				</tbody>		
+		</table>
+	</div>
+</div>
+<br>
+<div class="btn-group">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Hospitals" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<script>
+	$(document).ready(function(){
+		$("#mytable #checkall").click(function () {
+			if ($("#mytable #checkall").is(':checked')) {
+				$("#mytable input[type=checkbox]").each(function () {
+					$(this).prop("checked", true);
+				});
+
+			} else {
+				$("#mytable input[type=checkbox]").each(function () {
+					$(this).prop("checked", false);
+				});
+			}
+		});
+		$("[data-toggle=tooltip]").tooltip();
+	});
+</script>

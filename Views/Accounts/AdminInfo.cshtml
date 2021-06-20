@@ -12,10 +12,10 @@
         <tr class="row100 head">
           <th class="cell100 column13"><h5>Nombre</h5></th>
           <th class="cell100 column13"><h5>Apellido</h5></th>
-          <th class="cell100 column15"><h5>Username</h5></th>
+          <th class="cell100 column15"><h5>Usuario</h5></th>
           <th class="cell100 column15"><h5>Email</h5></th>
           <th class="cell100 column5"><h5>Teléfono</h5></th>
-          <th class="cell100 column13"><h5>Editar | Eliminar</h5></th>
+          <th class="cell100 column13"><h5>Editar</h5></th>
         </tr>
       </thead>
   <div class="table100-body ">
@@ -30,9 +30,7 @@
             <td class="cell100 column5"><h6>@item.phoneNumber</h6></td>
             <td class="cell100 column13"><h6></h6>
 						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Editar", "EditAdmin", new { id = item.id }) |
-						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Eliminar", "Delete", new { id = item.id })
+							@Html.ActionLink("Editar", "Edit", new { id = item.id })
 				  	</td>
           </tr>
         }
@@ -45,8 +43,8 @@
 <div class="btn-group">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="PanelAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="User" asp-action="CreateAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Accounts" asp-action="CreateAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
 </div>
 
 

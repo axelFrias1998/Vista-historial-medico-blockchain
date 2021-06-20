@@ -20,9 +20,9 @@
 					<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Type)</td>
 					<td class="cell100 column8">
 						<data-placement="top" data-toggle="tooltip" title="Edit">
-							<h6>@Html.ActionLink("Editar", "EditSpecia", new { id = item.Id }) |
+							<h6>@Html.ActionLink("Editar", "EditarEspecialidad", new { id = item.Id }) |
 						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Eliminar", "Delete", new { id = item.Id })</h6>
+							@Html.ActionLink("Eliminar", "BorrarEspecialidad", new { id = item.Id })</h6>
 					</td>
 												
 				</tr>
@@ -35,8 +35,8 @@
 <div class="btn-group">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="Seleccion"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
-	<center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="CreateSpecialities"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
+	<center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Panel" asp-action="Seleccion"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+	<center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="CrearEspecialidad"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
 </div>
 
 <!-- <div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="new" aria-hidden="true">

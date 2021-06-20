@@ -15,9 +15,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
-    public class PanelsController : Controller
+    public class PanelController : Controller
     {
-        public IActionResult Menu()
+        public IActionResult Index()
         {
             string cookie = Request.Cookies["Token"];
 

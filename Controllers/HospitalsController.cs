@@ -18,7 +18,66 @@ namespace Vista_historial_medico_blockchain.Controllers
         static readonly HttpClient client = new HttpClient();
 
         [HttpGet]
-        public async Task<ActionResult> Hospitales()
+        public async Task<ActionResult> BorrarAdministrador(string adminId, string hospitalId)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.DeleteAsync($"api/HospitalAdministrador/{hospitalId}/{adminId}");
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("HospitalAdministradores", "Hospitals", hospitalId);
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> HospitalAdministradores(string id)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/HospitalAdministrador/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var hospitalAdminsInfo = new HospitalAdminsInfo
+                    {
+                        Admins = JsonConvert.DeserializeObject<List<HospitalAdminDTO>>(await response.Content.ReadAsStringAsync()).ToList(),
+                        HospitalId = id
+                    };
+                    return View(hospitalAdminsInfo);
+                }
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> HospitalEspecialidades(string id)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/HospitalSpecialities/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var hospitalSpecialitiesInfo = new HospitalSpecialitiesInfo
+                    {
+                        Specialities = JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList(),
+                        HospitalId = id
+                    };
+                    return View(hospitalSpecialitiesInfo);
+                }
+                return NotFound();                
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
             using(var client = new HttpClient()){
                 /*Mandar Token en el Header*/
@@ -29,8 +88,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 if (response.IsSuccessStatusCode){
                     return View(JsonConvert.DeserializeObject<List<HospitalInfo>>(await response.Content.ReadAsStringAsync()).ToList());
                 }
-                else
-                    return NotFound();
+                return NotFound();
             }
         }
 
@@ -57,9 +115,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 var postTask = await client.PostAsJsonAsync<HospitalInfo>("api/Hospitals", hospitalinfo);
                 if (postTask.IsSuccessStatusCode)
-                {
-                  return RedirectToAction("Hospitales");
-                }
+                  return RedirectToAction("Index");
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
@@ -123,50 +179,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                     return View("EditSpecia");
                 } 
             }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> ModalEspecialidades(string idSpecialities){
-            using(HttpClient client = new HttpClient()){
-                client.BaseAddress = new Uri("https://localhost:44349");
-                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                var response = await client.GetAsync($"api/HospitalSpecialities/{idSpecialities}");
-                if (response.IsSuccessStatusCode){
-                    return View("ModalEspecialidades",JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList());
-                }
-                else{
-                    return NotFound();
-                }
-                
-            }
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> ModalAdministrador(string idHospital){
-            using(HttpClient client = new HttpClient()){
-                client.BaseAddress = new Uri("https://localhost:44349");
-                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                var response = await client.GetAsync($"api/HospitalAdministrador/{idHospital}");
-                if (response.IsSuccessStatusCode){
-                    return View("ModalAdministrador",JsonConvert.DeserializeObject<List<CreatedUserDTO>>(await response.Content.ReadAsStringAsync()).ToList());
-                }
-                else{
-                    return NotFound();
-                }
-                
-            }
-        }
-
-        public IActionResult GetViewEspecialities(string id){
-            return RedirectToAction("ModalEspecialidades",new{ idSpecialities = id});
-        }
-
-        public IActionResult GetViewAdmin(string id)
-        {
-            return RedirectToAction("ModalAdministrador",new{ idHospital = id});
-        }
+        }   
 
         public async Task<IActionResult> ServiceCaltalog()
         {

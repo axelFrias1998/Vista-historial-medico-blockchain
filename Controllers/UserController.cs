@@ -21,79 +21,6 @@ namespace Vista_historial_medico_blockchain.Controllers
     {
         static readonly HttpClient client = new HttpClient();
 
-        public UserController()
-        {
-
-        }
-        
-
-        [HttpGet]
-        public async Task<ActionResult> AdminInfo(CreatedUserDTO createdUserDTO)
-        {
-            using(var client = new HttpClient()){
-                /*Mandar Token en el Header*/
-                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                client.BaseAddress = new Uri("https://localhost:44349");
-                string tipo = "true";
-                /*if(){
-                    tipo = "true";
-                }else{
-                    tipo = "false";
-                }*/
-                var response = await client.GetAsync($"api/Accounts/GetAdmins/{tipo}");
-                if (response.IsSuccessStatusCode){
-                    return View(JsonConvert.DeserializeObject<List<CreatedUserDTO>>(await response.Content.ReadAsStringAsync()).ToList());
-                }
-                else{
-                    return NotFound();
-                }
-            }
-            
-        }
-
-       
-
-        public async Task<ActionResult> CreateAdmin(UserInfo userinfo)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44349");
-                List<SelectListItem> lst = new List<SelectListItem>();
-
-                lst.Add(new SelectListItem() { Text = "PacsAdmin", Value = "0" });
-                lst.Add(new SelectListItem() { Text = "ClinicAdmin", Value = "1" });
-
-                ViewBag.IdentityRol= lst;
-                string rol = userinfo.SelectedUsuario;
-                string tipo = string.Empty;
-                /*Request.Form["Id"].ToString()*/
-                if(string.IsNullOrEmpty(rol)){
-                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View();
-                }else{
-                    if(rol.Equals("1")){
-                        tipo = "true";
-                    }
-                    else if(rol.Equals("0")){
-                        tipo = "false";
-                    }
-                    /*Mandar Token en el Header*/
-                    var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                    var postTask = await client.PostAsJsonAsync<UserInfo>($"api/Accounts/CreateAdmin/{tipo}", userinfo);
-                    if (postTask.IsSuccessStatusCode)
-                    {
-                            return RedirectToAction("AdminInfo");
-                    }
-                    else{
-                        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                        return View("CreateAdmin");
-                    }
-                }
-            }
-        }
-
         [HttpPost]
         public async Task<ActionResult> AdminInfo(UserInfo userInfo)
         {
@@ -121,32 +48,7 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> EditAdmin(CreatedUserDTO createdUserDTO)
-        {
-            using (var client = new HttpClient())
-            {
-                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-                client.BaseAddress = new Uri("https://localhost:44349");
-                var updateUserDTO = new UpdateUserDTO
-                {
-                    nombre = createdUserDTO.nombre,
-                    apellido = createdUserDTO.apellido,
-                    userName = createdUserDTO.userName,
-                    email = createdUserDTO.email,
-                    phoneNumber = createdUserDTO.phoneNumber
-                };
-                var response = await client.PutAsJsonAsync<UpdateUserDTO>($"api/Accounts/{createdUserDTO.id}", updateUserDTO);
-                if (response.IsSuccessStatusCode){
-                    return RedirectToAction(@"AdminInfo");
-                }
-                else{
-                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("EditAdmin");
-                } 
-            }
-        }
+        
 
         public IActionResult InfoCli()
         {
