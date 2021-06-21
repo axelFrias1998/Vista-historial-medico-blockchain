@@ -1,7 +1,17 @@
 @model Vista_historial_medico_blockchain.Models.PacientValidation
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Validación usuario";
 }
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+            <div class="btn-group">
+                <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
 <center>
 <div class="container">
     <div class="row">
@@ -35,9 +45,4 @@
     </div>
 </div>
 </center>
-<br><br>
-<div class="btn-group">
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="DoctorPanel"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
-</div>
+

@@ -58,9 +58,8 @@ namespace Vista_historial_medico_blockchain.Models
        //Pruebas Dx
         public string Pruebas { get; set; }
 
-        [DataType(DataType.MultilineText)]
         [JsonInclude]
-        public List<PlanMedicamento> PlanMedicamentos { get; set; }
+        public PlanMedicamento PlanMedicamentos { get; set; }
         
         [DataType(DataType.MultilineText)]
         [JsonInclude]

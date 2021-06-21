@@ -1,6 +1,6 @@
 @model Vista_historial_medico_blockchain.Models.UserInfo
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Registro";
 }
 
 <div class="container">
@@ -42,8 +42,7 @@
                         <div class="form-group">
                             @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder="Teléfono"} })
                             @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                        </div>   
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" name="sysAdmin">Registrar sysAdmin</button>
+                        </div>
                         <button type="submit" class="btn btn-lg btn-primary btn-block" name="pacient">Registrarse</button>
                     }
                 </div>

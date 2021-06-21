@@ -144,20 +144,11 @@ namespace Vista_historial_medico_blockchain.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var postTask = await client.PostAsJsonAsync<UserInfo>("api/Accounts/CreateAccount", userinfo);
+                var postTask = await client.PostAsJsonAsync<UserInfo>("api/Accounts/CreatePacient", userinfo);
                 if (postTask.IsSuccessStatusCode)
-                {
-                    var userToken = JsonConvert.DeserializeObject<UserToken>(await postTask.Content.ReadAsStringAsync());
-                    if (userToken is null)
-                        return NotFound();
-                    SetCookie("Token", userToken.Token, userToken.Expiration);
-                    return View("Login");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("Registrer");
-                }
+                    return File(await postTask.Content.ReadAsByteArrayAsync(), "text/plain", $"{userinfo.Nombre}_genNode.gti");
+                ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                return View("Registrer");
             }
         }
 

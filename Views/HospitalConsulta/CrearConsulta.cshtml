@@ -1,6 +1,8 @@
+
 @model Vista_historial_medico_blockchain.Models.CreateConsultaDTO
 @{
     ViewData["Title"] = "Home Page";
+    var transactions = (ConsultaViewInfo)ViewData["transactions"];
 }
 <div class="container">
     <div class="row">
@@ -15,7 +17,23 @@
                 <!-- Tab panes -->
                 <div class="tab-content tabs">
                     <div role="Consultas" class="tab-pane fade in active" id="Consultas">
-                        Motrar consultas que tiene
+                        @foreach (var transaction in transactions.TransactionBlock)
+                        {
+                            <table>
+                              <thead>
+                                <tr class="row100 head">
+                                  <th class="cell100">Nombre del medicamento: </th>
+                                  <th class="cell100" colspan="2">ewq</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="row100 body">
+                                  <td class="cell100" colspan="3"><strong>Descripción:</strong>ewqewq</td>
+                                </tr>
+                              </tbody>	
+                            </table>
+                            <br>
+                        }
                     </div>
                     <div role="Crear Consulta" class="tab-pane fade" id="CrearConsulta">
                                                    
@@ -100,17 +118,31 @@
                         <div class="modal-body">
                           <div class="form-group">
                             <h6>Fecha de inicio</h6>
-                            <input class="form-control" type="date" name="fecha_inicio">
                           </div>
                           <div class="form-group">
-                            DROP DOWN LIST DE LOS MEDICAMENTOS DISPONIBLES
+                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos.Init, new { htmlAttributes = new { @class = "form-control", placeholder="Fecha inicio"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos.Init, "", new { @class = "text-danger" })
                           </div>
                           <div class="form-group">
-                            <textarea class="form-control" name="indicaciones">Indicaciones</textarea>
+                            <h6>Nombre medicamento</h6>
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos.NombreMedicamento, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre medicamento"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos.NombreMedicamento, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                            <h6>Indicaciones</h6>
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos.Indicaciones, new { htmlAttributes = new { @class = "form-control", placeholder="Indicaciones"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos.Indicaciones, "", new { @class = "text-danger" })
                           </div> 
                           <div class="form-group">
-                            <h6>Fecha de termino</h6>
-                            <input class="form-control" type="date" name="fecha_termino">
+                            <h6>Fecha término</h6>
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos.Finish, new { htmlAttributes = new { @class = "form-control", placeholder="Antecedentes de hospitalizaciones"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos.Finish, "", new { @class = "text-danger" })
                           </div>
                           <br>
                         </div>
@@ -160,14 +192,8 @@
                           <br>
                           <b>Plan</b>
                           <hr>
-                          <div class="form-group">
-                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Medicamentos"} })
-                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos, "", new { @class = "text-danger" })
-                          </div>
-                          <div class="form-group">
-                            @Html.EditorFor(model => model.ConsultaMedica.PlanTerapeutico, new { htmlAttributes = new { @class = "form-control", placeholder="Plan Terapéutico"} })
-                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanTerapeutico, "", new { @class = "text-danger" })
-                          </div>
+                
+                          
                           <div class="form-group">
                             @Html.EditorFor(model => model.ConsultaMedica.Educacion, new { htmlAttributes = new { @class = "form-control", placeholder="Educación"} })
                             @Html.ValidationMessageFor(model => model.ConsultaMedica.Educacion, "", new { @class = "text-danger" })
@@ -188,13 +214,13 @@
     </div>
 </div>
 
-                        <br>
-                        <div class="btn-group">
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="ClinicAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> 
-                        </div>
-                        <br><br><br>
+<br>
+<div class="btn-group">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="ClinicAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> 
+</div>
+<br><br><br>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

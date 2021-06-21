@@ -13,13 +13,14 @@ namespace Vista_historial_medico_blockchain.Models
         [JsonInclude]
         public DateTime Init { get; set; }
     
-        [DataType(DataType.Date)]
         [JsonInclude]
         public string NombreMedicamento { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [JsonInclude]
         public string Indicaciones { get; set; }
 
+        [DataType(DataType.Date)]
         [JsonInclude]
         public DateTime Finish { get; set; }
     }

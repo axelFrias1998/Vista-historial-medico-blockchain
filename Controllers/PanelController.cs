@@ -28,8 +28,12 @@ namespace Vista_historial_medico_blockchain.Controllers
             var loggedUser = new LoggedUser()
             {
                 Username =  tokens.Claims.First(claim => claim.Type == "unique_name").Value,
-                Rol = tokens.Claims.First(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value
+                Rol = new List<string>()
             };
+
+            foreach (var rol in tokens.Claims.Where(claim => claim.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"))
+                loggedUser.Rol.Add(rol.Value);
+            
             return View(loggedUser);
         }
         
