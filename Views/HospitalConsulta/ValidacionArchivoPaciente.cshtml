@@ -1,0 +1,48 @@
+@model Vista_historial_medico_blockchain.Models.PacientValidation
+@{
+    ViewData["Title"] = "Validación paciente";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+            <div class="btn-group">
+                <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<center>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mx-auto">
+            <div class="login-box">
+                <div class="card-body-2 text-center">
+                    @using (Html.BeginForm("ValidacionArchivoPaciente", "HospitalConsulta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <br>
+                        <h1 class="h3 mb-3 font-weight-normal"><b>Verificar sesión Paciente</b></h1>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder="Usuario", required = "required"} })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder="Contraseña", required = "required"} })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control", placeholder="Archivo", required = "required"} })
+                            @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                        </div>
+                        <br><br>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Ingresar</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</center>
+

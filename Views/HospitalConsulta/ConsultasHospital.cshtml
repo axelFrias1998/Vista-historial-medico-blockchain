@@ -1,0 +1,38 @@
+@model IEnumerable<Vista_historial_medico_blockchain.Models.HospitalConsultasDTO>
+@{
+    ViewData["Title"] = "Consultas hospital";
+}
+<br>
+<h1>Consultas en el hospital</h1>
+<div class="table100 ver1 m-b-110">
+  <div class="table100-head">
+    <div class="table-responsive"> 
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th style="text-align: center;" class="cell100"><h5>Fecha</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Paciente</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Doctor</h5></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model)
+          {
+            <tr>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.DateStamp)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.Paciente)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.Doctor)</h6></td>
+            </tr>
+          }
+          </tbody>
+      </table>
+    </div> 
+  </div>  
+</div>             
+
+<center>
+  <br>
+  <div class="btn-group">
+      <center><data-placement="top" data-toggle="tooltip" title="Regresar"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+  </div>
+</center>

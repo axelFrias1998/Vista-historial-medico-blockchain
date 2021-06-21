@@ -11,11 +11,52 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Vista_historial_medico_blockchain.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
     public class HospitalConsultaController : Controller
     { 
+        [HttpGet]
+        public async Task<ActionResult> ConsultasHospital()
+        {
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(ck);
+                var tokens = jsonToken as JwtSecurityToken;
+                string hospitalId = tokens.Claims.First(claim => claim.Type == "HospitalId").Value;
+                
+                var response = await client.GetAsync($"api/HospitalConsultas/{hospitalId}");
+                if (response.IsSuccessStatusCode)
+                    return View(JsonConvert.DeserializeObject<List<HospitalConsultasDTO>>(await response.Content.ReadAsStringAsync()).ToList());
+                return NotFound();
+            }
+        } 
+
+        [HttpGet]
+        public async Task<ActionResult> ConsultasDoctor()
+        {
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(ck);
+                var tokens = jsonToken as JwtSecurityToken;
+                string hospitalId = tokens.Claims.First(claim => claim.Type == "UserId").Value;
+                
+                var response = await client.GetAsync($"api/HospitalConsultas/Doctor/{hospitalId}");
+                if (response.IsSuccessStatusCode)
+                    return View(JsonConvert.DeserializeObject<List<HospitalConsultasDTO>>(await response.Content.ReadAsStringAsync()).ToList());
+                return NotFound();
+            }
+        } 
+
         [HttpGet]
         public async Task<ActionResult> CrearConsultaAsync(NodeInfo nodeInfo)
         {
@@ -35,7 +76,30 @@ namespace Vista_historial_medico_blockchain.Controllers
                         TransactionBlock = mongo
                     };
                     ViewData["transactions"] = consulaViewInfo;
-                    return View();
+
+                    var handler = new JwtSecurityTokenHandler();
+                    var jsonToken = handler.ReadJwtToken(ck);
+                    var tokens = jsonToken as JwtSecurityToken;
+                    string hospitalId = tokens.Claims.First(claim => claim.Type == "HospitalId").Value;
+
+                    var responseMedicamentos = await client.GetAsync($"api/HospitalMedicamentos/{hospitalId}");
+                    if (responseMedicamentos.IsSuccessStatusCode)
+                    {
+                        List<SelectListItem> lst = new List<SelectListItem>();
+                        foreach (var medicamentosDTO in JsonConvert.DeserializeObject<List<HospitalMedicamentosDTO>>(await responseMedicamentos.Content.ReadAsStringAsync()).ToList())
+                            lst.Add(new SelectListItem() { Text = $"{medicamentosDTO.nombreMedicamento}", Value = $"{medicamentosDTO.nombreMedicamento}"});
+                        
+                        var consultaInfo = new CreateConsultaDTO
+                        {
+                            PacienteId = nodeInfo.PacientId,
+                            GenNodeId = nodeInfo.GenNode,
+                            HospitalId = hospitalId,
+                            DoctorId = tokens.Claims.First(claim => claim.Type == "UserId").Value
+                        };
+                        ViewBag.Medicamentos = lst;
+                        return View(consultaInfo);
+                    }
+                    return NotFound();
 
                 }
                 return NotFound();
@@ -43,18 +107,35 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearConsulta(CreateConsultaDTO createConsultaDTO)
+        public async Task<ActionResult> CrearConsulta(CreateConsultaDTO createConsultaDTO)
         {
-            Console.Write(createConsultaDTO);
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var postTask = await client.PostAsJsonAsync<CreateConsultaDTO>("api/HospitalConsultas", createConsultaDTO);
+                if (postTask.IsSuccessStatusCode)
+                  return RedirectToAction("CrearConsulta", "HospitalConsulta", new NodeInfo { GenNode = createConsultaDTO.GenNodeId, PacientId = createConsultaDTO.PacienteId});
+                else
+                {
+                    return RedirectToAction("Index", "Panel");
+                }
+            }
+        }
+
+        public IActionResult Registrer()
+        {
             return View();
         }
 
-       public IActionResult Registrer()
+        public ActionResult ValidacionArchivo()
         {
             return View();
         }
 
-       public ActionResult ValidacionArchivo()
+        [HttpGet]
+        public ActionResult ValidacionArchivoPaciente()
         {
             return View();
         }
@@ -94,15 +175,54 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
-        public IActionResult MisConsultasP()
+        [HttpPost]
+        public async Task<ActionResult> ValidacionArchivoPaciente(PacientValidation pacientValidation) 
         {
-            return View();
-        } 
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                using(var content = new MultipartFormDataContent())
+                {
+                    content.Add(new StreamContent(pacientValidation.File.OpenReadStream())
+                    {
+                        Headers =
+                        {
+                            ContentLength = pacientValidation.File.Length,
+                            ContentType = new MediaTypeHeaderValue(pacientValidation.File.ContentType)
+                        }
+                    }, "file", pacientValidation.File.FileName);
+                    var postTask = await client.PostAsync($"api/HospitalConsultas/GetNode/{pacientValidation.Username}/{pacientValidation.Password}", content);
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        var nodeInfo = JsonConvert.DeserializeObject<NodeInfo>(await postTask.Content.ReadAsStringAsync());
+                        return RedirectToAction("MisConsultas", "HospitalConsulta", nodeInfo);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                        return RedirectToAction("ValidacionArchivoPaciente");
+                    }
+                }
+            }
+        }
 
-        public IActionResult VerConsultasDoctor()
+        [HttpGet]
+        public async Task<ActionResult> MisConsultas(NodeInfo nodeInfo)
         {
-            return View();
-        } 
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+                
+                var response = await client.GetAsync($"api/HospitalConsultas/MisConsultas/{nodeInfo.GenNode}/{nodeInfo.PacientId}");
+                if (response.IsSuccessStatusCode)
+                    return View(JsonConvert.DeserializeObject<MiCalendarioConsultasDTO>(await response.Content.ReadAsStringAsync()));
+                return NotFound();
+            }
+        }
     }
 }
 

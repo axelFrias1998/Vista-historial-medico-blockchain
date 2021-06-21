@@ -1,0 +1,67 @@
+@model Vista_historial_medico_blockchain.Models.MiCalendarioConsultasDTO
+@{
+    ViewData["Title"] = "Mis consultas";
+}
+<br>
+<h1>Mis consultas</h1>
+<div class="table100 ver1 m-b-110">
+  <div class="table100-head">
+    <div class="table-responsive"> 
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th style="text-align: center;" class="cell100"><h5>Doctor</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Hospital</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Fecha</h5></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model.MisConsultas)
+          {
+            <tr>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.NombreDoctor)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.NombreHospital)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.FechaConsulta)</h6></td>
+            </tr>
+          }
+          </tbody>
+      </table>
+    </div> 
+  </div>  
+</div> 
+<br>
+<h1>Mis medicamentos</h1>
+<div class="table100 ver1 m-b-110">
+  <div class="table100-head">
+    <div class="table-responsive"> 
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th style="text-align: center;" class="cell100"><h5>Fecha inicio</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Medicamento</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Indicaciones</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Fecha fin</h5></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var item in Model.MisMedicamentos)
+          {
+            <tr>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.Init)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.NombreMedicamento)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.Indicaciones)</h6></td>
+                <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.Finish)</h6></td>
+            </tr>
+          }
+          </tbody>
+      </table>
+    </div> 
+  </div>  
+</div>             
+
+<center>
+  <br>
+  <div class="btn-group">
+      <center><data-placement="top" data-toggle="tooltip" title="Regresar"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center>
+  </div>
+</center>

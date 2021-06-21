@@ -1,7 +1,7 @@
 
 @model Vista_historial_medico_blockchain.Models.CreateConsultaDTO
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Consulta del paciente";
     var transactions = (ConsultaViewInfo)ViewData["transactions"];
 }
 <div class="container">
@@ -19,20 +19,109 @@
                     <div role="Consultas" class="tab-pane fade in active" id="Consultas">
                         @foreach (var transaction in transactions.TransactionBlock)
                         {
-                            <table>
-                              <thead>
-                                <tr class="row100 head">
-                                  <th class="cell100">Nombre del medicamento: </th>
-                                  <th class="cell100" colspan="2">ewq</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr class="row100 body">
-                                  <td class="cell100" colspan="3"><strong>Descripción:</strong>ewqewq</td>
-                                </tr>
-                              </tbody>	
-                            </table>
-                            <br>
+                          <br><br><hr/><br>
+                              <table>
+                                <thead>
+                                  <tr class="row100 head">
+                                    <th class="cell100"><strong>Acción: </strong></th>
+                                    <th class="cell100">@transaction.Type</th>
+                                    <th class="cell100"><strong>Fecha: </strong>@transaction.TimeStamp</th>
+                                  </tr>
+                                </thead>
+                              </table>
+                              @if(transaction.ConsultaMedica is not null)
+                              {
+                                <br>
+                                <table>
+                                  <tbody>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><h2>Historia clínica</h2></td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100"><strong>Fecha nacimiento: </strong>@(transaction.ConsultaMedica.HistoriaClinica.FechaNacimiento)</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100"><strong>Sexo: </strong>@if (transaction.ConsultaMedica.HistoriaClinica.Sexo) {<label>Hombre</label>} else {<label>Mujer</label>} </td>
+                                      <td class="cell100"><strong>Interrogatorio: </strong>@if (transaction.ConsultaMedica.HistoriaClinica.Interrogatorio) {<label>Directo</label>} else {<label>Indirecto</label>} </td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Antecedentes alérgicos: </strong>@transaction.ConsultaMedica.HistoriaClinica.AntecedentesAlergicos</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Antecedentes traumáticos: </strong>@transaction.ConsultaMedica.HistoriaClinica.AntecedentesTraumaticos</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Antecedentes quirúrgicos: </strong>@transaction.ConsultaMedica.HistoriaClinica.AntecedentesQuirurgicos</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Antecedentes hospitalizaciones: </strong>@transaction.ConsultaMedica.HistoriaClinica.AntecedentesHospitalizaciones</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Padecimientos madre: </strong>@transaction.ConsultaMedica.HistoriaClinica.PadecimientosMadre</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Padecimientos padre: </strong>@transaction.ConsultaMedica.HistoriaClinica.PadecimientosPadre</td>
+                                    </tr>
+                                  </tbody>
+                                  <br>
+                                </table>
+                                <br>
+                                <table>
+                                  <tbody>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><h2>Información consulta</h2></td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Dolencia: </strong>@transaction.ConsultaMedica.Dolencia</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Dolencia: </strong>@transaction.ConsultaMedica.RelacionPasada</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Hallazgos: </strong>@transaction.ConsultaMedica.Hallazgos</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Pruebas Diagnósticas: </strong>@transaction.ConsultaMedica.PruebasDiagnosticas</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Resumen: </strong>@transaction.ConsultaMedica.Resumen</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Problemas: </strong>@transaction.ConsultaMedica.Problemas</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Diferenciales: </strong>@transaction.ConsultaMedica.Diferenciales</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Razonamiento: </strong>@transaction.ConsultaMedica.Razonamiento</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Pruebas: </strong>@transaction.ConsultaMedica.Pruebas</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <br>
+                                <table>
+                                  <tbody>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><h2>Medicación recomendada</h2></td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Inicio: </strong>@transaction.ConsultaMedica.PlanMedicamentos.Init</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Inicio: </strong>@transaction.ConsultaMedica.PlanMedicamentos.NombreMedicamento</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Inicio: </strong>@transaction.ConsultaMedica.PlanMedicamentos.Indicaciones</td>
+                                    </tr>
+                                    <tr class="row100 body">
+                                      <td class="cell100" colspan="3"><strong>Inicio: </strong>@transaction.ConsultaMedica.PlanMedicamentos.Finish</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              }
+                            
                         }
                     </div>
                     <div role="Crear Consulta" class="tab-pane fade" id="CrearConsulta">
@@ -127,8 +216,7 @@
                             <h6>Nombre medicamento</h6>
                           </div>
                           <div class="form-group">
-                            @Html.EditorFor(model => model.ConsultaMedica.PlanMedicamentos.NombreMedicamento, new { htmlAttributes = new { @class = "form-control", placeholder="Nombre medicamento"} })
-                            @Html.ValidationMessageFor(model => model.ConsultaMedica.PlanMedicamentos.NombreMedicamento, "", new { @class = "text-danger" })
+                            @Html.DropDownListFor(model => model.ConsultaMedica.PlanMedicamentos.NombreMedicamento, (IEnumerable<SelectListItem>)ViewBag.Medicamentos, "Medicamentos Registrados" , new { @class = "form-control", @onChange = "SelectedValue(this)" })
                           </div>
                           <div class="form-group">
                             <h6>Indicaciones</h6>
@@ -202,6 +290,22 @@
                             @Html.EditorFor(model => model.ConsultaMedica.Seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
                             @Html.ValidationMessageFor(model => model.ConsultaMedica.Seguimiento, "", new { @class = "text-danger" })
                           </div>
+                          <div class="form-group">
+                            @Html.HiddenFor(model => model.GenNodeId)
+                          </div>
+                          <div class="form-group">
+                            @Html.HiddenFor(model => model.PacienteId)
+                          </div>
+                          <div class="form-group">
+                            @Html.HiddenFor(model => model.HospitalId)
+                          </div>
+                          <div class="form-group">
+                            @Html.HiddenFor(model => model.DoctorId)
+                          </div>
+                          <div class="form-group">
+                            @Html.EditorFor(model => model.ConsultaMedica.Seguimiento, new { htmlAttributes = new { @class = "form-control", placeholder="Seguimiento"} })
+                            @Html.ValidationMessageFor(model => model.ConsultaMedica.Seguimiento, "", new { @class = "text-danger" })
+                          </div>
                         </div>
                         <div class="modal-footer ">
                           <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Crear</button>
@@ -218,7 +322,7 @@
 <div class="btn-group">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="AdminPanel" asp-action="ClinicAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> 
+  <center><data-placement="top" data-toggle="tooltip" title="new"}><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> 
 </div>
 <br><br><br>
 

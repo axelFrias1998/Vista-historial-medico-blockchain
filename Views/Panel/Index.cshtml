@@ -118,7 +118,7 @@
         <div class="col-lg-6 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
           <div class="icon-box">
             <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
-            <h4><a asp-controller="HospitalConsulta" asp-action="VerConsultasDoctor">Tus consultas</a></h4>
+            <h4><a asp-controller="HospitalConsulta" asp-action="ConsultasDoctor">Tus consultas</a></h4>
             <br><p>Aquí podrás visualizar el listado de consultas realizadas.</p>
           </div>
         </div>
@@ -146,21 +146,25 @@
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
           <div class="icon-box">
             <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
-            <h4><a asp-controller="HospitalConsulta" asp-action="VerConsultasDoctor">Tus consultas</a></h4>
+            <h4><a asp-controller="HospitalConsulta" asp-action="ConsultasDoctor">Tus consultas</a></h4>
             <br><p>Aquí podrás visualizar el listado de consultas realizadas.</p>
           </div>
         </div>
       </div>
     }
-    else if(userInfo.Rol.Equals("Pacient"))
+    else if(userInfo.Rol.Contains("Pacient"))
     {
-      <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-        <div class="icon-box">
-          <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
-          <h4><a asp-controller="HospitalConsulta" asp-action="MisConsultasP">Tus consultas</a></h4>
-          <br><p>Aquí podrás visualizar el historial de tus consultas médicas.</p>
+      <center>
+        <div class="row">
+          <div class="col-lg-12 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209061.png" style="width:70px;height:70px;"></i></div>
+              <h4><a asp-controller="HospitalConsulta" asp-action="ValidacionArchivoPaciente">Tus consultas</a></h4>
+              <br><p>Aquí podrás visualizar el historial de tus consultas médicas.</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </center>
     }
 
     </div>
