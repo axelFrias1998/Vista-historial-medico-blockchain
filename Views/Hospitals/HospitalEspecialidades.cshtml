@@ -17,10 +17,10 @@
 				@foreach (var item in Model.Specialities)
 				{
 					<tr class="row100 body">
-						<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Nombre)</td>
+						<td class="cell100 column7">@Html.DisplayFor(modelItem => item.Type)</td>
 						<td class="cell100 column8">
 							<data-placement="top" data-toggle="tooltip" title="Borrar">
-							<h6>@Html.ActionLink("Borrar", "BorrarEspecialidad", new { hospitalId = Model.HospitalId, specialityId = item.EspecialidadId } )</h6>
+							<h6>@Html.ActionLink("Borrar", "BorrarEspecialidad", new { hospitalId = Model.HospitalId, specialityId = item.Id } )</h6>
 						</td>						
 					</tr>
 				}	

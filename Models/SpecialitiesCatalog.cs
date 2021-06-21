@@ -10,13 +10,10 @@ namespace Vista_historial_medico_blockchain.Models
     {
 
         [JsonInclude]
-        public string EspecialidadId { get; set; }
+        public int Id { get; set; }
 
         [JsonInclude]
         public string Type { get; set; }
-
-        [JsonInclude]
-        public string Nombre { get; set; }
 
         //public virtual ICollection<Hospital> Hospitals { get; set; }
     }

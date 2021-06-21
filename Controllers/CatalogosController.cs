@@ -87,13 +87,13 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.EspecialidadId}/{specialitiesCatalog.Nombre}", null);
+                var response = await client.PutAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}/{specialitiesCatalog.Type}", null);
                 if (response.IsSuccessStatusCode){
                     return RedirectToAction("Especialidades");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("EditSpecia");
+                    return View("EditarEspecialidad");
                 } 
             }
         }
@@ -106,13 +106,13 @@ namespace Vista_historial_medico_blockchain.Controllers
                 var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
                 client.BaseAddress = new Uri("https://localhost:44349");
-                var response = await client.DeleteAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.EspecialidadId}");
+                var response = await client.DeleteAsync($"api/SpecialitiesCatalog/{specialitiesCatalog.Id}");
                 if (response.IsSuccessStatusCode){
                      return RedirectToAction("Especialidades");
                 }
                 else{
                     ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-                    return View("Especialidades");
+                    return View("BorrarEspecialidad");
                 } 
             }
         }
