@@ -161,6 +161,67 @@ namespace Vista_historial_medico_blockchain.Controllers
             }
         }
 
+        [HttpGet]               
+        public async Task<ActionResult> CreateDoctores()
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(ck);
+                var tokens = jsonToken as JwtSecurityToken;
+                string hospitalId = tokens.Claims.First(claim => claim.Type == "HospitalId").Value;
+
+                var response = await client.GetAsync($"api/HospitalSpecialities/{hospitalId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    List<SelectListItem> lst = new List<SelectListItem>();
+                    foreach (var speciality in JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList())
+                        lst.Add(new SelectListItem() { Text = $"{speciality.Type}", Value = $"{speciality.Id}"});
+                    ViewBag.Especialidades = lst;
+                    return View();
+                }
+                return NotFound();
+            }
+        }
+
+        [HttpPost]               
+        public async Task<ActionResult> CreateDoctores(DoctorInfoView doctorInfoView)
+        {
+            using(var client = new HttpClient())
+            {
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                client.BaseAddress = new Uri("https://localhost:44349");
+
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(ck);
+                var tokens = jsonToken as JwtSecurityToken;
+
+                var doctorInfo = new DoctorInfo
+                {
+                    Apellido = doctorInfoView.Apellido,
+                    Email = doctorInfoView.Email,
+                    Password = doctorInfoView.Password,
+                    ConfirmPassword = doctorInfoView.ConfirmPassword,
+                    Nombre = doctorInfoView.Nombre,
+                    PhoneNumber = doctorInfoView.PhoneNumber,
+                    UserName = doctorInfoView.UserName,
+                    AdminId = tokens.Claims.First(claim => claim.Type == "UserId").Value,
+                    EspecialidadId = Convert.ToInt32(doctorInfoView.EspecialidadId)
+                };
+                
+                var postTask = await client.PostAsJsonAsync<DoctorInfo>("api/Accounts/CreateDoctor", doctorInfo);
+                if (postTask.IsSuccessStatusCode)
+                   return RedirectToAction("DoctoresHospital", "Hospitals");
+                ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+                return RedirectToAction("CreateDoctores");
+            }
+        }
+
         public RedirectToActionResult LogOut()
         {
             Response.Cookies.Delete("Token");

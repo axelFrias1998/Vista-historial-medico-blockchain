@@ -1,36 +1,49 @@
 @model IEnumerable<Vista_historial_medico_blockchain.Models.HospitalMedicamentosDTO>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Medicamentos registrados";
 }
 
-<br><h1>Catálogo de medicamentos</h1>
+<br><h1>Medicamentos registrados</h1>
 <div class="table100 ver1 m-b-110">
   <div class="table100-head">
-    <table>
-      <thead>
-        <tr class="row100 head">
-          <th class="cell100">Nombre del medicamento: </th>
-          <th class="cell100" colspan="2">@Html.DisplayNameFor(model => model.nombreMedicamento)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="row100 body">
-          <td class="cell100"><strong>Descripción:</strong>@Html.DisplayNameFor(model => model.descripcion)</td>
-          <td class="cell100"><strong>Indicaciones:</strong>@Html.DisplayNameFor(model => model.indicaciones)</td>
-          <td class="cell100"><strong>Vía de Administración: </strong>@Html.DisplayNameFor(model => model.viaAdministracion)</td>
-        </tr>
-        <tr class="row100 body">
-          <td class="cell100"><strong>Precauciones:</strong>@Html.DisplayNameFor(model => model.precauciones)</td>
-          <td class="cell100"><strong>Efectos secundarios:</strong>@Html.DisplayNameFor(model => model.efectosSecundarios)</td>
-          <!--<td class="cell100 column8">
-            <data-placement="top" data-toggle="tooltip" title="Edit">
-              Html.ActionLink("Editar", "EditSpecia", new { id = item.id }) |
-            <data-placement="top" data-toggle="tooltip" title="Edit">
-              Html.ActionLink("Eliminar", "Delete", new { id = item.id })
-          </td>-->
-        </tr>
-      </tbody>	
-    </table>
+    @foreach (var item in Model)
+    {
+      <table>
+        <thead>
+          <tr class="row100 head">
+            <th class="cell100">Nombre del medicamento: </th>
+            <th class="cell100" colspan="2">@Html.DisplayFor(model => item.nombreMedicamento)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row100 body">
+            <td class="cell100" colspan="3"><strong>Descripción:</strong>@Html.DisplayFor(model => item.descripcion)</td>
+          </tr>
+          <tr class="row100 body">
+            <td class="cell100" colspan="3"><strong>Indicaciones:</strong>@Html.DisplayFor(model => item.indicaciones)</td>
+          </tr>
+          <tr class="row100 body">
+            <td class="cell100" colspan="3"><strong>Vía de administración:</strong>@Html.DisplayFor(model => item.viaAdministracion)</td>
+          </tr>
+          <tr class="row100 body">
+            <td class="cell100" colspan="3"><strong>Grupo de medicamentos:</strong>@Html.DisplayFor(model => item.grupoMedicamentos)</td>
+          </tr>
+          <tr class="row100 body">
+            <td class="cell100" colspan="3"><strong>Precauciones:</strong>@Html.DisplayFor(model => item.precauciones)</td>
+          </tr>
+          <tr class="row100 body">
+            <td class="cell100" colspan="3"><strong>Efectos secundarios:</strong>@Html.DisplayFor(model => item.efectosSecundarios)</td>
+          </tr>
+          <tr class="row100 body">
+            <td class="cell100 column8">
+              <data-placement="top" data-toggle="tooltip" title="Edit">
+                @Html.ActionLink("Eliminar", "BorrarMedicamento", new { id = item.id })
+            </td>
+          </tr>
+        </tbody>	
+      </table>
+      <br>
+    }
   </div>
 </div>
 
@@ -38,49 +51,6 @@
 <div class="btn-group">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Catalogos" asp-action="EleccionMedicamentos"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Hospitals" asp-action="InformacionHospital"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
     <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Hospitals" asp-action="CrearMedicamento"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
-</div>
-
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Editar Datos</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <input class="form-control " type="text" placeholder="Descripción">
-        </div>
-        <div class="form-group">
-          <input class="form-control " type="text" placeholder="Indicaciones">
-        </div>
-        <div class="form-group">
-          <input class="form-control " type="text" placeholder="Via de administración">
-        </div>
-      </div>
-      <div class="modal-footer ">
-        <button type="button" class="btn btn-primary btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Guardar</button>
-      </div>
-    </div> 
-  </div> 
-</div>
-
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Eliminar Medicamento</h4>
-      </div>
-      <div class="modal-body">
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>¿Esta seguro que desea eliminar este mediamentos?</div>
-      </div>
-      <div class="modal-footer ">
-        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-      </div>
-    </div>
-  </div> 
 </div>

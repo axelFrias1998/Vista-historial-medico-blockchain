@@ -7,10 +7,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Vista_historial_medico_blockchain.Models{
 
-    public partial class DoctorInfo
+    public partial class DoctorInfoView
     {
 
+
         [JsonInclude]
+
         public string Nombre { get; set; }
 
         [JsonInclude]
@@ -38,6 +40,6 @@ namespace Vista_historial_medico_blockchain.Models{
         public string AdminId { get; set; }
 
         [JsonInclude]
-        public int EspecialidadId { get; set; }
+        public string EspecialidadId { get; set; }
     }
 }

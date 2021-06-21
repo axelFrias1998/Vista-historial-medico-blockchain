@@ -13,8 +13,8 @@
           <th class="cell100 column13"><h5>Apellido</h5></th>
           <th class="cell100 column15"><h5>Email</h5></th>
           <th class="cell100 column15"><h5>Teléfono</h5></th>
-          <th class="cell100 column5"><h5>Especialidades</h5></th>
-          <th class="cell100 column13"><h5>Editar | Eliminar</h5></th>
+          <th class="cell100 column5"><h5>Especialidad</h5></th>
+          <th class="cell100 column13"><h5>Eliminar</h5></th>
         </tr>
       </thead>
 
@@ -28,12 +28,10 @@
             <td class="cell100 column15"><h6>@Html.DisplayFor(modelItem => item.Email)</h6></td>
             <td class="cell100 column15"><h6>@Html.DisplayFor(modelItem => item.Numero)</h6></td>
             <td class="cell100 column5"><h6>@Html.DisplayFor(modelItem => item.Especialidad)</h6></td>
-            <td class="cell100 column13"><h6>
-						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@*Html.ActionLink("Editar", "EditDoctor", new { id = item.id }) |
-						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Eliminar", "Delete", new { id = item.id })*@</h6>
-				  	</td>
+            <td class="cell100 column8">
+							<data-placement="top" data-toggle="tooltip" title="Borrar">
+							<h6>@Html.ActionLink("Borrar", "EliminarDoctor", new { doctorId = item.DoctorId } )</h6> 
+						</td>	
           </tr>
         }
       </tbody>
@@ -44,8 +42,8 @@
 <div class="btn-group">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="AdminPanel" asp-action="ClinicAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="User" asp-action="CreateDoctores"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+    <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Accounts" asp-action="CreateDoctores"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
 </div>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">

@@ -38,7 +38,14 @@
             <h4><a asp-controller="Panel" asp-action="Seleccion">Catálogos</a></h4>
             <br><p>Aquí podrás editar el Catálogo de Servicios y Catálogo de Especialidades</p>
           </div>
-        </div>   
+        </div>  
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height:70px;"></i></div>
+              <h4><a asp-controller="Catalogos" asp-action="Medicamentos">Medicamentos</a></h4>
+              <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
+            </div>
+          </div> 
       </div>
     }
     else if(userInfo.Rol.Equals("PacsAdmin"))
@@ -48,7 +55,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
             <div class="icon-box">
               <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3952/3952988.png" style="width:70px;height:70px;"></i></div>
-              <h4><a asp-controller="Accounts" asp-action="DoctoresHospital">Doctores</a></h4>
+              <h4><a asp-controller="Hospitals" asp-action="DoctoresHospital">Doctores</a></h4>
               <br><p>Aquí podrás registrar, eliminar y visualizar los doctores doctores del hospital</p>
             </div>
           </div>              
@@ -69,13 +76,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height:70px;"></i></div>
-              <h4><a asp-controller="Catalogos" asp-action="Medicamentos">Medicamentos</a></h4>
-              <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
-            </div>
-          </div>
+          
       </div>
     }
     else if(userInfo.Rol.Equals("ClinicAdmin"))
@@ -110,14 +111,6 @@
             <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3063/3063083.png" style="width:70px;height:70px;"></i></div>
             <h4><a asp-controller="HospitalConsulta" asp-action="CrearConsulta">Consultas   </a></h4>
             <br><p>Aquí podrás visualizar el listado de consultas realizadas en el hospital.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="icofont-drug"><img src="https://image.flaticon.com/icons/png/128/3209/3209036.png" style="width:70px;height:70px;"></i></div>
-            <h4><a asp-controller="Catalogos" asp-action="EleccionMedicamentos">Medicamentos</a></h4>
-            <br><p>Aquí podrás agregar y editar medicamentos, sus generalidades y efectos.</p>
           </div>
         </div>
 

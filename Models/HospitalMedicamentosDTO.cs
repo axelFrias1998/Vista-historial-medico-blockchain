@@ -12,10 +12,11 @@ namespace Vista_historial_medico_blockchain.Models
         public int id { get; set; }
 
         [JsonInclude]
-        public string nombreMedicamento { get; set; }
+        public string descripcion { get; set; }
         
         [JsonInclude]
-        public string descripcion { get; set; }
+        public string nombreMedicamento { get; set; }
+        
         
         [JsonInclude]
         public string indicaciones { get; set; }
@@ -24,7 +25,7 @@ namespace Vista_historial_medico_blockchain.Models
         public string viaAdministracion { get; set; }
 
         [JsonInclude]
-        public int grupoMedicamentos { get; set; }
+        public string grupoMedicamentos { get; set; }
 
         [JsonInclude]
         public string precauciones { get; set; }
