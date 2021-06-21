@@ -10,7 +10,7 @@
       <table>
         <thead>
           <tr class="row100 head">
-            <th style="text-align: center;"  class="cell100"><h5>Nombre</h5></th>
+            <th style="text-align: center;" class="cell100"><h5>Nombre</h5></th>
             <th style="text-align: center;" class="cell100"><h5>Teléfono</h5></th>
             <th style="text-align: center;" class="cell100"><h5>Fecha de registro</h5></th>
             <th style="text-align: center;" class="cell100"><h5>Administradores</h5></th>
@@ -23,16 +23,16 @@
           @foreach (var item in Model)
           {
           <tr>
-            <td style="display:none;">@Html.DisplayFor(modelItem => item.hospitalId)</td>
-            <td><h6>@Html.DisplayFor(modelItem => item.Name)</h6></td>
-            <td><h6>@Html.DisplayFor(modelItem => item.PhoneNumber)</h6></td>
-            <td><h6>@Html.DisplayFor(modelItem => item.registerDate)</h6></td>
-            <td><data-placement="top" data-toggle="tooltip" title="Edit">
+            <td style="display:none; text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.hospitalId)</h6></td>
+            <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.Name)</h6></td>
+            <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.PhoneNumber)</h6></td>
+            <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.registerDate)</h6></td>
+            <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<data-placement="top" data-toggle="tooltip" title="Edit">
                 <h6>@Html.ActionLink("Ver administradores", "HospitalAdministradores", new { id = item.hospitalId } )</h6></td>
-            <td><data-placement="top" data-toggle="tooltip" title="Edit">
+            <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<data-placement="top" data-toggle="tooltip" title="Edit">
                 <h6>@Html.ActionLink("Ver especialidades", "HospitalEspecialidades", new { id = item.hospitalId })</h6></td>
-            <td>@Html.DisplayFor(modelItem => item.servicesCatalog.Type)</td>
-            <td>          
+            <td style="text-align: center;">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.servicesCatalog.Type)</h6></td>
+            <td style="text-align: center;"> &nbsp;&nbsp;&nbsp;          
               <data-placement="top" data-toggle="tooltip" title="Edit">
                 <h6>
                   @Html.ActionLink("Deshabilitar", "EditTipoMedicamento", new { id = item.hospitalId } )
@@ -46,15 +46,13 @@
   </div>  
 </div>             
 
-<br>
-<div class="btn-group">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="Regresar"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
-    <center><data-placement="top" data-toggle="tooltip" title="Agregar"><a asp-controller="Hospitals" asp-action="Create"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
-</div>
-
-
+<center>
+  <br>
+  <div class="btn-group">
+      <center><data-placement="top" data-toggle="tooltip" title="Regresar"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
+      <center><data-placement="top" data-toggle="tooltip" title="Agregar"><a asp-controller="Hospitals" asp-action="Create"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
+  </div>
+</center>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
   <div class="modal-dialog">
