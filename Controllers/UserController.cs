@@ -48,58 +48,6 @@ namespace Vista_historial_medico_blockchain.Controllers
             return View();
         }
 
-        
-
-        public IActionResult InfoCli()
-        {
-            return View();
-        }
-                /*[HttpGet]
-        public async Task<ActionResult> InfoCli(CreatedUserDTO createduserDTO)
-        {
-        using(var client = new HttpClient()){
-        /*Mandar Token en el Header
-        var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-        client.BaseAddress = new Uri("https://localhost:44349");
-        var response = await client.GetAsync($"api/Accounts/GetAccountInfo/{createduserDTO.id}");
-        if (response.IsSuccessStatusCode){
-        return View(JsonConvert.DeserializeObject<CreatedUserDTO>(await client.GetStringAsync($"https://localhost:44349/api/Accounts/GetAccountInfo/{createduserDTO.id}")));
-        }
-        else{
-        return NotFound();
-        }
-        }
-        }*/
-
-        /*
-        public ViewResult InfoCli() => View();
-
-
-
-        [HttpPost]
-        public async Task<IActionResult> InfoCli( string id)
-        {
-        CreatedUserDTO createdUserDTO = new CreatedUserDTO();
-        using (var httpClient = new HttpClient())
-        {
-        var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
-        using (var response = await httpClient.GetAsync("https://localhost:44349/api/GetAccountInfo/" + id))
-        {
-        if (response.IsSuccessStatusCode)
-        {
-        string apiResponse = await response.Content.ReadAsStringAsync();
-        createdUserDTO = JsonConvert.DeserializeObject<CreatedUserDTO>(apiResponse);
-        }
-        else
-        ViewBag.StatusCode = response.StatusCode;
-        }
-        }
-        return View(createdUserDTO);
-        }*/
-
-
         [HttpGet]
         public async Task<ActionResult> Doctores (){
             using(var client = new HttpClient()){

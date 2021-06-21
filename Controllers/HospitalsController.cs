@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Vista_historial_medico_blockchain.Models;
 using System.Net.Http.Headers;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Vista_historial_medico_blockchain.Controllers
 {
@@ -31,6 +32,7 @@ namespace Vista_historial_medico_blockchain.Controllers
                 return NotFound();
             }
         }
+
 
         [HttpGet]
         public async Task<ActionResult> BorrarEspecialidad(string hospitalId, int specialityId)
@@ -184,6 +186,28 @@ namespace Vista_historial_medico_blockchain.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> HospitalEspecialidadesAdministrador(string id)
+        {
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+                var response = await client.GetAsync($"api/HospitalSpecialities/{id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var hospitalSpecialitiesInfo = new HospitalSpecialitiesInfo
+                    {
+                        Specialities = JsonConvert.DeserializeObject<List<SpecialitiesCatalog>>(await response.Content.ReadAsStringAsync()).ToList(),
+                        HospitalId = id
+                    };
+                    return View(hospitalSpecialitiesInfo);
+                }
+                return NotFound();                
+            }
+        }
+
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
             using(var client = new HttpClient()){
@@ -300,14 +324,29 @@ namespace Vista_historial_medico_blockchain.Controllers
             ViewBag.CatalogoServicios = new SelectList(serviceCatalog, "Id", "Type");
             return View();
         }
-         
         
-
-        public IActionResult DetailsHos()
+        public async Task<ActionResult> InformacionHospital()
         {
-            return View();
-        } 
-        
+            using(HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44349");
+                var ck = ControllerContext.HttpContext.Request.Cookies["Token"];
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ck);
+
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadJwtToken(ck);
+                var tokens = jsonToken as JwtSecurityToken;
+
+                string hospitalId = tokens.Claims.First(claim => claim.Type == "HospitalId").Value;
+                var response = await client.GetAsync($"api/Hospitals/GetHospitalInfo/{hospitalId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var hospitalInfo = JsonConvert.DeserializeObject<HospitalInfo>(await response.Content.ReadAsStringAsync());
+                    return View(hospitalInfo);
+                }
+                return NotFound();
+            }
+        }
         
     }
 }
