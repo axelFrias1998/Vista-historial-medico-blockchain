@@ -23,14 +23,14 @@
         @foreach (var item in Model)
         {
           <tr>
-            <td class="cell100 column13"><h6>@Html.DisplayFor(modelItem => item.nombre)</h6></td> 
+            <td class="cell100 column13">&nbsp;&nbsp;&nbsp;<h6>@Html.DisplayFor(modelItem => item.nombre)</h6></td> 
             <td class="cell100 column13"><h6>@item.apellido</h6></td> 
             <td class="cell100 column15"><h6>@item.userName</h6></td> 
             <td class="cell100 column15"><h6>@item.email</h6></td> 
             <td class="cell100 column5"><h6>@item.phoneNumber</h6></td>
-            <td class="cell100 column13"><h6></h6>
+            <td class="cell100 column13"><h6>
 						<data-placement="top" data-toggle="tooltip" title="Edit">
-							@Html.ActionLink("Editar", "Edit", new { id = item.id })
+							@Html.ActionLink("Editar", "Edit", new { id = item.id }) </h6>
 				  	</td>
           </tr>
         }
@@ -39,14 +39,13 @@
   </div>
 </div>
 
-<br>
-<div class="btn-group">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<center>
+  <br>
+  <div class="btn-group">
     <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Panel" asp-action="Index"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Regresar</button></a></center> &nbsp;&nbsp;&nbsp;&nbsp;
     <center><data-placement="top" data-toggle="tooltip" title="new"><a asp-controller="Accounts" asp-action="CreateAdmin"><button style='width:140px; height:50px' class="btn btn-lg btn-primary btn-block">Agregar</button></a></center> 
-</div>
-
+  </div>
+</center>
 
     
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
